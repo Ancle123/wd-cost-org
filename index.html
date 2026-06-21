@@ -911,6 +911,7 @@ td.cell-range-origin, th.cell-range-origin { outline: 2px solid #2b6cb0 !importa
 </div>
 <div class="action-bar">
     <button class="action-btn export-btn" id="exportBtn">导出只读版</button>
+    <button class="action-btn" id="downloadCurrentBtn" style="background:#e53e3e;color:white;font-weight:700">下载当前版本</button>
     <button class="action-btn export-btn" id="exportEditableBtn" style="background:#38a169">导出可编辑版</button>
     <button class="action-btn reset-btn" id="resetBtn">重置</button>
 </div>
@@ -1292,6 +1293,17 @@ document.addEventListener('input', function(e) {
     }
 
     // Export
+    // Download Current Version (with all edits captured)
+    document.getElementById('downloadCurrentBtn').addEventListener('click', function() {
+        var htmlStr = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+        var blob = new Blob([htmlStr], {type:'text/html;charset=utf-8'});
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url; a.download = '东区成本管理组织架构v3.1_当前版本.html';
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    });
+
     document.getElementById('exportBtn').addEventListener('click', function() {
         var clone = document.documentElement.cloneNode(true);
         ['.rte-toolbar', '.action-bar', '.save-toast', '.card-controls', '.resize-handle', '.nav-toggle'].forEach(function(sel) {
