@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
+<html lang="zh-CN"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>东区成本管理平台组织架构方案 v3.1</title>
@@ -192,10 +191,10 @@ td.cell-range-origin, th.cell-range-origin { outline: 2px solid #2b6cb0 !importa
 <body>
 <div class="header">
     <div style="display:flex;align-items:center">
-        <button class="nav-toggle" id="navToggle">&#9776;</button>
+        <button class="nav-toggle" id="navToggle">☰</button>
         <span class="header-title">东区成本管理平台组织架构方案 v3.1</span>
     </div>
-    <span class="version-badge" id="versionBadge">v3.1-安安0620g</span>
+    <span class="version-badge" id="versionBadge">v3.1-安安0620</span>
 </div>
 <div class="sidebar" id="sidebar">
     <a class="nav-link" href="#sec_1">一、设计原则</a>
@@ -205,7 +204,7 @@ td.cell-range-origin, th.cell-range-origin { outline: 2px solid #2b6cb0 !importa
 <a class="nav-link" href="#sec_5">五、三大组详细设计</a>
 <a class="nav-link" href="#sec_6">六、需求流转与协作机制</a>
 <a class="nav-link" href="#sec_7">七、三大基础建设路线图</a>
-<a class="nav-link" href="#sec_8">八、过渡方案</a>
+<a class="nav-link active" href="#sec_8">八、过渡方案</a>
 <a class="nav-link" href="#sec_9">九、汇报与考核</a>
 <a class="nav-link" href="#sec_10">十、风险与应对</a>
 
@@ -213,7 +212,7 @@ td.cell-range-origin, th.cell-range-origin { outline: 2px solid #2b6cb0 !importa
 <div class="main-content">
     
 <div class="mod-log color-block">
-    <div class="card-controls"><button class="card-del" title="删除色块">&times;</button><button class="card-dup" title="复制色块">+</button></div>
+    <div class="card-controls"><button class="card-del" title="删除色块">×</button><button class="card-dup" title="复制色块">+</button></div>
     <div class="resize-handle"></div>
     <div class="mod-log-title" id="modLogTitle" contenteditable="true">修改记录</div>
     <div id="modLogContent" contenteditable="true">
@@ -222,23 +221,23 @@ td.cell-range-origin, th.cell-range-origin { outline: 2px solid #2b6cb0 !importa
     </div>
 </div>
 
-    <p id="e1" contenteditable="true"># 东区成本管理平台组织架构方案（v3.1）</p>
-<div class="blockquote" id="e2" contenteditable="true">基于6.18领导v2方案 + 会议讨论 + 领导最新语音定调<br>编制日期：2026年6月20日<br>定位：过程稿，方向校准用<br>v3.1更新：采购二三组同做物业企划按区域分+三组叠加供方把控，验收结算组补至7人，验收分级调整，三大基础建设路线图重构（标准清单→价格库、分标段→提效、供方库→合规+快速匹配），过渡期东区自建价格库和供方库、后期总部统一</div>
+    <p id="e1"># <b>东区成本管理平台组织架构方案</b>（v3.1）</p>
+<div class="blockquote" id="e2" contenteditable="true">编制日期：2026年6月20日<br>定位：过程稿，方向校准用<br>v3.1更新：采购二三组同做物业企划按区域分+三组叠加供方把控，验收结算组补至7人，验收分级调整，三大基础建设路线图重构（标准清单→价格库、分标段→提效、供方库→合规+快速匹配），过渡期东区自建价格库和供方库、后期总部统一</div>
 <hr>
-<div class="section-card color-block" id="sec_1"><div class="card-controls"><button class="card-del" title="删除色块">&times;</button><button class="card-dup" title="复制色块">+</button></div><div class="resize-handle"></div><h2 class="section-title" id="e3" contenteditable="true">一、设计原则</h2>
+<div class="section-card color-block" id="sec_1"><div class="card-controls"><button class="card-del" title="删除色块">×</button><button class="card-dup" title="复制色块">+</button></div><div class="resize-handle"></div><h2 class="section-title" id="e3" contenteditable="true">一、设计原则</h2>
 <div class="table-wrap" id="tw_1"><table>
-<tr><th id="e4" contenteditable="true">原则</th><th id="e5" contenteditable="true">说明</th><th id="e6" contenteditable="true">来源</th></tr>
-<tr><td id="e7" contenteditable="true"><strong>人不动、编组干活</strong></td><td id="e8" contenteditable="true">所有人办公地点不变，按功能编组，组长统一派工</td><td id="e9" contenteditable="true">领导v2方案+语音确认</td></tr>
-<tr><td id="e10" contenteditable="true"><strong>三大组+七小组</strong></td><td id="e11" contenteditable="true">三个大组做归口管理，七个小组做专业执行</td><td id="e12" contenteditable="true">领导语音定调</td></tr>
-<tr><td id="e13" contenteditable="true"><strong>7城市BP全覆盖</strong></td><td id="e14" contenteditable="true">3大组协调人+4小组长，7个成本组长人人有岗</td><td id="e15" contenteditable="true">方案B</td></tr>
-<tr><td id="e16" contenteditable="true"><strong>双重身份</strong></td><td id="e17" contenteditable="true">城市成本组长既是属地接口人，又是专业线组长/协调人</td><td id="e18" contenteditable="true">领导语音</td></tr>
-<tr><td id="e19" contenteditable="true"><strong>审批最小改动</strong></td><td id="e20" contenteditable="true">过渡期审批流基本不变，价格库建成后逐步调整</td><td id="e21" contenteditable="true">领导语音</td></tr>
-<tr><td id="e22" contenteditable="true"><strong>逻辑集中、物理分散</strong></td><td id="e23" contenteditable="true">专业线统一调度，人员驻点不变</td><td id="e24" contenteditable="true">领导v2方案+语音</td></tr>
-<tr><td id="e25" contenteditable="true"><strong>供方管理从建转控</strong></td><td id="e26" contenteditable="true">供应商库由总部建设，东区负责使用+本地把关+基准价维护</td><td id="e27" contenteditable="true">会议讨论+本次确认</td></tr>
-</table></div>
+<tbody><tr><th id="e4" contenteditable="true" style="position: relative; width: 338px; min-width: 40px; padding-left: 22px; padding-right: 20px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span>原则<div class="th-resizer"></div><div class="th-resizer"></div><span class="col-del-btn" title="删除此列" style="position: absolute; right: 2px; top: 1px; width: 14px; height: 14px; line-height: 14px; text-align: center; font-size: 10px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span></th><th id="e5" contenteditable="true" style="position: relative; width: 338px; min-width: 40px; padding-right: 20px;">说明<div class="th-resizer"></div><div class="th-resizer"></div><span class="col-del-btn" title="删除此列" style="position: absolute; right: 2px; top: 1px; width: 14px; height: 14px; line-height: 14px; text-align: center; font-size: 10px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span><span class="add-col-btn" title="添加一列" style="position: absolute; right: -16px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(49, 130, 206); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">+</span></th></tr>
+<tr><td id="e7" contenteditable="true" style="position: relative; padding-left: 22px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span><strong>人不动、编组干活</strong></td><td id="e8" contenteditable="true">所有人办公地点不变，按功能编组，组长统一派工</td></tr>
+<tr><td id="e10" contenteditable="true" style="position: relative; padding-left: 22px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span><strong>三大组+七小组</strong></td><td id="e11" contenteditable="true">三个大组做归口管理，七个小组做专业执行</td></tr>
+<tr><td id="e13" contenteditable="true" style="position: relative; padding-left: 22px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span><strong>7城市BP全覆盖</strong></td><td id="e14" contenteditable="true">3大组协调人+4小组长，7个成本组长人人有岗</td></tr>
+<tr><td id="e16" contenteditable="true" style="position: relative; padding-left: 22px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span><strong>双重身份</strong></td><td id="e17" contenteditable="true">城市成本组长既是属地接口人，又是专业线组长/协调人</td></tr>
+<tr><td id="e19" contenteditable="true" style="position: relative; padding-left: 22px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span><strong>审批最小改动</strong></td><td id="e20" contenteditable="true">过渡期审批流基本不变，价格库建成后逐步调整</td></tr>
+<tr><td id="e22" contenteditable="true" style="position: relative; padding-left: 22px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span><strong>逻辑集中、物理分散</strong></td><td id="e23" contenteditable="true">专业线统一调度，人员驻点不变</td></tr>
+<tr><td id="e25" contenteditable="true" style="position: relative; padding-left: 22px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span><strong>供方管理从建转控</strong></td><td id="e26" contenteditable="true">供应商库由总部建设，东区负责使用+本地把关+基准价维护</td></tr>
+</tbody></table><div class="add-row-bar" style="text-align: center; padding: 4px 0px;"><button class="add-row-btn" title="在末尾添加一行" style="background: rgb(237, 242, 247); border: 1px dashed rgb(160, 174, 192); color: rgb(74, 85, 104); padding: 3px 14px; border-radius: 4px; cursor: pointer; font-size: 12px; margin-top: 4px;">+ 添加行</button></div></div>
 <hr>
 </div>
-<div class="section-card color-block" id="sec_2"><div class="card-controls"><button class="card-del" title="删除色块">&times;</button><button class="card-dup" title="复制色块">+</button></div><div class="resize-handle"></div><h2 class="section-title" id="e28" contenteditable="true">二、组织架构总图</h2>
+<div class="section-card color-block" id="sec_2"><div class="card-controls"><button class="card-del" title="删除色块">×</button><button class="card-dup" title="复制色块">+</button></div><div class="resize-handle"></div><h2 class="section-title" id="e28" contenteditable="true">二、组织架构总图</h2>
 <div class="ctree">
   <div class="ctree-top">
     <div class="ctree-hq" id="arch_hq">
@@ -336,134 +335,76 @@ td.cell-range-origin, th.cell-range-origin { outline: 2px solid #2b6cb0 !importa
 </div>
 <hr>
 </div>
-<div class="section-card color-block" id="sec_3"><div class="card-controls"><button class="card-del" title="删除色块">&times;</button><button class="card-dup" title="复制色块">+</button></div><div class="resize-handle"></div><h2 class="section-title" id="e30" contenteditable="true">三、7城市BP岗位分配</h2>
-<h3 class="subsection-title" id="e31" contenteditable="true">3.1 分配逻辑</h3>
+<div class="section-card color-block" id="sec_3"><div class="card-controls"><button class="card-del" title="删除色块">×</button><button class="card-dup" title="复制色块">+</button></div><div class="resize-handle"></div><h2 class="section-title" id="e30" contenteditable="true">三、7城市BP岗位分配</h2>
+<h3 class="subsection-title" id="e31"></h3><h3 class="subsection-title" id="e31" style="background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;">3.1 分配逻辑</h3>
 <div class="table-wrap" id="tw_2"><table>
-<tr><th id="e32" contenteditable="true">岗位</th><th id="e33" contenteditable="true">人数</th><th id="e34" contenteditable="true">身份一</th><th id="e35" contenteditable="true">身份二</th><th id="e36" contenteditable="true">选拔标准</th><th id="e36a" contenteditable="true">拟定人员</th></tr>
-<tr><td id="e37" contenteditable="true"><strong>大组协调人①</strong></td><td id="e38" contenteditable="true">1</td><td id="e39" contenteditable="true">测算核价大组协调人</td><td id="e40" contenteditable="true">兼测算核价组组长</td><td id="e41" contenteditable="true">测算经验最丰富，能带教</td><td id="e37a" contenteditable="true">
+<tbody><tr><th id="e32" contenteditable="true" style="position: relative; width: 169px; min-width: 40px; padding-left: 22px; padding-right: 20px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span>岗位<div class="th-resizer"></div><div class="th-resizer"></div><span class="col-del-btn" title="删除此列" style="position: absolute; right: 2px; top: 1px; width: 14px; height: 14px; line-height: 14px; text-align: center; font-size: 10px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span></th><th id="e33" contenteditable="true" style="position: relative; width: 169px; min-width: 40px; padding-right: 20px;">人数<div class="th-resizer"></div><div class="th-resizer"></div><span class="col-del-btn" title="删除此列" style="position: absolute; right: 2px; top: 1px; width: 14px; height: 14px; line-height: 14px; text-align: center; font-size: 10px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span></th><th id="e34" contenteditable="true" style="position: relative; width: 169px; min-width: 40px; padding-right: 20px;">身份一<div class="th-resizer"></div><div class="th-resizer"></div><span class="col-del-btn" title="删除此列" style="position: absolute; right: 2px; top: 1px; width: 14px; height: 14px; line-height: 14px; text-align: center; font-size: 10px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span></th><th id="e35" contenteditable="true" style="position: relative; width: 169px; min-width: 40px; padding-right: 20px;">身份二<div class="th-resizer"></div><div class="th-resizer"></div><span class="col-del-btn" title="删除此列" style="position: absolute; right: 2px; top: 1px; width: 14px; height: 14px; line-height: 14px; text-align: center; font-size: 10px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span></th><th id="e36" contenteditable="true" style="position: relative; width: 169px; min-width: 40px; padding-right: 20px;">选拔标准<div class="th-resizer"></div><div class="th-resizer"></div><span class="col-del-btn" title="删除此列" style="position: absolute; right: 2px; top: 1px; width: 14px; height: 14px; line-height: 14px; text-align: center; font-size: 10px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span></th><th id="e36a" contenteditable="true" style="position: relative; width: 169px; min-width: 40px; padding-right: 20px;">拟定人员<div class="th-resizer"></div><div class="th-resizer"></div><span class="col-del-btn" title="删除此列" style="position: absolute; right: 2px; top: 1px; width: 14px; height: 14px; line-height: 14px; text-align: center; font-size: 10px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span><span class="add-col-btn" title="添加一列" style="position: absolute; right: -16px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(49, 130, 206); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">+</span></th></tr>
+<tr><td id="e37" contenteditable="true" style="position: relative; padding-left: 22px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span><strong>大组协调人①</strong></td><td id="e38" contenteditable="true">1</td><td id="e39" contenteditable="true" class="">城市成本BP</td><td id="e40" contenteditable="true" class="">测算核价大组协调人兼测算合价组组长</td><td id="e41" contenteditable="true">测算经验最丰富，能带教</td><td id="e37a" contenteditable="true">
 </td></tr>
-<tr><td id="e42" contenteditable="true"><strong>大组协调人②</strong></td><td id="e43" contenteditable="true">1</td><td id="e44" contenteditable="true">采购供方大组协调人</td><td id="e45" contenteditable="true">兼合规检查组长</td><td id="e46" contenteditable="true">工程/能源采购领域最熟</td><td id="e38a" contenteditable="true">
+<tr><td id="e42" contenteditable="true" style="position: relative; padding-left: 22px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span><strong>大组协调人②</strong></td><td id="e43" contenteditable="true">1</td><td id="e44" contenteditable="true" class="">城市成本BP</td><td id="e45" contenteditable="true" class="">采购供方大组协调人兼合规检查组长</td><td id="e46" contenteditable="true" class="">统筹能力强，原则性强，熟悉制度</td><td id="e38a" contenteditable="true">
 </td></tr>
-<tr><td id="e47" contenteditable="true"><strong>大组协调人③</strong></td><td id="e48" contenteditable="true">1</td><td id="e49" contenteditable="true">验收结算大组协调人</td><td id="e50" contenteditable="true">兼验收结算组组长</td><td id="e51" contenteditable="true">结算审核严谨，敢较真</td><td id="e39a" contenteditable="true">
+<tr><td id="e47" contenteditable="true" style="position: relative; padding-left: 22px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span><strong>大组协调人③</strong></td><td id="e48" contenteditable="true">1</td><td id="e49" contenteditable="true" class="">城市成本BP</td><td id="e50" contenteditable="true" class="">验收结算大组协调人兼验收结算组组长</td><td id="e51" contenteditable="true">结算审核严谨，敢较真</td><td id="e39a" contenteditable="true">
 </td></tr>
-<tr><td id="e52" contenteditable="true"><strong>小组长④</strong></td><td id="e53" contenteditable="true">1</td><td id="e54" contenteditable="true">城市成本BP</td><td id="e55" contenteditable="true">成本管控+数据分析组组长</td><td id="e56" contenteditable="true">数据分析能力强，有全局观</td><td id="e40a" contenteditable="true">
+<tr><td id="e52" contenteditable="true" style="position: relative; padding-left: 22px;" class=""><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span><strong>小组长④</strong></td><td id="e53" contenteditable="true">1</td><td id="e54" contenteditable="true" class="">城市成本BP</td><td id="e55" contenteditable="true">成本管控+数据分析组组长</td><td id="e56" contenteditable="true">数据分析能力强，有全局观</td><td id="e40a" contenteditable="true">
 </td></tr>
-<tr><td id="e57" contenteditable="true"><strong>小组长⑤</strong></td><td id="e58" contenteditable="true">1</td><td id="e59" contenteditable="true">城市成本BP</td><td id="e60" contenteditable="true">采购一组组长</td><td id="e61" contenteditable="true">物业/企划采购经验丰富</td><td id="e41a" contenteditable="true">
+<tr><td id="e57" contenteditable="true" style="position: relative; padding-left: 22px;" class=""><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span><strong>小组长⑤</strong></td><td id="e58" contenteditable="true">1</td><td id="e59" contenteditable="true">城市成本BP</td><td id="e60" contenteditable="true" class="">采购一组组长</td><td id="e61" contenteditable="true" class="">工程/能源采购领域最熟</td><td id="e41a" contenteditable="true">
 </td></tr>
-<tr><td id="e62" contenteditable="true"><strong>小组长⑥</strong></td><td id="e63" contenteditable="true">1</td><td id="e64" contenteditable="true">城市成本BP</td><td id="e65" contenteditable="true">采购二组组长</td><td id="e66" contenteditable="true">供方体系把控能力，数据敏感</td><td id="e42a" contenteditable="true">
+<tr><td id="e62" contenteditable="true" style="position: relative; padding-left: 22px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span><strong>小组长⑥</strong></td><td id="e63" contenteditable="true">1</td><td id="e64" contenteditable="true">城市成本BP</td><td id="e65" contenteditable="true" class="">采购二组组长（物业企划4城）</td><td id="e66" contenteditable="true" class="">物业/企划采购经验丰富</td><td id="e42a" contenteditable="true">
 </td></tr>
-<tr><td id="e67" contenteditable="true"><strong>小组长⑦</strong></td><td id="e68" contenteditable="true">1</td><td id="e69" contenteditable="true">城市成本BP</td><td id="e70" contenteditable="true">采购三组组长</td><td id="e71" contenteditable="true">原则性强，熟悉制度</td><td id="e43a" contenteditable="true">
+<tr><td id="e67" contenteditable="true" style="position: relative; padding-left: 22px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span><strong>小组长⑦</strong></td><td id="e68" contenteditable="true">1</td><td id="e69" contenteditable="true">城市成本BP</td><td id="e70" contenteditable="true" class="">采购三组组长（物业企划+供方管理3城）</td><td id="e71" contenteditable="true" class="">供方体系把控能力，数据敏感</td><td id="e43a" contenteditable="true">
 </td></tr>
-</table></div>
+</tbody></table><div class="add-row-bar" style="text-align: center; padding: 4px 0px;"><button class="add-row-btn" title="在末尾添加一行" style="background: rgb(237, 242, 247); border: 1px dashed rgb(160, 174, 192); color: rgb(74, 85, 104); padding: 3px 14px; border-radius: 4px; cursor: pointer; font-size: 12px; margin-top: 4px;">+ 添加行</button></div></div>
 <p id="e72" contenteditable="true"><strong>关键设计</strong>：大组协调人兼任一个核心小组的组长，保证大组协调人"既管协调又接地气"，不会变成纯粹的行政角色。</p>
-<p id="e89x" contenteditable="true"
-><strong>采购各组分工</strong>：</p>
+<p id="e89x" contenteditable="true"><strong>采购各组分工</strong>：</p>
 <div class="table-wrap" id="tw_3"><table>
-<tr><th id="e74" contenteditable="true"
-></th><th id="e75" contenteditable="true"
->采购一组/工程能源</th><th id="e76" contenteditable="true"
->采购二组/物业企划</th><th id="e76a" contenteditable="true"
->采购三组/物业企划+供方管理</th><th id="e76b" contenteditable="true"
->合规检查组</th></tr>
-<tr><td id="e77" contenteditable="true"
->常态业务</td><td id="e77a" contenteditable="true"
->工程+能源类招标核价（主力）</td><td id="e78" contenteditable="true"
->物业+企划类招标核价（主力）</td><td id="e79" contenteditable="true"
->物业+企划类招标核价（前期因供方管理占精力，承接量适当减少）</td><td id="e79a" contenteditable="true"
->无专项检查时，与采购一组协同承担工程能源类采购辅助工作</td></tr>
-<tr><td id="e80" contenteditable="true"
->专项职责</td><td id="e80a" contenteditable="true"
->工程改造、工程物资集采、能源节费端到端负责</td><td id="e81" contenteditable="true"
->4城物业企划端到端负责</td><td id="e82" contenteditable="true"
->3城物业企划 + 前期牵头供方管理+基准价体系建设</td><td id="e82a" contenteditable="true"
->有专项任务时突击做合规检查</td></tr>
-<tr><td id="e83" contenteditable="true"
->区域</td><td id="e83a" contenteditable="true"
->全区7城（工程/能源跨城统筹）</td><td id="e84" contenteditable="true"
->4城（上海、苏州、杭州、南京）</td><td id="e85" contenteditable="true"
->3城（合肥、厦门、宁波）</td><td id="e85a" contenteditable="true"
->全区7城</td></tr>
-<tr><td id="e86" contenteditable="true"
->人数</td><td id="e86b" contenteditable="true"
->4人</td><td id="e87a" contenteditable="true"
->3人</td><td id="e88a2" contenteditable="true"
->3人</td><td id="e88a3" contenteditable="true"
->3人</td></tr>
-<tr><td id="e87" contenteditable="true"
->组长</td><td id="e87b" contenteditable="true"
->小组长⑤</td><td id="e87c" contenteditable="true"
->小组长⑥</td><td id="e88" contenteditable="true"
->小组长⑦</td><td id="e88a" contenteditable="true"
->协调人②兼</td></tr>
+<tbody><tr><th id="e74" contenteditable="true" style="position: relative; width: 264px; min-width: 40px; padding-left: 22px; padding-right: 20px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span><div class="th-resizer"></div><div class="th-resizer"></div><span class="col-del-btn" title="删除此列" style="position: absolute; right: 2px; top: 1px; width: 14px; height: 14px; line-height: 14px; text-align: center; font-size: 10px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span></th><th id="e75" contenteditable="true" style="position: relative; width: 264px; min-width: 40px; padding-right: 20px;">采购二组<div class="th-resizer"></div><div class="th-resizer"></div><span class="col-del-btn" title="删除此列" style="position: absolute; right: 2px; top: 1px; width: 14px; height: 14px; line-height: 14px; text-align: center; font-size: 10px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span></th><th id="e76" contenteditable="true" style="position: relative; width: 264px; min-width: 40px; padding-right: 20px;">采购三组<div class="th-resizer"></div><div class="th-resizer"></div><span class="col-del-btn" title="删除此列" style="position: absolute; right: 2px; top: 1px; width: 14px; height: 14px; line-height: 14px; text-align: center; font-size: 10px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span></th><th id="e76a" contenteditable="true" style="position: relative; width: 264px; min-width: 40px; padding-right: 20px;">采购三组/物业企划+供方管理<div class="th-resizer"></div><div class="th-resizer"></div><span class="col-del-btn" title="删除此列" style="position: absolute; right: 2px; top: 1px; width: 14px; height: 14px; line-height: 14px; text-align: center; font-size: 10px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span></th><th id="e76b" contenteditable="true" style="position: relative; width: 264px; min-width: 40px; padding-right: 20px;">合规检查组<div class="th-resizer"></div><div class="th-resizer"></div><span class="col-del-btn" title="删除此列" style="position: absolute; right: 2px; top: 1px; width: 14px; height: 14px; line-height: 14px; text-align: center; font-size: 10px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span><span class="add-col-btn" title="添加一列" style="position: absolute; right: -16px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(49, 130, 206); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">+</span></th></tr>
+<tr><td id="e77" contenteditable="true" style="position: relative; padding-left: 22px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span>业务</td><td id="e77a" contenteditable="true">工程+能源类招标核价（主力）</td><td id="e78" contenteditable="true">物业+企划类招标核价</td><td id="e79" contenteditable="true">物业+企划类招标核价 + 供方管理+基准价把控</td><td id="e79a" contenteditable="true">无专项检查时，与采购一组协同承担工程能源类采购辅助工作</td></tr>
+<tr><td id="e80" contenteditable="true" style="position: relative; padding-left: 22px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span>区域</td><td id="e80a" contenteditable="true">工程改造、工程物资集采、能源节费端到端负责</td><td id="e81" contenteditable="true">4城（上海、苏州、杭州、南京）</td><td id="e82" contenteditable="true">3城（合肥、厦门、宁波）</td><td id="e82a" contenteditable="true">有专项任务时突击做合规检查</td></tr>
+<tr><td id="e83" contenteditable="true" style="position: relative; padding-left: 22px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span>组长</td><td id="e83a" contenteditable="true">全区7城（工程/能源跨城统筹）</td><td id="e84" contenteditable="true">城市BP⑤</td><td id="e85" contenteditable="true">城市BP⑥</td><td id="e85a" contenteditable="true">全区7城</td></tr>
+<tr><td id="e86" contenteditable="true" style="position: relative; padding-left: 22px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span>人数</td><td id="e86b" contenteditable="true">4人</td><td id="e87a" contenteditable="true">3人</td><td id="e88a2" contenteditable="true">3人</td><td id="e88a3" contenteditable="true">3人</td></tr>
+<tr><td id="e87" contenteditable="true" style="position: relative; padding-left: 22px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span>3人</td><td id="e87b" contenteditable="true">小组长⑤</td><td id="e87c" contenteditable="true">小组长⑥</td><td id="e88" contenteditable="true">3人</td><td id="e88a" contenteditable="true">协调人②兼</td></tr>
 
-</table></div>
-<p id="e89" contenteditable="true"
->核心机制：四组人员分工协作，由大组协调人②统筹工作分配——</p>
-<div class="list-item" id="e90" contenteditable="true"
->• 采购一组专注工程/能源领域，小组长⑤担任组长，专注工程能源一线执行</div>
-<div class="list-item" id="e91" contenteditable="true"
->• 采购二组、三组常态下共同承担物业企划类采购与核价，人力池共享、灵活调配</div>
-<div class="list-item" id="e92" contenteditable="true"
->• 前期供方管理+基准价体系建设由三组牵头，三组物业企划承接量适当减少，空出精力抓体系建设</div>
-<div class="list-item" id="e92a" contenteditable="true"
->• 合规检查组有专项检查任务时突击执行，平时回归人力池与采购一组协同承担工程能源类采购辅助工作</div>
-<div class="list-item" id="e92aa" contenteditable="true"
->• 各组间的具体工作量由大组协调人②按实际负荷动态调配，避免忙闲不均</div>
-<p id="e92b" contenteditable="true"
-><strong>测算核价大组两个小组复合用工</strong>：</p>
+</tbody></table><div class="add-row-bar" style="text-align: center; padding: 4px 0px;"><button class="add-row-btn" title="在末尾添加一行" style="background: rgb(237, 242, 247); border: 1px dashed rgb(160, 174, 192); color: rgb(74, 85, 104); padding: 3px 14px; border-radius: 4px; cursor: pointer; font-size: 12px; margin-top: 4px;">+ 添加行</button></div></div>
+<p id="e89" contenteditable="true">按区域切的原因：</p>
+<div class="list-item" id="e90" contenteditable="true">• 物业+企划在不同城市的组合和体量差异大，按区域切让每组对"自己的城市"端到端负责</div>
+<div class="list-item" id="e91" contenteditable="true">• 三组管3城（工作量相对轻的合肥、厦门、宁波），叠加供方管理+基准价把控后跟二组4城工作量基本对等</div>
+<div class="list-item" id="e92" contenteditable="true">• 三组供方管理职责因总部建库从"建"转"控"，工作量约砍一半，叠加在3组合理</div>
+<div class="list-item" id="e92a" contenteditable="true">• 合规检查组有专项检查任务时突击执行，平时回归人力池与采购一组协同承担工程能源类采购辅助工作</div>
+<div class="list-item" id="e92aa" contenteditable="true">• 各组间的具体工作量由大组协调人②按实际负荷动态调配，避免忙闲不均</div>
+<p id="e92b" contenteditable="true"><strong>测算核价大组两个小组复合用工</strong>：</p>
 <div class="table-wrap" id="tw_4"><table>
-<tr><th id="e92c" contenteditable="true"
-></th><th id="e92d" contenteditable="true"
->测算核价组</th><th id="e92e" contenteditable="true"
->成本管控+数据分析组</th></tr>
-<tr><td id="e92f" contenteditable="true"
->常态业务</td><td id="e92g" contenteditable="true"
->出量、核价、定目标价（主力）</td><td id="e92h" contenteditable="true"
->数据提炼、数据分析、降本挖掘</td></tr>
-<tr><td id="e92i" contenteditable="true"
->复合机制</td><td id="e92j" contenteditable="true"
->测算高峰期可调用成本管控组人员支援测算</td><td id="e92k" contenteditable="true"
->测算空闲时支援测算核价组做基础量价工作</td></tr>
-<tr><td id="e92l" contenteditable="true"
->侧重点</td><td id="e92m" contenteditable="true"
->量价准确性、目标价合理性</td><td id="e92n" contenteditable="true"
->数据提炼与数据分析，为降本决策提供依据</td></tr>
-</table></div>
-<p id="e92o" contenteditable="true"
-><strong>核心机制</strong>：测算核价组与成本管控+数据分析组同样复合用工，由大组协调人①统筹——</p>
-<div class="list-item" id="e92p" contenteditable="true"
->• 常态下两组各有侧重：测算核价组聚焦出量核价，成本管控+数据分析组聚焦数据提炼和分析</div>
-<div class="list-item" id="e92q" contenteditable="true"
->• 成本管控+数据分析组的数据分析能力贯穿整个成本中台，不仅服务于测算核价大组，也为采购供方大组（二组三组合规检查组）提供数据支撑</div>
-<div class="list-item" id="e92r" contenteditable="true"
->• 两组人员由大组协调人①按测算波峰波谷灵活调配，测算忙时增援、闲时回归各自主业</div>
+<tbody><tr><th id="e92c" contenteditable="true" style="position: relative; width: 338px; min-width: 40px; padding-left: 22px; padding-right: 20px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span><div class="th-resizer"></div><div class="th-resizer"></div><span class="col-del-btn" title="删除此列" style="position: absolute; right: 2px; top: 1px; width: 14px; height: 14px; line-height: 14px; text-align: center; font-size: 10px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span></th><th id="e92d" contenteditable="true" style="position: relative; width: 338px; min-width: 40px; padding-right: 20px;">测算核价组<div class="th-resizer"></div><div class="th-resizer"></div><span class="col-del-btn" title="删除此列" style="position: absolute; right: 2px; top: 1px; width: 14px; height: 14px; line-height: 14px; text-align: center; font-size: 10px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span></th><th id="e92e" contenteditable="true" style="position: relative; width: 338px; min-width: 40px; padding-right: 20px;">成本管控+数据分析组<div class="th-resizer"></div><div class="th-resizer"></div><span class="col-del-btn" title="删除此列" style="position: absolute; right: 2px; top: 1px; width: 14px; height: 14px; line-height: 14px; text-align: center; font-size: 10px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span><span class="add-col-btn" title="添加一列" style="position: absolute; right: -16px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(49, 130, 206); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">+</span></th></tr>
+<tr><td id="e92f" contenteditable="true" style="position: relative; padding-left: 22px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span>常态业务</td><td id="e92g" contenteditable="true">出量、核价、定目标价（主力）</td><td id="e92h" contenteditable="true">数据提炼、数据分析、降本挖掘</td></tr>
+<tr><td id="e92i" contenteditable="true" style="position: relative; padding-left: 22px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span>复合机制</td><td id="e92j" contenteditable="true">测算高峰期可调用成本管控组人员支援测算</td><td id="e92k" contenteditable="true">测算空闲时支援测算核价组做基础量价工作</td></tr>
+<tr><td id="e92l" contenteditable="true" style="position: relative; padding-left: 22px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span>侧重点</td><td id="e92m" contenteditable="true">量价准确性、目标价合理性</td><td id="e92n" contenteditable="true">数据提炼与数据分析，为降本决策提供依据</td></tr>
+</tbody></table><div class="add-row-bar" style="text-align: center; padding: 4px 0px;"><button class="add-row-btn" title="在末尾添加一行" style="background: rgb(237, 242, 247); border: 1px dashed rgb(160, 174, 192); color: rgb(74, 85, 104); padding: 3px 14px; border-radius: 4px; cursor: pointer; font-size: 12px; margin-top: 4px;">+ 添加行</button></div></div>
+<p id="e92o" contenteditable="true"><strong>核心机制</strong>：测算核价组与成本管控+数据分析组同样复合用工，由大组协调人①统筹——</p>
+<div class="list-item" id="e92p" contenteditable="true">• 常态下两组各有侧重：测算核价组聚焦出量核价，成本管控+数据分析组聚焦数据提炼和分析</div>
+<div class="list-item" id="e92q" contenteditable="true">• 成本管控+数据分析组的数据分析能力贯穿整个成本中台，不仅服务于测算核价大组，也为采购供方大组（二组三组合规检查组）提供数据支撑</div>
+<div class="list-item" id="e92r" contenteditable="true">• 两组人员由大组协调人①按测算波峰波谷灵活调配，测算忙时增援、闲时回归各自主业</div>
 </div>
-<div class="section-card color-block" id="sec_4"><div class="card-controls"><button class="card-del" title="删除色块">&times;</button><button class="card-dup" title="复制色块">+</button></div><div class="resize-handle"></div><h2 class="section-title" id="e95" contenteditable="true">四、人员总盘（30人，不含大区成本BP）</h2>
+<div class="section-card color-block" id="sec_4"><div class="card-controls"><button class="card-del" title="删除色块">×</button><button class="card-dup" title="复制色块">+</button></div><div class="resize-handle"></div><h2 class="section-title" id="e95" contenteditable="true">四、人员总盘（30人，不含大区成本BP）</h2>
 <h3 class="subsection-title" id="e96" contenteditable="true">4.1 按三大组+七小组分配</h3>
 <div class="table-wrap" id="tw_5"><table>
-<tr><th id="e97" contenteditable="true">大组</th><th id="e98" contenteditable="true">小组</th><th id="e99" contenteditable="true">人数</th><th id="e100" contenteditable="true">岗位拆分</th></tr>
-<tr><td id="e101" contenteditable="true"><strong>一、测算核价大组</strong></td><td id="e102" contenteditable="true"></td><td id="e103" contenteditable="true"><strong>8</strong></td><td id="e104" contenteditable="true"></td></tr>
-<tr><td id="e105" contenteditable="true"></td><td id="e106" contenteditable="true">测算核价组</td><td id="e107" contenteditable="true">4</td><td id="e108" contenteditable="true">组长1（大组协调人①兼）+ 高级测算师1 + 测算师2</td></tr>
-<tr><td id="e109" contenteditable="true"></td><td id="e110" contenteditable="true">成本管控+数据分析组</td><td id="e111" contenteditable="true">4</td><td id="e112" contenteditable="true">组长1（城市BP④）+ 数据分析专员1 + 成果汇总专员1 + 降本挖掘专员1</td></tr>
-<tr><td id="e113" contenteditable="true"><strong>二、采购供方大组</strong></td><td id="e114" contenteditable="true"></td><td id="e115" contenteditable="true"><strong>13</strong></td><td id="e116" contenteditable="true"></td></tr>
-<tr><td id="e117" contenteditable="true"></td><td id="e118" contenteditable="true">采购一组/工程能源</td><td id="e119" contenteditable="true">4</td><td id="e120" contenteditable="true">组长1（小组长⑤）+ 工程改造专员1 + 工程物资集采专员1 + 能源节费专员1</td></tr>
-<tr><td id="e121" contenteditable="true"></td><td id="e122" contenteditable="true">采购二组/物业企划（4城）</td><td id="e123" contenteditable="true">3</td><td id="e124" contenteditable="true">组长1（小组长⑥）+ 物业采购专员1 + 企划采购专员1</td></tr>
-<tr><td id="e125" contenteditable="true"></td><td id="e126" contenteditable="true">采购三组/物业企划+供方管理（3城）</td><td id="e127" contenteditable="true">3</td><td id="e128" contenteditable="true">组长1（小组长⑦）+ 物业企划采购专员1 + 供方管理+基准价把控专员1</td></tr>
-<tr><td id="e129a" contenteditable="true"
-></td><td id="e129b" contenteditable="true"
->合规检查+标准化组</td><td id="e129c" contenteditable="true"
->3</td><td id="e129d" contenteditable="true"
->组长1（协调人②兼）+ 合规检查专员1 + 标准化专员1</td></tr>
+<tbody><tr><th id="e97" contenteditable="true" style="position: relative; width: 267px; min-width: 40px; padding-left: 22px; padding-right: 20px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span>大组<div class="th-resizer"></div><div class="th-resizer"></div><span class="col-del-btn" title="删除此列" style="position: absolute; right: 2px; top: 1px; width: 14px; height: 14px; line-height: 14px; text-align: center; font-size: 10px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span></th><th id="e98" contenteditable="true" style="position: relative; width: 267px; min-width: 40px; padding-right: 20px;">小组<div class="th-resizer"></div><div class="th-resizer"></div><span class="col-del-btn" title="删除此列" style="position: absolute; right: 2px; top: 1px; width: 14px; height: 14px; line-height: 14px; text-align: center; font-size: 10px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span></th><th id="e99" contenteditable="true" style="position: relative; width: 267px; min-width: 40px; padding-right: 20px;">人数<div class="th-resizer"></div><div class="th-resizer"></div><span class="col-del-btn" title="删除此列" style="position: absolute; right: 2px; top: 1px; width: 14px; height: 14px; line-height: 14px; text-align: center; font-size: 10px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span></th><th id="e100" contenteditable="true" style="position: relative; width: 267px; min-width: 40px; padding-right: 20px;">岗位拆分<div class="th-resizer"></div><div class="th-resizer"></div><span class="col-del-btn" title="删除此列" style="position: absolute; right: 2px; top: 1px; width: 14px; height: 14px; line-height: 14px; text-align: center; font-size: 10px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span><span class="add-col-btn" title="添加一列" style="position: absolute; right: -16px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(49, 130, 206); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">+</span></th></tr>
+<tr><td id="e101" contenteditable="true" style="position: relative; padding-left: 22px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span><strong>一、测算核价大组</strong></td><td id="e102" contenteditable="true"></td><td id="e103" contenteditable="true"><strong>8</strong></td><td id="e104" contenteditable="true"></td></tr>
+<tr><td id="e105" contenteditable="true" style="position: relative; padding-left: 22px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span></td><td id="e106" contenteditable="true">测算合价组</td><td id="e107" contenteditable="true">4</td><td id="e108" contenteditable="true">组长1（大组协调人①兼）+ 高级测算师1 + 测算师2</td></tr>
+<tr><td id="e109" contenteditable="true" style="position: relative; padding-left: 22px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span></td><td id="e110" contenteditable="true">成本管控+数据分析组</td><td id="e111" contenteditable="true">4</td><td id="e112" contenteditable="true">组长1（城市BP④）+ 数据分析专员1 + 成果汇总专员1 + 降本挖掘专员1</td></tr>
+<tr><td id="e113" contenteditable="true" style="position: relative; padding-left: 22px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span><strong>二、采购供方大组</strong></td><td id="e114" contenteditable="true"></td><td id="e115" contenteditable="true"><strong>10</strong></td><td id="e116" contenteditable="true"></td></tr>
+<tr><td id="e117" contenteditable="true" style="position: relative; padding-left: 22px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span></td><td id="e118" contenteditable="true">采购一组/工程能源</td><td id="e119" contenteditable="true">4</td><td id="e120" contenteditable="true">组长1（大组协调人②兼）+ 工程改造专员1 + 工程物资集采专员1 + 能源节费专员1</td></tr>
+<tr><td id="e121" contenteditable="true" style="position: relative; padding-left: 22px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span></td><td id="e122" contenteditable="true">采购二组/物业企划（4城）</td><td id="e123" contenteditable="true">3</td><td id="e124" contenteditable="true">组长1（城市BP⑤）+ 物业采购专员1 + 企划采购专员1</td></tr>
+<tr><td id="e125" contenteditable="true" style="position: relative; padding-left: 22px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span></td><td id="e126" contenteditable="true">采购三组/物业企划+供方管理（3城）</td><td id="e127" contenteditable="true">3</td><td id="e128" contenteditable="true">组长1（城市BP⑥）+ 物业企划采购专员1 + 供方管理+基准价把控专员1</td></tr>
+<tr><td id="e129a" contenteditable="true" style="position: relative; padding-left: 22px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span></td><td id="e129b" contenteditable="true">合规检查+标准化组</td><td id="e129c" contenteditable="true">3</td><td id="e129d" contenteditable="true">组长1（协调人②兼）+ 合规检查专员1 + 标准化专员1</td></tr>
 
-<tr><td id="e129" contenteditable="true"><strong>三、验收结算大组</strong></td><td id="e130" contenteditable="true"></td><td id="e131" contenteditable="true"><strong>7+1机动</strong></td><td id="e132" contenteditable="true"></td></tr>
-<tr><td id="e133" contenteditable="true"></td><td id="e134" contenteditable="true">验收结算组</td><td id="e135" contenteditable="true">7</td><td id="e136" contenteditable="true">组长1（大组协调人③兼）+ 结算审核专员2 + 验收专员2 + 结算支持专员1 + 数据录入归档专员1</td></tr>
+<tr><td id="e129" contenteditable="true" style="position: relative; padding-left: 22px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span><strong>三、验收结算大组</strong></td><td id="e130" contenteditable="true"></td><td id="e131" contenteditable="true"><strong>10</strong></td><td id="e132" contenteditable="true"></td></tr>
+<tr><td id="e133" contenteditable="true" style="position: relative; padding-left: 22px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span></td><td id="e134" contenteditable="true">验收结算组</td><td id="e135" contenteditable="true">7</td><td id="e136" contenteditable="true">组长1（大组协调人③兼）+ 结算审核专员2 + 验收专员2 + 结算支持专员1 + 数据录入归档专员1</td></tr>
 
-<tr><td id="e141" contenteditable="true"><strong>大区本部</strong></td><td id="e142" contenteditable="true"></td><td id="e143" contenteditable="true"><strong>1</strong></td><td id="e144" contenteditable="true"></td></tr>
-<tr><td id="e145" contenteditable="true"></td><td id="e146" contenteditable="true">平台运营+数据分析</td><td id="e147" contenteditable="true">1</td><td id="e148" contenteditable="true">需求池管理、任务调度、数据汇总</td></tr>
-<tr><td id="e149" contenteditable="true"><strong>机动</strong></td><td id="e150" contenteditable="true"></td><td id="e151" contenteditable="true"><strong>1</strong></td><td id="e152" contenteditable="true"></td></tr>
-<tr><td id="e153" contenteditable="true"></td><td id="e154" contenteditable="true">机动岗</td><td id="e155" contenteditable="true">1</td><td id="e156" contenteditable="true">按实际需要分配到最忙的组（首推验收结算组）</td></tr>
-<tr><td id="e157" contenteditable="true"><strong>合计</strong></td><td id="e158" contenteditable="true"></td><td id="e159" contenteditable="true"><strong>30</strong></td><td id="e160" contenteditable="true">7组长/协调人 + 1大区本部 + 21组员 + 1机动</td></tr>
-</table></div>
+<tr><td id="e141" contenteditable="true" style="position: relative; padding-left: 22px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span><strong>大区本部</strong></td><td id="e142" contenteditable="true"></td><td id="e143" contenteditable="true" class=""><strong>2</strong></td><td id="e144" contenteditable="true"></td></tr>
+<tr><td id="e145" contenteditable="true" style="position: relative; padding-left: 22px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span></td><td id="e146" contenteditable="true">平台运营+数据分析</td><td id="e147" contenteditable="true" class="">2</td><td id="e148" contenteditable="true" class="">统筹协调、需求池管理、任务调度、数据汇总、机动</td></tr>
+
+
+<tr><td id="e157" contenteditable="true" style="position: relative; padding-left: 22px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span><strong>合计</strong></td><td id="e158" contenteditable="true"></td><td id="e159" contenteditable="true"><strong>30</strong></td><td id="e160" contenteditable="true" class="">7组长/协调人 + 1大区本部 + 21组员 + 2机动</td></tr>
+</tbody></table><div class="add-row-bar" style="text-align: center; padding: 4px 0px;"><button class="add-row-btn" title="在末尾添加一行" style="background: rgb(237, 242, 247); border: 1px dashed rgb(160, 174, 192); color: rgb(74, 85, 104); padding: 3px 14px; border-radius: 4px; cursor: pointer; font-size: 12px; margin-top: 4px;">+ 添加行</button></div></div>
 <h3 class="subsection-title" id="e161" contenteditable="true">4.2 三大组人数平衡</h3>
 <div class="arch-diagram" style="background:#fff">
 <div class="balance-bar">
@@ -473,13 +414,13 @@ td.cell-range-origin, th.cell-range-origin { outline: 2px solid #2b6cb0 !importa
 </div>
 <div class="balance-bar">
 <div class="balance-label" contenteditable="true" id="bal_2l">采购供方大组</div>
-<div class="balance-track"><div class="balance-fill" style="width:43%;background:#3182ce" contenteditable="true" id="bal_2f">13人</div></div>
-<div class="balance-pct" contenteditable="true" id="bal_2p">43%</div>
+<div class="balance-track"><div class="balance-fill" style="width:43%;background:#3182ce" contenteditable="true" id="bal_2f">10人</div></div>
+<div class="balance-pct" contenteditable="true" id="bal_2p">33%</div>
 </div>
 <div class="balance-bar">
 <div class="balance-label" contenteditable="true" id="bal_3l">验收结算大组</div>
-<div class="balance-track"><div class="balance-fill" style="width:27%;background:#38a169" contenteditable="true" id="bal_3f">8人</div></div>
-<div class="balance-pct" contenteditable="true" id="bal_3p">27%</div>
+<div class="balance-track"><div class="balance-fill" style="width:27%;background:#38a169" contenteditable="true" id="bal_3f">10人</div></div>
+<div class="balance-pct" contenteditable="true" id="bal_3p">33%</div>
 </div>
 <div class="balance-bar">
 <div class="balance-label" contenteditable="true" id="bal_4l">大区本部+机动</div>
@@ -487,1411 +428,76 @@ td.cell-range-origin, th.cell-range-origin { outline: 2px solid #2b6cb0 !importa
 <div class="balance-pct" contenteditable="true" id="bal_4p">7%</div>
 </div>
 </div>
-<p id="e163" contenteditable="true">三大组人数分布：采购供方13人（执行落地+合规把控，最大组），验收结算8人（闭环保障），测算核价8人（大脑型岗位，单兵产出高）。</p>
+<p id="e163" contenteditable="true">三大组人数分布：采购和验收各10人（执行落地主力），测算8人（大脑型岗位，单兵产出高）。</p>
 <hr>
 </div>
-<div class="section-card color-block" id="sec_5"><div class="card-controls"><button class="card-del" title="删除色块">&times;</button><button class="card-dup" title="复制色块">+</button></div><div class="resize-handle"></div><h2 class="section-title" id="e225" contenteditable="true">五、三大组详细设计</h2>
+<div class="section-card color-block" id="sec_5"><div class="card-controls"><button class="card-del" title="删除色块">×</button><button class="card-dup" title="复制色块">+</button></div><div class="resize-handle"></div><h2 class="section-title" id="e225" contenteditable="true">五、三大组详细设计</h2>
 <h3 class="subsection-title" id="e226" contenteditable="true">5.1 测算核价大组（8人）</h3>
 <p id="e227" contenteditable="true"><strong>定位</strong>：成本管控的"大脑"——出量、核价、定目标价、数据分析、降本挖掘</p>
-<p id="e228" contenteditable="true"><strong>大组协调人①</strong>：统筹本大组两个小组的协作，确保测算→核价→数据分析→降本挖掘的闭环运转。兼任测算核价组组长。</p>
-<h4 class="sub-subsection-title" id="e229" contenteditable="true">5.1.1 测算核价组（4人）</h4>
+<p id="e228" contenteditable="true"><strong>大组协调人①</strong>：统筹本大组两个小组的协作，确保测算→核价→数据分析→降本挖掘的闭环运转。兼任测算合价组组长。</p>
+<h4 class="sub-subsection-title" id="e229" contenteditable="true">5.1.1 测算合价组（4人）</h4>
 <div class="table-wrap" id="tw_6"><table>
-<tr><th id="e230" contenteditable="true">岗位</th><th id="e231" contenteditable="true">人数</th><th id="e232" contenteditable="true">核心职责</th></tr>
-<tr><td id="e233" contenteditable="true">组长（大组协调人①兼）</td><td id="e234" contenteditable="true">1</td><td id="e235" contenteditable="true">统筹全组+大组协调、质量把关、与采购组协作</td></tr>
-<tr><td id="e236" contenteditable="true">高级测算师</td><td id="e237" contenteditable="true">1</td><td id="e238" contenteditable="true">复杂改造项目深度测算、测算模型迭代</td></tr>
-<tr><td id="e239" contenteditable="true">测算师</td><td id="e240" contenteditable="true">2</td><td id="e241" contenteditable="true">常规项目测算、核价模型套用、招标清单编制+报价分析</td></tr>
-</table></div>
+<tbody><tr><th id="e230" contenteditable="true" style="position: relative; width: 338px; min-width: 40px; padding-left: 22px; padding-right: 20px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span>岗位<div class="th-resizer"></div><div class="th-resizer"></div><span class="col-del-btn" title="删除此列" style="position: absolute; right: 2px; top: 1px; width: 14px; height: 14px; line-height: 14px; text-align: center; font-size: 10px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span></th><th id="e231" contenteditable="true" style="position: relative; width: 338px; min-width: 40px; padding-right: 20px;">人数<div class="th-resizer"></div><div class="th-resizer"></div><span class="col-del-btn" title="删除此列" style="position: absolute; right: 2px; top: 1px; width: 14px; height: 14px; line-height: 14px; text-align: center; font-size: 10px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span></th><th id="e232" contenteditable="true" style="position: relative; width: 338px; min-width: 40px; padding-right: 20px;">核心职责<div class="th-resizer"></div><div class="th-resizer"></div><span class="col-del-btn" title="删除此列" style="position: absolute; right: 2px; top: 1px; width: 14px; height: 14px; line-height: 14px; text-align: center; font-size: 10px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span><span class="add-col-btn" title="添加一列" style="position: absolute; right: -16px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(49, 130, 206); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">+</span></th></tr>
+<tr><td id="e233" contenteditable="true" style="position: relative; padding-left: 22px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span>组长（大组协调人①兼）</td><td id="e234" contenteditable="true">1</td><td id="e235" contenteditable="true">统筹全组+大组协调、质量把关、与采购组协作</td></tr>
+<tr><td id="e236" contenteditable="true" style="position: relative; padding-left: 22px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span>高级测算师</td><td id="e237" contenteditable="true">1</td><td id="e238" contenteditable="true">复杂改造项目深度测算、测算模型迭代</td></tr>
+<tr><td id="e239" contenteditable="true" style="position: relative; padding-left: 22px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span>测算师</td><td id="e240" contenteditable="true">2</td><td id="e241" contenteditable="true">常规项目测算、核价模型套用、招标清单编制+报价分析</td></tr>
+</tbody></table><div class="add-row-bar" style="text-align: center; padding: 4px 0px;"><button class="add-row-btn" title="在末尾添加一行" style="background: rgb(237, 242, 247); border: 1px dashed rgb(160, 174, 192); color: rgb(74, 85, 104); padding: 3px 14px; border-radius: 4px; cursor: pointer; font-size: 12px; margin-top: 4px;">+ 添加行</button></div></div>
 <p id="e242" contenteditable="true"><strong>工作量参考</strong>：</p>
 <div class="table-wrap" id="tw_7"><table>
-<tr><th id="e243" contenteditable="true">项目类型</th><th id="e244" contenteditable="true">核价周期</th></tr>
-<tr><td id="e245" contenteditable="true">轻改造（≤50万）</td><td id="e246" contenteditable="true">1-2个工作日</td></tr>
-<tr><td id="e247" contenteditable="true">常规改造（50-200万）</td><td id="e248" contenteditable="true">3-5个工作日</td></tr>
-<tr><td id="e249" contenteditable="true">大专项/大招调（&gt;200万）</td><td id="e250" contenteditable="true">5-10个工作日</td></tr>
-</table></div>
+<tbody><tr><th id="e243" contenteditable="true" style="position: relative; width: 508px; min-width: 40px; padding-left: 22px; padding-right: 20px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span>项目类型<div class="th-resizer"></div><div class="th-resizer"></div><span class="col-del-btn" title="删除此列" style="position: absolute; right: 2px; top: 1px; width: 14px; height: 14px; line-height: 14px; text-align: center; font-size: 10px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span></th><th id="e244" contenteditable="true" style="position: relative; width: 508px; min-width: 40px; padding-right: 20px;">核价周期<div class="th-resizer"></div><div class="th-resizer"></div><span class="col-del-btn" title="删除此列" style="position: absolute; right: 2px; top: 1px; width: 14px; height: 14px; line-height: 14px; text-align: center; font-size: 10px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span><span class="add-col-btn" title="添加一列" style="position: absolute; right: -16px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(49, 130, 206); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">+</span></th></tr>
+<tr><td id="e245" contenteditable="true" style="position: relative; padding-left: 22px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span>轻改造（≤50万）</td><td id="e246" contenteditable="true">1-2个工作日</td></tr>
+<tr><td id="e247" contenteditable="true" style="position: relative; padding-left: 22px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span>常规改造（50-200万）</td><td id="e248" contenteditable="true">3-5个工作日</td></tr>
+<tr><td id="e249" contenteditable="true" style="position: relative; padding-left: 22px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span>大专项/大招调（&gt;200万）</td><td id="e250" contenteditable="true">5-10个工作日</td></tr>
+</tbody></table><div class="add-row-bar" style="text-align: center; padding: 4px 0px;"><button class="add-row-btn" title="在末尾添加一行" style="background: rgb(237, 242, 247); border: 1px dashed rgb(160, 174, 192); color: rgb(74, 85, 104); padding: 3px 14px; border-radius: 4px; cursor: pointer; font-size: 12px; margin-top: 4px;">+ 添加行</button></div></div>
 <p id="e251" contenteditable="true"><strong>协作要点</strong>：</p>
-<div class="list-item" id="e252" contenteditable="true">• 测算组不只是核价——出量、核价、招标清单、报价分析是一条线</div>
+<div class="list-item" id="e252" contenteditable="true">• 测算组不只是核价——出量、核价、招标清单是一条线</div>
 <div class="list-item" id="e253" contenteditable="true">• 招标的工程量清单和报价分析由测算组出，采购组负责流程推进和商务谈判</div>
 <div class="list-item" id="e254" contenteditable="true">• 同一个项目的量出一遍，核价用一遍，招标再用一遍，不用重复算</div>
 <h4 class="sub-subsection-title" id="e255" contenteditable="true">5.1.2 成本管控+数据分析组（4人）</h4>
 <div class="table-wrap" id="tw_8"><table>
-<tr><th id="e256" contenteditable="true">岗位</th><th id="e257" contenteditable="true">人数</th><th id="e258" contenteditable="true">核心职责</th></tr>
-<tr><td id="e259" contenteditable="true">组长（城市BP④）</td><td id="e260" contenteditable="true">1</td><td id="e261" contenteditable="true">成本分析方向把控、降本机会识别、向大区总汇报</td></tr>
-<tr><td id="e262" contenteditable="true">数据分析专员</td><td id="e263" contenteditable="true">1</td><td id="e264" contenteditable="true">价格数据库维护更新、市场价对标、成本数据看板</td></tr>
-<tr><td id="e265" contenteditable="true">成果汇总专员</td><td id="e266" contenteditable="true">1</td><td id="e267" contenteditable="true">各组成果汇总归纳、标杆对比分析、月度/季度成本报表</td></tr>
-<tr><td id="e268" contenteditable="true">降本挖掘专员</td><td id="e269" contenteditable="true">1</td><td id="e270" contenteditable="true">降本机会识别、降本方案策划、降本成效跟踪</td></tr>
-</table></div>
+<tbody><tr><th id="e256" contenteditable="true" style="position: relative; width: 338px; min-width: 40px; padding-left: 22px; padding-right: 20px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span>岗位<div class="th-resizer"></div><div class="th-resizer"></div><span class="col-del-btn" title="删除此列" style="position: absolute; right: 2px; top: 1px; width: 14px; height: 14px; line-height: 14px; text-align: center; font-size: 10px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span></th><th id="e257" contenteditable="true" style="position: relative; width: 338px; min-width: 40px; padding-right: 20px;">人数<div class="th-resizer"></div><div class="th-resizer"></div><span class="col-del-btn" title="删除此列" style="position: absolute; right: 2px; top: 1px; width: 14px; height: 14px; line-height: 14px; text-align: center; font-size: 10px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span></th><th id="e258" contenteditable="true" style="position: relative; width: 338px; min-width: 40px; padding-right: 20px;">核心职责<div class="th-resizer"></div><div class="th-resizer"></div><span class="col-del-btn" title="删除此列" style="position: absolute; right: 2px; top: 1px; width: 14px; height: 14px; line-height: 14px; text-align: center; font-size: 10px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span><span class="add-col-btn" title="添加一列" style="position: absolute; right: -16px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(49, 130, 206); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">+</span></th></tr>
+<tr><td id="e259" contenteditable="true" style="position: relative; padding-left: 22px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span>组长（城市BP④）</td><td id="e260" contenteditable="true">1</td><td id="e261" contenteditable="true">成本分析方向把控、降本机会识别、向大区总汇报</td></tr>
+<tr><td id="e262" contenteditable="true" style="position: relative; padding-left: 22px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span>数据分析专员</td><td id="e263" contenteditable="true">1</td><td id="e264" contenteditable="true">价格数据库维护更新、市场价对标、成本数据看板</td></tr>
+<tr><td id="e265" contenteditable="true" style="position: relative; padding-left: 22px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span>成果汇总专员</td><td id="e266" contenteditable="true">1</td><td id="e267" contenteditable="true">各组成果汇总归纳、标杆对比分析、月度/季度成本报表</td></tr>
+<tr><td id="e268" contenteditable="true" style="position: relative; padding-left: 22px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span>降本挖掘专员</td><td id="e269" contenteditable="true">1</td><td id="e270" contenteditable="true">降本机会识别、降本方案策划、降本成效跟踪</td></tr>
+</tbody></table><div class="add-row-bar" style="text-align: center; padding: 4px 0px;"><button class="add-row-btn" title="在末尾添加一行" style="background: rgb(237, 242, 247); border: 1px dashed rgb(160, 174, 192); color: rgb(74, 85, 104); padding: 3px 14px; border-radius: 4px; cursor: pointer; font-size: 12px; margin-top: 4px;">+ 添加行</button></div></div>
 <p id="e271" contenteditable="true"><strong>核心产出</strong>：</p>
 <div class="table-wrap" id="tw_9"><table>
-<tr><th id="e272" contenteditable="true">产出</th><th id="e273" contenteditable="true">频率</th><th id="e274" contenteditable="true">服务对象</th></tr>
-<tr><td id="e275" contenteditable="true"><strong>降本机会清单</strong></td><td id="e276" contenteditable="true">月度</td><td id="e277" contenteditable="true">大区总+功能组</td></tr>
-<tr><td id="e278" contenteditable="true">月度成本简报</td><td id="e279" contenteditable="true">月度</td><td id="e280" contenteditable="true">大区总+各城市总</td></tr>
-<tr><td id="e281" contenteditable="true">基准价库沉淀</td><td id="e282" contenteditable="true">季度</td><td id="e283" contenteditable="true">测算组+采购组+大区BP</td></tr>
-</table></div>
+<tbody><tr><th id="e272" contenteditable="true" style="position: relative; width: 338px; min-width: 40px; padding-left: 22px; padding-right: 20px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span>产出<div class="th-resizer"></div><div class="th-resizer"></div><span class="col-del-btn" title="删除此列" style="position: absolute; right: 2px; top: 1px; width: 14px; height: 14px; line-height: 14px; text-align: center; font-size: 10px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span></th><th id="e273" contenteditable="true" style="position: relative; width: 338px; min-width: 40px; padding-right: 20px;">频率<div class="th-resizer"></div><div class="th-resizer"></div><span class="col-del-btn" title="删除此列" style="position: absolute; right: 2px; top: 1px; width: 14px; height: 14px; line-height: 14px; text-align: center; font-size: 10px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span></th><th id="e274" contenteditable="true" style="position: relative; width: 338px; min-width: 40px; padding-right: 20px;">服务对象<div class="th-resizer"></div><div class="th-resizer"></div><span class="col-del-btn" title="删除此列" style="position: absolute; right: 2px; top: 1px; width: 14px; height: 14px; line-height: 14px; text-align: center; font-size: 10px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span><span class="add-col-btn" title="添加一列" style="position: absolute; right: -16px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(49, 130, 206); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">+</span></th></tr>
+<tr><td id="e275" contenteditable="true" style="position: relative; padding-left: 22px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span>月度成本简报</td><td id="e276" contenteditable="true">月度</td><td id="e277" contenteditable="true">大区总+各城市总</td></tr>
+<tr><td id="e278" contenteditable="true" style="position: relative; padding-left: 22px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span>降本机会清单</td><td id="e279" contenteditable="true">月度</td><td id="e280" contenteditable="true">大区总+功能组</td></tr>
+<tr><td id="e281" contenteditable="true" style="position: relative; padding-left: 22px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span>标杆对比分析</td><td id="e282" contenteditable="true">季度</td><td id="e283" contenteditable="true">大区总</td></tr>
+</tbody></table><div class="add-row-bar" style="text-align: center; padding: 4px 0px;"><button class="add-row-btn" title="在末尾添加一行" style="background: rgb(237, 242, 247); border: 1px dashed rgb(160, 174, 192); color: rgb(74, 85, 104); padding: 3px 14px; border-radius: 4px; cursor: pointer; font-size: 12px; margin-top: 4px;">+ 添加行</button></div></div>
 <h4 class="sub-subsection-title" id="comp_51_title" contenteditable="true">5.1.3 两组复合用工机制</h4>
 <p id="comp_51_r1" contenteditable="true"><strong>核心机制</strong>：测算核价组和成本管控+数据分析组平时复合用工，由大组协调人①统筹分配工作。两组人员共享人力池，根据项目量和阶段性重点灵活调配。</p>
 <p id="comp_51_r2" contenteditable="true"><strong>重点叠加</strong>：成本管控+数据分析组是一项叠加且重点的工作——在测算核价的主线上，叠加了数据提炼和成本分析能力，让测算结果不仅「出量核价」，更能「挖出降本机会、沉淀数据资产」。</p>
 <p id="comp_51_r3" contenteditable="true"><strong>跨大组服务</strong>：数据分析能力贯穿整个成本中台，不仅服务于本大组，也为采购供方大组提供数据支撑和价格库服务。</p>
 <hr>
-<h3 class="subsection-title" id="e287" contenteditable="true">5.2 采购供方大组（13人）</h3>
-<p id="e288" contenteditable="true"><strong>定位</strong>：花钱+管人——采购执行、供方把控、基准价维护</p>
-<p id="e289" contenteditable="true"><strong>大组协调人②</strong>：统筹本大组四个小组的协作，确保采购执行→供方把控→基准价维护的闭环。兼任合规检查组长。</p>
-<p id="e290" contenteditable="true"><strong>大组内四个小组的制衡逻辑</strong>：</p>
+<h3 class="subsection-title" id="e287" contenteditable="true">5.2 采购供方大组（10人）</h3>
+<p id="e288" contenteditable="true"><strong>定位</strong>：中枢平台花钱+管人——采购执行、供方把控、基准价维护</p>
+<p id="e289" contenteditable="true"><strong>大组协调人②</strong>：统筹本大组三个小组的协作，确保采购执行→供方把控→基准价维护的闭环。兼任采购一组组长。</p>
+<p id="e290" contenteditable="true"><strong>大组内三个小组的制衡逻辑</strong>：</p>
 <div class="list-item" id="e291" contenteditable="true">• 采购一组/二组/三组：执行端——找供方、谈价格、推流程</div>
 <div class="list-item" id="e292" contenteditable="true">• 采购三组叠加供方管理+基准价：把控端——评供方、定标准、控价格</div>
 <div class="list-item" id="e293" contenteditable="true">• 选商和使用评价不是同一拨人（二组找供方，三组评供方），避免利益绑定</div>
-<div class="list-item" id="e293a" contenteditable="true"
->• 合规检查+标准化组：监督端——查合规、定标准、促规范</div>
+<div class="list-item" id="e293a" contenteditable="true">• 合规检查+标准化组：监督端——查合规、定标准、促规范</div>
 <h4 class="sub-subsection-title" id="e294" contenteditable="true">5.2.1 采购一组/工程能源（4人）</h4>
 <div class="table-wrap" id="tw_10"><table>
-<tr><th id="e295" contenteditable="true">岗位</th><th id="e296" contenteditable="true">人数</th><th id="e297" contenteditable="true">核心职责</th></tr>
-<tr><td id="e298" contenteditable="true">组长（小组长⑤）</td><td id="e299" contenteditable="true">1</td><td id="e300" contenteditable="true">统筹工程能源类采购+大组协调、大标亲自把关</td></tr>
-<tr><td id="e301" contenteditable="true">工程改造专员</td><td id="e302" contenteditable="true">1</td><td id="e303" contenteditable="true">专项改造/高品质施工/改造设计/专项维修/防水维修</td></tr>
-<tr><td id="e304" contenteditable="true">工程物资+集采落地专员</td><td id="e305" contenteditable="true">1</td><td id="e306" contenteditable="true">总部集采工程类品项落地协调（灯具、水泵、电缆等29项）</td></tr>
-<tr><td id="e307" contenteditable="true">能源节费专员</td><td id="e308" contenteditable="true">1</td><td id="e309" contenteditable="true">储能、EMC高效水泵/灯具、光伏、AI智控落地推动+效果跟踪</td></tr>
-</table></div>
+<tbody><tr><th id="e295" contenteditable="true" style="position: relative; width: 338px; min-width: 40px; padding-left: 22px; padding-right: 20px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span>岗位<div class="th-resizer"></div><div class="th-resizer"></div><span class="col-del-btn" title="删除此列" style="position: absolute; right: 2px; top: 1px; width: 14px; height: 14px; line-height: 14px; text-align: center; font-size: 10px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span></th><th id="e296" contenteditable="true" style="position: relative; width: 338px; min-width: 40px; padding-right: 20px;">人数<div class="th-resizer"></div><div class="th-resizer"></div><span class="col-del-btn" title="删除此列" style="position: absolute; right: 2px; top: 1px; width: 14px; height: 14px; line-height: 14px; text-align: center; font-size: 10px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span></th><th id="e297" contenteditable="true" style="position: relative; width: 338px; min-width: 40px; padding-right: 20px;">核心职责<div class="th-resizer"></div><div class="th-resizer"></div><span class="col-del-btn" title="删除此列" style="position: absolute; right: 2px; top: 1px; width: 14px; height: 14px; line-height: 14px; text-align: center; font-size: 10px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span><span class="add-col-btn" title="添加一列" style="position: absolute; right: -16px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(49, 130, 206); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">+</span></th></tr>
+<tr><td id="e298" contenteditable="true" style="position: relative; padding-left: 22px;" class=""><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span>组长</td><td id="e299" contenteditable="true">1</td><td id="e300" contenteditable="true">统筹工程能源类采购+大组协调、大标亲自把关</td></tr>
+<tr><td id="e301" contenteditable="true" style="position: relative; padding-left: 22px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span>工程改造专员</td><td id="e302" contenteditable="true">1</td><td id="e303" contenteditable="true">专项改造/高品质施工/改造设计/专项维修/防水维修</td></tr>
+<tr><td id="e304" contenteditable="true" style="position: relative; padding-left: 22px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span>工程物资+集采落地专员</td><td id="e305" contenteditable="true">1</td><td id="e306" contenteditable="true">总部集采工程类品项落地协调（灯具、水泵、电缆等29项）</td></tr>
+<tr><td id="e307" contenteditable="true" style="position: relative; padding-left: 22px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span>能源节费专员</td><td id="e308" contenteditable="true">1</td><td id="e309" contenteditable="true">储能、EMC高效水泵/灯具、光伏、AI智控落地推动+效果跟踪</td></tr>
+</tbody></table><div class="add-row-bar" style="text-align: center; padding: 4px 0px;"><button class="add-row-btn" title="在末尾添加一行" style="background: rgb(237, 242, 247); border: 1px dashed rgb(160, 174, 192); color: rgb(74, 85, 104); padding: 3px 14px; border-radius: 4px; cursor: pointer; font-size: 12px; margin-top: 4px;">+ 添加行</button></div></div>
 <p id="e310" contenteditable="true"><strong>招采覆盖</strong>：</p>
 <div class="table-wrap" id="tw_11"><table>
-<tr><th id="e311" contenteditable="true">品类方向</th><th id="e312" contenteditable="true">对应招采项</th><th id="e313" contenteditable="true">角色</th></tr>
-<tr><td id="e314" contenteditable="true">工程改造</td><td id="e315" contenteditable="true">专项改造、改造设计、专项维修、防水维修（大区集采4项）</td><td id="e316" contenteditable="true">全流程主导</td></tr>
-<tr><td id="e317" contenteditable="true">工程物资</td><td id="e318" contenteditable="true">总部集采工程类品项（灯具、水泵、电缆、石材等）</td><td id="e319" contenteditable="true">落地协调</td></tr>
-<tr><td id="e320" contenteditable="true">能源节费</td><td id="e321" contenteditable="true">储能、EMC、光伏、AI智控（总部集采）</td><td id="e322" contenteditable="true">落地推动+效果跟踪</td></tr>
-</table></div>
+<tbody><tr><th id="e311" contenteditable="true" style="position: relative; width: 338px; min-width: 40px; padding-left: 22px; padding-right: 20px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span>品类方向<div class="th-resizer"></div><div class="th-resizer"></div><span class="col-del-btn" title="删除此列" style="position: absolute; right: 2px; top: 1px; width: 14px; height: 14px; line-height: 14px; text-align: center; font-size: 10px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span></th><th id="e312" contenteditable="true" style="position: relative; width: 338px; min-width: 40px; padding-right: 20px;">对应招采项<div class="th-resizer"></div><div class="th-resizer"></div><span class="col-del-btn" title="删除此列" style="position: absolute; right: 2px; top: 1px; width: 14px; height: 14px; line-height: 14px; text-align: center; font-size: 10px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span></th><th id="e313" contenteditable="true" style="position: relative; width: 338px; min-width: 40px; padding-right: 20px;">角色<div class="th-resizer"></div><div class="th-resizer"></div><span class="col-del-btn" title="删除此列" style="position: absolute; right: 2px; top: 1px; width: 14px; height: 14px; line-height: 14px; text-align: center; font-size: 10px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span><span class="add-col-btn" title="添加一列" style="position: absolute; right: -16px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(49, 130, 206); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">+</span></th></tr>
+<tr><td id="e314" contenteditable="true" style="position: relative; padding-left: 22px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span>工程改造</td><td id="e315" contenteditable="true">专项改造、改造设计、专项维修、防水维修（大区集采4项）</td><td id="e316" contenteditable="true">全流程主导</td></tr>
+<tr><td id="e317" contenteditable="true" style="position: relative; padding-left: 22px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span>工程物资</td><td id="e318" contenteditable="true">总部集采工程类品项（灯具、水泵、电缆、石材等）</td><td id="e319" contenteditable="true">落地协调</td></tr>
+<tr><td id="e320" contenteditable="true" style="position: relative; padding-left: 22px;"><span class="row-del-btn" title="删除此行" style="position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; line-height: 16px; text-align: center; font-size: 11px; background: rgb(229, 62, 62); color: rgb(255, 255, 255); border-radius: 50%; cursor: pointer; transition: opacity 0.2s; z-index: 10; user-select: none;">×</span>能源节费</td><td id="e321" contenteditable="true">储能、EMC、光伏、AI智控（总部集采）</td><td id="e322" contenteditable="true">落地推动+效果跟踪</td></tr>
+</tbody></table><div class="add-row-bar" style="text-align: center; padding: 4px 0px;"><button class="add-row-btn" title="在末尾添加一行" style="background: rgb(237, 242, 247); border: 1px dashed rgb(160, 174, 192); color: rgb(74, 85, 104); padding: 3px 14px; border-radius: 4px; cursor: pointer; font-size: 12px; margin-top: 4px;">+ 添加行</button></div></div>
 <h4 class="sub-subsection-title" id="e323" contenteditable="true">5.2.2 采购二组/物业企划·4城（3人）</h4>
 <div class="table-wrap" id="tw_12"><table>
-<tr><th id="e324" contenteditable="true">岗位</th><th id="e325" contenteditable="true">人数</th><th id="e326" contenteditable="true">核心职责</th></tr>
-<tr><td id="e327" contenteditable="true">组长（小组长⑥）</td><td id="e328" contenteditable="true">1</td><td id="e329" contenteditable="true">统筹4城物业+企划类采购、区域供需平衡</td></tr>
-<tr><td id="e330" contenteditable="true">物业采购专员</td><td id="e331" contenteditable="true">1</td><td id="e332" contenteditable="true">物业类集采和管控（消杀、保洁用品、绿化养护等）</td></tr>
-<tr><td id="e333" contenteditable="true">企划采购专员</td><td id="e334" contenteditable="true">1</td><td id="e335" contenteditable="true">企划类集采和管控（VI设计、自媒体、活动物料等）</td></tr>
-</table></div>
-<p id="e336" contenteditable="true"><strong>覆盖城市</strong>：上海、苏州、杭州、南京（4城，物业+企划体量较大）</p>
-<p id="e337" contenteditable="true"><strong>与采购三组的分工</strong>：</p>
-<div class="list-item" id="e338" contenteditable="true">• 二组和三组同做物业+企划类招标核价</div>
-<div class="list-item" id="e339" contenteditable="true">• 按区域切：二组管4城，三组管3城</div>
-<div class="list-item" id="e340" contenteditable="true">• 二组纯做采购执行，不管供方管理</div>
-<h4 class="sub-subsection-title" id="e341" contenteditable="true">5.2.3 采购三组/物业企划+供方管理·3城（3人）</h4>
-<div class="table-wrap" id="tw_13"><table>
-<tr><th id="e342" contenteditable="true">岗位</th><th id="e343" contenteditable="true">人数</th><th id="e344" contenteditable="true">核心职责</th></tr>
-<tr><td id="e345" contenteditable="true">组长（小组长⑦）</td><td id="e346" contenteditable="true">1</td><td id="e347" contenteditable="true">统筹3城物业+企划采购+供方管理+基准价把控</td></tr>
-<tr><td id="e348" contenteditable="true">物业企划采购专员</td><td id="e349" contenteditable="true">1</td><td id="e350" contenteditable="true">3城物业+企划类采购执行（与二组做同样的事，只是区域不同）</td></tr>
-<tr><td id="e351" contenteditable="true">供方管理+基准价把控专员</td><td id="e352" contenteditable="true">1</td><td id="e353" contenteditable="true">供应商库使用+本地准入把关+基准价维护+供方评价+分层管理</td></tr>
-</table></div>
-<p id="e354" contenteditable="true"><strong>覆盖城市</strong>：合肥、厦门、宁波（3城，工作量相对轻，叠加供方管理后与二组对等）</p>
-<p id="e355" contenteditable="true"><strong>供方管理职责说明</strong>：</p>
-<div class="table-wrap" id="tw_14"><table>
-<tr><th id="e356" contenteditable="true">职责</th><th id="e357" contenteditable="true">内容</th><th id="e358" contenteditable="true">前提</th></tr>
-<tr><td id="e359" contenteditable="true">供应商库使用</td><td id="e360" contenteditable="true">基于总部建设的供应商库进行日常选商</td><td id="e361" contenteditable="true">总部建库并维护</td></tr>
-<tr><td id="e362" contenteditable="true">本地准入把关</td><td id="e363" contenteditable="true">新供方本地准入初审、现场考察</td><td id="e364" contenteditable="true">配合总部准入标准</td></tr>
-<tr><td id="e365" contenteditable="true">基准价维护</td><td id="e366" contenteditable="true">分品类基准价录入更新、市场价格对标</td><td id="e367" contenteditable="true">采购组提供成交价数据</td></tr>
-<tr><td id="e368" contenteditable="true">供方评价</td><td id="e369" contenteditable="true">S/A/B/C分层管理、绩效评价</td><td id="e370" contenteditable="true">按总部评价模型执行</td></tr>
-<tr><td id="e371" contenteditable="true">供方切换审核</td><td id="e372" contenteditable="true">退出/切换审核，确保合规</td><td id="e373" contenteditable="true">与合规检查组联动</td></tr>
-</table></div>
-<p id="e374" contenteditable="true"><strong>供方分层管理</strong>：</p>
-<div class="table-wrap" id="tw_15"><table>
-<tr><th id="e375" contenteditable="true">供方等级</th><th id="e376" contenteditable="true">定义</th><th id="e377" contenteditable="true">管理方式</th><th id="e378" contenteditable="true">合作范围</th></tr>
-<tr><td id="e379" contenteditable="true">S级</td><td id="e380" contenteditable="true">战略合作伙伴</td><td id="e381" contenteditable="true">年度战略合作协议，优先派单</td><td id="e382" contenteditable="true">全东区</td></tr>
-<tr><td id="e383" contenteditable="true">A级</td><td id="e384" contenteditable="true">优质供方</td><td id="e385" contenteditable="true">区域框架协议，定期评价</td><td id="e386" contenteditable="true">跨城市</td></tr>
-<tr><td id="e387" contenteditable="true">B级</td><td id="e388" contenteditable="true">合格供方</td><td id="e389" contenteditable="true">单项目合同，年度复评</td><td id="e390" contenteditable="true">属地为主</td></tr>
-<tr><td id="e391" contenteditable="true">C级</td><td id="e392" contenteditable="true">观察期供方</td><td id="e393" contenteditable="true">限用+重点监督</td><td id="e394" contenteditable="true">限指定项目</td></tr>
-</table></div>
-<p id="e395" contenteditable="true"><strong>过渡安排</strong>：供方管理职责随总部供应商库上线节奏逐步移交。库未建成前，三组仍承担建库类工作，机动人员可临时增配。</p>
-<h4 class="sub-subsection-title" id="e395a" contenteditable="true">5.2.4 合规检查+标准化组（3人）</h4>
-<div class="table-wrap" id="tw_16"><table>
-<tr><th id="e395b" contenteditable="true">岗位</th><th id="e395c" contenteditable="true">人数</th><th id="e395d" contenteditable="true">核心职责</th></tr>
-<tr><td id="e395e" contenteditable="true">组长（协调人②兼）</td><td id="e395f" contenteditable="true">1</td><td id="e395g" contenteditable="true">统筹合规检查专项+标准化建设+大组协调，兼任南京成本组长</td></tr>
-<tr><td id="e395h" contenteditable="true">合规检查专员</td><td id="e395i" contenteditable="true">1</td><td id="e395j" contenteditable="true">专项合规检查执行、招标流程合规审查、供方资质复核</td></tr>
-<tr><td id="e395k" contenteditable="true">标准化专员</td><td id="e395l" contenteditable="true">1</td><td id="e395m" contenteditable="true">采购流程标准化建设、合同模板维护、制度文件归档更新</td></tr>
-</table></div>
-<p id="e395n" contenteditable="true"><strong>常态业务</strong>：有专项合规检查任务时突击执行，确保采购流程、供方准入、合同签订各环节合规。</p>
-<p id="e395o" contenteditable="true"><strong>标准化建设</strong>：持续推进采购流程标准化、合同模板统一化、制度文件规范化，降低操作风险。</p>
-<p id="e395p" contenteditable="true"><strong>与采购一组的复合用工</strong>：无专项合规检查任务时，合规检查组人员回归人力池，与采购一组协同承担工程能源类采购的辅助工作（如工程改造现场核查、集采落地跟进、能源节费效果跟踪），由大组协调人②统筹调配。</p>
-<p id="e396" contenteditable="true"><strong>采购二组vs三组的协作与制衡</strong>：</p>
-<div class="arch-diagram">
-<div class="arch-nodes" style="margin-bottom:10px">
-<div class="arch-node" style="background:rgba(43,108,176,.15);border-color:rgba(43,108,176,.4);min-width:180px">
-<div class="arch-node-title" style="color:#2b6cb0" contenteditable="true" id="proc_b1">采购二组（4城执行）</div>
-<div class="arch-node-desc" style="color:#4a5568" contenteditable="true" id="proc_b1d">找供方、谈价格<br>覆盖：上海、苏州、杭州、南京</div>
-</div>
-<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 12px">
-<div style="color:#e53e3e;font-weight:700;font-size:13px" contenteditable="true" id="proc_div">制衡分界</div>
-<div style="font-size:11px;color:#718096" contenteditable="true" id="proc_div_d">二组找的供方→三组评<br>三组找的供方→二组评</div>
-</div>
-<div class="arch-node" style="background:rgba(56,161,105,.15);border-color:rgba(56,161,105,.4);min-width:180px">
-<div class="arch-node-title" style="color:#38a169" contenteditable="true" id="proc_b2">采购三组（3城执行+把控）</div>
-<div class="arch-node-desc" style="color:#4a5568" contenteditable="true" id="proc_b2d">找供方、谈价格 + 评供方、定标准<br>覆盖：合肥、厦门、宁波 + 供方管理</div>
-</div>
-</div>
-<div style="text-align:center;font-size:12px;color:#718096" contenteditable="true" id="proc_note">基准价由三组维护，二组采购结果对标基准价</div>
-</div>
-<hr>
-<h3 class="subsection-title" id="e398" contenteditable="true">5.3 验收结算大组（7人+1机动）</h3>
-<p id="e399" contenteditable="true"><strong>定位</strong>：成本管控的"闭环"——验品质、审结算</p>
-<p id="e400" contenteditable="true"><strong>大组协调人③</strong>：统筹验收结算组的运作，确保验收→结算的闭环。兼任验收结算组组长。</p>
 
-<h4 class="sub-subsection-title" id="e402" contenteditable="true">5.3.1 验收结算组（7人）</h4>
-<div class="table-wrap" id="tw_17"><table>
-<tr><th id="e403" contenteditable="true">岗位</th><th id="e404" contenteditable="true">人数</th><th id="e405" contenteditable="true">核心职责</th></tr>
-<tr><td id="e406" contenteditable="true">组长（大组协调人③兼）</td><td id="e407" contenteditable="true">1</td><td id="e408" contenteditable="true">结算标准制定、质量把关、验收调度、争议仲裁</td></tr>
-<tr><td id="e409" contenteditable="true">结算审核专员</td><td id="e410" contenteditable="true">2</td><td id="e411" contenteditable="true">结算量价核对、变更合规审查、结算审批</td></tr>
-<tr><td id="e412" contenteditable="true">验收专员</td><td id="e413" contenteditable="true">2</td><td id="e414" contenteditable="true">到场验收、隐蔽工程抽查</td></tr>
-<tr><td id="e415" contenteditable="true">结算支持专员</td><td id="e416" contenteditable="true">1</td><td id="e417" contenteditable="true">对账归档、结算进度跟踪</td></tr>
-<tr><td id="e418" contenteditable="true">数据录入归档专员</td><td id="e419" contenteditable="true">1</td><td id="e420" contenteditable="true">结算数据录入、电子归档、价格库数据回填</td></tr>
-</table></div>
-<p id="e421" contenteditable="true"><strong>验收分级处理</strong>：</p>
-<div class="table-wrap" id="tw_18"><table>
-<tr><th id="e422" contenteditable="true">项目类型</th><th id="e423" contenteditable="true">验收方式</th><th id="e424" contenteditable="true">结算审核</th></tr>
-<tr><td id="e425" contenteditable="true">大招调/大专项</td><td id="e426" contenteditable="true">必须到场验收</td><td id="e427" contenteditable="true">全量审</td></tr>
-<tr><td id="e428" contenteditable="true">轻改造</td><td id="e429" contenteditable="true">必须到场验收</td><td id="e430" contenteditable="true">全量审</td></tr>
-<tr><td id="e431" contenteditable="true">常规改造</td><td id="e432" contenteditable="true">抽查验收</td><td id="e433" contenteditable="true">全量审</td></tr>
-<tr><td id="e434" contenteditable="true">日常维保类</td><td id="e435" contenteditable="true">远程审核为主</td><td id="e436" contenteditable="true">抽审</td></tr>
-</table></div>
-<p id="e437" contenteditable="true"><strong>验收逻辑说明</strong>：</p>
-<div class="list-item" id="e438" contenteditable="true">• 大招调/大专项和轻改造都必须到场验收——金额大的自不必说，轻改造虽然金额小但项目分散、容易出漏洞，全量现场验收兜底</div>
-<div class="list-item" id="e439" contenteditable="true">• 常规改造项目相对标准化，抽查验收+全量结算审核即可控制风险</div>
-<div class="list-item" id="e440" contenteditable="true">• 结算审核除日常维保类抽审外，其余全量审</div>
-<p id="e441" contenteditable="true"><strong>7人的必要性</strong>：7城广场所有项目的验收+结算全归本组。验收需要到场（出差），结算需要全量审——2个验收专员覆盖7城（每人3-4城），2个结算审核专员保证结算时效，1个数据录入归档专员确保结算数据及时回填价格库。5人版本偏紧，7人才能保证验收不排期、结算不积压。</p>
-<p id="e442" contenteditable="true"><strong>日常节奏</strong>：大头在结算审核——各类结算单据、变更签证，不需要到场，远程集中审效率更高。验收出差的调度权归组长——哪个城市有验收需求就派谁去。</p>
-<hr>
-</div>
-<div class="section-card color-block" id="sec_6"><div class="card-controls"><button class="card-del" title="删除色块">&times;</button><button class="card-dup" title="复制色块">+</button></div><div class="resize-handle"></div><h2 class="section-title" id="e458" contenteditable="true">六、需求流转与协作机制</h2>
-<h3 class="subsection-title" id="e459" contenteditable="true">6.1 需求怎么进来——统一需求池</h3>
-<p id="e460" contenteditable="true">广场/城市公司提需求，统一进需求池：</p>
-<div class="table-wrap" id="tw_19"><table>
-<tr><th id="e461" contenteditable="true">需求字段</th><th id="e462" contenteditable="true">说明</th></tr>
-<tr><td id="e463" contenteditable="true">广场名</td><td id="e464" contenteditable="true">哪个广场发起</td></tr>
-<tr><td id="e465" contenteditable="true">需求类型</td><td id="e466" contenteditable="true">测算/采购/验收/结算/供方/合规/其他</td></tr>
-<tr><td id="e467" contenteditable="true">紧急程度</td><td id="e468" contenteditable="true">常规/加急/紧急</td></tr>
-<tr><td id="e469" contenteditable="true">项目简述</td><td id="e470" contenteditable="true">一句话说清楚要干啥</td></tr>
-<tr><td id="e471" contenteditable="true">期望时间</td><td id="e472" contenteditable="true">什么时候要成果</td></tr>
-</table></div>
-<p id="e473" contenteditable="true">工具选择：飞书多维表格或共享Excel</p>
-<h3 class="subsection-title" id="e474" contenteditable="true">6.2 活怎么派——组长派工制</h3>
-<div class="table-wrap" id="tw_20"><table>
-<tr><th id="e475" contenteditable="true">需求类型</th><th id="e476" contenteditable="true">流转到</th><th id="e477" contenteditable="true">派工逻辑</th></tr>
-<tr><td id="e478" contenteditable="true">出量核价、目标价</td><td id="e479" contenteditable="true">测算核价组组长</td><td id="e480" contenteditable="true">看组内谁负荷轻就派给谁，不按城市分</td></tr>
-<tr><td id="e481" contenteditable="true">工程/能源招标</td><td id="e482" contenteditable="true">采购一组组长</td><td id="e483" contenteditable="true">按品类分给对应的人</td></tr>
-<tr><td id="e484" contenteditable="true">物业/企划采购（上海/苏州/杭州/南京）</td><td id="e485" contenteditable="true">采购二组组长</td><td id="e486" contenteditable="true">按工作量排</td></tr>
-<tr><td id="e487" contenteditable="true">物业/企划采购（合肥/厦门/宁波）</td><td id="e488" contenteditable="true">采购三组组长</td><td id="e489" contenteditable="true">按工作量排</td></tr>
-<tr><td id="e490" contenteditable="true">供应商准入/评价/基准价</td><td id="e491" contenteditable="true">采购三组组长</td><td id="e492" contenteditable="true">按品类和紧急度排</td></tr>
-<tr><td id="e493" contenteditable="true">验收、结算审核</td><td id="e494" contenteditable="true">验收结算组组长</td><td id="e495" contenteditable="true">验收就近派人，结算远程审</td></tr>
-<tr><td id="e496" contenteditable="true">数据分析、降本咨询</td><td id="e497" contenteditable="true">成本管控组组长</td><td id="e498" contenteditable="true">按分析深度需求分配</td></tr>
-<tr><td id="e499" contenteditable="true">合规疑问、流程咨询</td><td id="e500" contenteditable="true">合规检查组组长</td><td id="e501" contenteditable="true">快速响应</td></tr>
-</table></div>
-<p id="e502" contenteditable="true"><strong>跨组协调</strong>：涉及多个小组的需求，由对应大组协调人统一调度。如测算→采购→结算是跨大组流程，由大区BP协调。</p>
-<p id="e503" contenteditable="true">紧急需求：直联组长，10分钟内派工，不走表格排队。组长电话全区域公开。</p>
-<h3 class="subsection-title" id="e504" contenteditable="true">6.3 大组协调人的特殊职责</h3>
-<p id="e505" contenteditable="true">大组协调人不只是"管组长的人"，核心价值在于：</p>
-<div class="list-item" id="e506" contenteditable="true">1. <strong>资源弹性调配</strong>：本大组内哪个小组忙，协调人从闲的小组抽人支援</div>
-<div class="list-item" id="e507" contenteditable="true">2. <strong>争议仲裁</strong>：小组间有分歧（如测算组和采购组对目标价有争议），协调人拍板</div>
-<div class="list-item" id="e508" contenteditable="true">3. <strong>专业标准统一</strong>：确保本大组内各小组做事标准一致</div>
-<div class="list-item" id="e509" contenteditable="true">4. <strong>向上汇报</strong>：大区BP不需要同时对接7个组长，只需要对接3个协调人+4个独立小组长</div>
-<h3 class="subsection-title" id="e510" contenteditable="true">6.4 审批流程（过渡期方案）</h3>
-<p id="e511" contenteditable="true"><strong>过渡期核心原则：审批流基本不变，派工方式先变</strong></p>
-<div class="table-wrap" id="tw_21"><table>
-<tr><th id="e512" contenteditable="true">业务</th><th id="e513" contenteditable="true">过渡期审批流</th><th id="e514" contenteditable="true">成熟期审批流（价格库建成后）</th></tr>
-<tr><td id="e515" contenteditable="true">测算核价</td><td id="e516" contenteditable="true">维持原审批人，测算执行改由组长派工</td><td id="e517" contenteditable="true">价格库内项目：自动核价通过；超预值：测算组长审批</td></tr>
-<tr><td id="e518" contenteditable="true">采购招标</td><td id="e519" contenteditable="true">维持原审批人，采购执行改由组长派工</td><td id="e520" contenteditable="true">价格库内项目：合规审查后直通；超预值：大组协调人审批</td></tr>
-<tr><td id="e521" contenteditable="true">验收结算</td><td id="e522" contenteditable="true">维持原审批人，验收/结算改由组长派工</td><td id="e523" contenteditable="true">标准清单内项目：按标准结算；超标准：验收组长审批</td></tr>
-</table></div>
-<p id="e524" contenteditable="true"><strong>过渡期时长</strong>：价格库+标准清单初步建成前（预计3-6个月）</p>
-<h3 class="subsection-title" id="e525" contenteditable="true">6.5 组间协作：以改造项目为例</h3>
-<div style="display:flex;flex-direction:column;gap:12px;margin:16px 0">
-  <!-- Phase 1: 需求发起 -->
-  <div style="display:flex;align-items:center;gap:10px">
-    <div style="min-width:72px;font-size:11px;color:#718096;font-weight:600;text-align:right;flex-shrink:0" contenteditable="true" id="flow_ph1">需求发起</div>
-    <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
-      <div style="background:#2b6cb0;color:#fff;padding:5px 12px;border-radius:6px;font-size:12px;font-weight:600;white-space:nowrap" contenteditable="true" id="flow_1">广场提需求</div>
-      <div style="color:#a0aec0;font-size:14px">→</div>
-      <div style="background:#2b6cb0;color:#fff;padding:5px 12px;border-radius:6px;font-size:12px;font-weight:600;white-space:nowrap" contenteditable="true" id="flow_2">属地BP受理</div>
-      <div style="color:#a0aec0;font-size:14px">→</div>
-      <div style="background:#2b6cb0;color:#fff;padding:5px 12px;border-radius:6px;font-size:12px;font-weight:600;white-space:nowrap" contenteditable="true" id="flow_3">进需求池</div>
-    </div>
-  </div>
-  <!-- Phase 2: 执行流转 -->
-  <div style="display:flex;align-items:center;gap:10px">
-    <div style="min-width:72px;font-size:11px;color:#718096;font-weight:600;text-align:right;flex-shrink:0" contenteditable="true" id="flow_ph2">执行流转</div>
-    <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
-      <div style="background:#2b6cb0;color:#fff;padding:5px 12px;border-radius:6px;font-size:12px;font-weight:600;white-space:nowrap" contenteditable="true" id="flow_4">测算核价组</div>
-      <div style="color:#a0aec0;font-size:14px">→</div>
-      <div style="background:#2b6cb0;color:#fff;padding:5px 12px;border-radius:6px;font-size:12px;font-weight:600;white-space:nowrap" contenteditable="true" id="flow_5">采购一组/二三组</div>
-      <div style="color:#a0aec0;font-size:14px">→</div>
-      <div style="background:#2b6cb0;color:#fff;padding:5px 12px;border-radius:6px;font-size:12px;font-weight:600;white-space:nowrap" contenteditable="true" id="flow_6">测算组回审</div>
-      <div style="color:#a0aec0;font-size:14px">→</div>
-      <div style="background:#2b6cb0;color:#fff;padding:5px 12px;border-radius:6px;font-size:12px;font-weight:600;white-space:nowrap" contenteditable="true" id="flow_7">定标审批</div>
-    </div>
-  </div>
-  <!-- Phase 3: 闭环沉淀 -->
-  <div style="display:flex;align-items:center;gap:10px">
-    <div style="min-width:72px;font-size:11px;color:#718096;font-weight:600;text-align:right;flex-shrink:0" contenteditable="true" id="flow_ph3">闭环沉淀</div>
-    <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
-      <div style="background:#2b6cb0;color:#fff;padding:5px 12px;border-radius:6px;font-size:12px;font-weight:600;white-space:nowrap" contenteditable="true" id="flow_8">验收结算组</div>
-      <div style="color:#a0aec0;font-size:14px">→</div>
-      <div style="background:#38a169;color:#fff;padding:5px 12px;border-radius:6px;font-size:12px;font-weight:600;white-space:nowrap" contenteditable="true" id="flow_9">采购三组「供方评价」</div>
-      <div style="color:#a0aec0;font-size:14px;font-weight:700">+</div>
-      <div style="background:#e53e3e;color:#fff;padding:5px 12px;border-radius:6px;font-size:12px;font-weight:600;white-space:nowrap" contenteditable="true" id="flow_10">成本管控组「数据沉淀」</div>
-    </div>
-  </div>
-</div>
-<h3 class="subsection-title" id="e527" contenteditable="true">6.6 制衡规则</h3>
-<div class="table-wrap" id="tw_22"><table>
-<tr><th id="e528" contenteditable="true">制衡点</th><th id="e529" contenteditable="true">规则</th></tr>
-<tr><td id="e530" contenteditable="true">核价与采购分离</td><td id="e531" contenteditable="true">测算核价组出目标价，采购组执行谈判，不得交叉</td></tr>
-<tr><td id="e532" contenteditable="true">谈判结果回审</td><td id="e533" contenteditable="true">采购谈判结果必须回测算核价组审核，超目标价10%须上报大区BP</td></tr>
-<tr><td id="e534" contenteditable="true">采购执行与供方评价分离</td><td id="e535" contenteditable="true">采购二组/三组找供方谈价格，供方评价由三组把控专员独立评（交叉评价）</td></tr>
-<tr><td id="e536" contenteditable="true">供方切换双审</td><td id="e537" contenteditable="true">采购组提切换需求 + 三组供方把控专员审核理由和价格合理性</td></tr>
-<tr><td id="e538" contenteditable="true">结算独立审核</td><td id="e539" contenteditable="true">结算审核由验收结算组独立完成，测算人员不得参与自己项目的结算</td></tr>
-<tr><td id="e540" contenteditable="true">合规一票否决</td><td id="e541" contenteditable="true">合规检查组对违规招采有一票否决权</td></tr>
-<tr><td id="e542" contenteditable="true">大组协调人不兼任其他大组协调人</td><td id="e543" contenteditable="true">3个协调人互不交叉，保证独立性</td></tr>
-</table></div>
-<hr>
-</div>
-<div class="section-card color-block" id="sec_7"><div class="card-controls"><button class="card-del" title="删除色块">&times;</button><button class="card-dup" title="复制色块">+</button></div><div class="resize-handle"></div><h2 class="section-title" id="e544" contenteditable="true">七、三大基础建设路线图</h2>
-<div class="blockquote" id="e545" contenteditable="true">架构调整要跑起来，依赖三项基础建设：标准清单+价格库、分标段、供方库。三者并行推进，各有侧重。</div>
-<h3 class="subsection-title" id="e546" contenteditable="true">7.1 标准清单与价格库（审批自动化的前提）</h3>
-<p id="e547" contenteditable="true"><strong>核心逻辑</strong>：标准清单是价格库的前提——先有标准化的品类清单和计量规则，才能把历史价格结构化入库。价格库是审批逻辑从"人治"到"规则治"的开关。</p>
-<p id="e548" contenteditable="true"><strong>建设策略</strong>：过渡期东区自行建设价格库，后期由总部统一建立价格库，东区过渡期的数据可直接迁移。</p>
-<div class="table-wrap" id="tw_23"><table>
-<tr><th id="e549" contenteditable="true">阶段</th><th id="e550" contenteditable="true">时间</th><th id="e551" contenteditable="true">目标</th><th id="e552" contenteditable="true">关键动作</th></tr>
-<tr><td id="e553" contenteditable="true"><strong>第一阶段：标准清单+框架搭建</strong></td><td id="e554" contenteditable="true">第1-4周</td><td id="e555" contenteditable="true">标准品类清单+价格库框架+首批品类入库</td><td id="e556" contenteditable="true">1. 采购三组供方把控专员牵头，测算组合价组配合&lt;br&gt;2. 按62项招采分类表，逐项梳理并标准化品类清单和计量规则&lt;br&gt;3. 建立基准价录入模板和更新机制&lt;br&gt;4. 历史价格按标准清单结构化入库</td></tr>
-<tr><td id="e557" contenteditable="true"><strong>第二阶段：核心品类覆盖</strong></td><td id="e558" contenteditable="true">第5-12周</td><td id="e559" contenteditable="true">覆盖80%以上常规招采品类</td><td id="e560" contenteditable="true">1. 工程/能源类优先入库&lt;br&gt;2. 物业/企划类第二批入库&lt;br&gt;3. 每个品类至少3个历史项目价格对标</td></tr>
-<tr><td id="e561" contenteditable="true"><strong>第三阶段：自动化审批+总部接管</strong></td><td id="e562" contenteditable="true">第13-24周</td><td id="e563" contenteditable="true">价格库内项目自动核价/审批+总部统一建库</td><td id="e564" contenteditable="true">1. OA审批流接入价格库&lt;br&gt;2. 范围内项目自动通过，超预值走特殊审批&lt;br&gt;3. 东区过渡期数据迁移至总部统一价格库&lt;br&gt;4. 持续迭代价格库数据</td></tr>
-</table></div>
-<h3 class="subsection-title" id="e565" contenteditable="true">7.2 分标段（采购提效的前提——解决重复工作量）</h3>
-<p id="e566" contenteditable="true"><strong>核心问题</strong>：目前同一品类在不同城市、不同广场分别招标，大量重复编制招标文件、重复考察供方、重复审批，效率极低。</p>
-<p id="e567" contenteditable="true"><strong>分标段解决什么</strong>：</p>
-<div class="list-item" id="e568" contenteditable="true">1. <strong>合并同类项</strong>：62项招采任务中，大量可以合并为同一标段，同一标段一次招标覆盖多城多广场</div>
-<div class="list-item" id="e569" contenteditable="true">2. <strong>减少重复审批</strong>：同类项目合并采购，一份招标文件、一次审批、覆盖全部需求</div>
-<div class="list-item" id="e570" contenteditable="true">3. <strong>提升议价能力</strong>：合并后采购规模上来了，谈判筹码更重</div>
-<p id="e571" contenteditable="true"><strong>分标段标准</strong>：按品类+金额区间分标段</p>
-<div class="table-wrap" id="tw_24"><table>
-<tr><th id="e572" contenteditable="true">标段类型</th><th id="e573" contenteditable="true">说明</th><th id="e574" contenteditable="true">典型品类</th></tr>
-<tr><td id="e575" contenteditable="true">大区集采标段</td><td id="e576" contenteditable="true">全东区统一招标，年度框架协议</td><td id="e577" contenteditable="true">工程物资（灯具、水泵、电缆等）、能源节费设备</td></tr>
-<tr><td id="e578" contenteditable="true">城市联合标段</td><td id="e579" contenteditable="true">2-3城联合招标</td><td id="e580" contenteditable="true">专项改造、防水维修</td></tr>
-<tr><td id="e581" contenteditable="true">单城标段</td><td id="e582" contenteditable="true">单城市独立招标</td><td id="e583" contenteditable="true">属地化强、体量小的品项</td></tr>
-</table></div>
-<p id="e584" contenteditable="true"><strong>启动时机</strong>：这是安安现在就可以动手的事，不需要等架构方案定稿。</p>
-<h3 class="subsection-title" id="e585" contenteditable="true">7.3 供方库（采购统筹的前提——解决合规+快速匹配）</h3>
-<p id="e586" contenteditable="true"><strong>核心问题</strong>：目前每个城市各自考察、各自准入，同一供方在不同城市重复考察，准入标准不统一，合规风险大。</p>
-<p id="e587" contenteditable="true"><strong>供方库解决什么</strong>：</p>
-<div class="list-item" id="e588" contenteditable="true">1. <strong>合规保障</strong>：统一准入标准、统一评价体系，堵住"各自准入、标准不一"的漏洞</div>
-<div class="list-item" id="e589" contenteditable="true">2. <strong>快速匹配供方</strong>：需求来了直接从库里匹配，不用每次重新找供方、谈准入</div>
-<div class="list-item" id="e590" contenteditable="true">3. <strong>减少考察工作量</strong>：同一供方只考察一次，全东区通用，不用7城重复跑</div>
-<p id="e591" contenteditable="true"><strong>建设策略</strong>：过渡期东区自行建设供方库，后期由总部统一建设供应商库，东区转"把控"模式。</p>
-<div class="table-wrap" id="tw_25"><table>
-<tr><th id="e592" contenteditable="true">阶段</th><th id="e593" contenteditable="true">东区动作</th><th id="e594" contenteditable="true">总部衔接</th></tr>
-<tr><td id="e595" contenteditable="true">过渡期</td><td id="e596" contenteditable="true">采购三组牵头建供方库：准入标准统一+历史供方入库+评价体系搭建</td><td id="e597" contenteditable="true">总部规划供应商库架构</td></tr>
-<tr><td id="e598" contenteditable="true">衔接期</td><td id="e599" contenteditable="true">提供本地准入数据、历史供方清单、评价记录</td><td id="e600" contenteditable="true">总部建设+试运行</td></tr>
-<tr><td id="e601" contenteditable="true">成熟期</td><td id="e602" contenteditable="true">三组转"把控"模式：使用+本地准入把关+评价执行</td><td id="e603" contenteditable="true">总部统一维护+更新</td></tr>
-</table></div>
-<p id="e604" contenteditable="true"><strong>供方库与分标段的协同</strong>：</p>
-<div class="list-item" id="e605" contenteditable="true">• 供方库建好了，分标段招标才有足够的合格供方可选</div>
-<div class="list-item" id="e606" contenteditable="true">• 分标段招标做起来了，供方评价才有足够的数据量支撑分层</div>
-<div class="list-item" id="e607" contenteditable="true">• 两者互为前提，必须同步推进</div>
-<hr>
-</div>
-<div class="section-card color-block" id="sec_8"><div class="card-controls"><button class="card-del" title="删除色块">&times;</button><button class="card-dup" title="复制色块">+</button></div><div class="resize-handle"></div><h2 class="section-title" id="e608" contenteditable="true">八、过渡方案</h2>
-<h3 class="subsection-title" id="e609" contenteditable="true">8.1 第一阶段：编组建组（第1-2周）</h3>
-<div class="table-wrap" id="tw_26"><table>
-<tr><th id="e610" contenteditable="true">事项</th><th id="e611" contenteditable="true">具体动作</th></tr>
-<tr><td id="e612" contenteditable="true">定7个组长/协调人</td><td id="e613" contenteditable="true">7个城市BP按专业能力分配到7个岗位</td></tr>
-<tr><td id="e614" contenteditable="true">定21个组员+1机动</td><td id="e615" contenteditable="true">按专业归属编入各组，不按城市分</td></tr>
-<tr><td id="e616" contenteditable="true">建需求池</td><td id="e617" contenteditable="true">搭建统一需求入口（飞书多维表格/共享Excel）</td></tr>
-<tr><td id="e618" contenteditable="true">建看板</td><td id="e619" contenteditable="true">每个组一个任务看板，进度透明</td></tr>
-<tr><td id="e620" contenteditable="true">建价格库</td><td id="e621" contenteditable="true">采购三组供方把控专员牵头，开始基础数据梳理</td></tr>
-</table></div>
-<h3 class="subsection-title" id="e622" contenteditable="true">8.2 第二阶段：试运行（第3-6周）</h3>
-<div class="table-wrap" id="tw_27"><table>
-<tr><th id="e623" contenteditable="true">事项</th><th id="e624" contenteditable="true">具体动作</th></tr>
-<tr><td id="e625" contenteditable="true">组长派工</td><td id="e626" contenteditable="true">组长每天看需求池派活，组员从组长手里接单、交成果</td></tr>
-<tr><td id="e627" contenteditable="true">跨城协作</td><td id="e628" contenteditable="true">测算组远程做异地广场测算，采购组跨城市谈判</td></tr>
-<tr><td id="e629" contenteditable="true">审批不变</td><td id="e630" contenteditable="true">OA审批流保持原样，审批人不变，但执行改由专业组</td></tr>
-<tr><td id="e631" contenteditable="true">大组协调</td><td id="e632" contenteditable="true">3个协调人每周开一次大组内协调会，解决跨组问题</td></tr>
-<tr><td id="e633" contenteditable="true">采购二三组联动</td><td id="e634" contenteditable="true">二三组按区域分工但共享物业企划采购经验，定期对齐做法</td></tr>
-<tr><td id="e635" contenteditable="true">问题收集</td><td id="e636" contenteditable="true">每周收集运转问题，快速调整</td></tr>
-</table></div>
-<h3 class="subsection-title" id="e637" contenteditable="true">8.3 第三阶段：固化推广（第7-12周）</h3>
-<div class="table-wrap" id="tw_28"><table>
-<tr><th id="e638" contenteditable="true">事项</th><th id="e639" contenteditable="true">具体动作</th></tr>
-<tr><td id="e640" contenteditable="true">价格库上线</td><td id="e641" contenteditable="true">核心品类价格库投入使用，超预值才走特殊审批</td></tr>
-<tr><td id="e642" contenteditable="true">供方库衔接</td><td id="e643" contenteditable="true">总部供应商库上线后，三组供方管理从"建"转"控"</td></tr>
-<tr><td id="e644" contenteditable="true">审批调整</td><td id="e645" contenteditable="true">OA审批节点从"指定人"改为"指定角色/组"</td></tr>
-<tr><td id="e646" contenteditable="true">优化分组</td><td id="e647" contenteditable="true">根据试运行情况微调组员分配</td></tr>
-<tr><td id="e648" contenteditable="true">制度固化</td><td id="e649" contenteditable="true">编制操作手册、考核办法、审批流程正式文件</td></tr>
-<tr><td id="e650" contenteditable="true">数据积累</td><td id="e651" contenteditable="true">价格库、案例库开始沉淀</td></tr>
-<tr><td id="e652" contenteditable="true">总结汇报</td><td id="e653" contenteditable="true">向总部汇报东区试点成果</td></tr>
-</table></div>
-<hr>
-</div>
-<div class="section-card color-block" id="sec_9"><div class="card-controls"><button class="card-del" title="删除色块">&times;</button><button class="card-dup" title="复制色块">+</button></div><div class="resize-handle"></div><h2 class="section-title" id="e654" contenteditable="true">九、汇报与考核</h2>
-<h3 class="subsection-title" id="e655" contenteditable="true">9.1 汇报关系</h3>
-<div class="arch-diagram" style="padding:20px 10px">
-<div style="text-align:center;font-weight:700;font-size:15px;color:#2d3748;margin-bottom:14px" contenteditable="true" id="rpt_title">大区层级汇报关系</div>
-<div style="display:flex;gap:20px;align-items:flex-start">
-<div style="flex:1;background:#f7fafc;border:2px solid #e2e8f0;border-radius:12px;padding:16px">
-<div style="text-align:center;font-weight:700;font-size:13px;color:#2b6cb0;margin-bottom:12px;border-bottom:2px solid #bee3f8;padding-bottom:8px" contenteditable="true" id="rpt_left_title">路径一：城市公司重点工作汇报</div>
-<div style="text-align:center;font-size:12px;color:#718096;margin-bottom:10px" contenteditable="true" id="rpt_left_desc">各城市公司工作重点，小组长直接向大区成本BP汇报</div>
-<div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:10px">
-<div style="background:#ebf8ff;border:1px solid #90cdf4;border-radius:8px;padding:6px 10px;font-size:12px;text-align:center;min-width:80px" contenteditable="true" id="rpt_c1">上海-刘莉</div>
-<div style="background:#ebf8ff;border:1px solid #90cdf4;border-radius:8px;padding:6px 10px;font-size:12px;text-align:center;min-width:80px" contenteditable="true" id="rpt_c2">苏州-刘朋</div>
-<div style="background:#ebf8ff;border:1px solid #90cdf4;border-radius:8px;padding:6px 10px;font-size:12px;text-align:center;min-width:80px" contenteditable="true" id="rpt_c3">合肥-武雪娜</div>
-<div style="background:#ebf8ff;border:1px solid #90cdf4;border-radius:8px;padding:6px 10px;font-size:12px;text-align:center;min-width:80px" contenteditable="true" id="rpt_c4">厦门-周仁林</div>
-<div style="background:#ebf8ff;border:1px solid #90cdf4;border-radius:8px;padding:6px 10px;font-size:12px;text-align:center;min-width:80px" contenteditable="true" id="rpt_c5">杭州-袁凯</div>
-<div style="background:#ebf8ff;border:1px solid #90cdf4;border-radius:8px;padding:6px 10px;font-size:12px;text-align:center;min-width:80px" contenteditable="true" id="rpt_c6">宁波-郭健康</div>
-<div style="background:#ebf8ff;border:1px solid #90cdf4;border-radius:8px;padding:6px 10px;font-size:12px;text-align:center;min-width:80px" contenteditable="true" id="rpt_c7">南京-沙爽</div>
-</div>
-<div style="text-align:center;color:#4299e1;font-size:18px">&#9660;</div>
-<div style="text-align:center;font-size:11px;color:#a0aec0;margin:4px 0" contenteditable="true" id="rpt_left_arrow">重点工作直报</div>
-<div style="background:linear-gradient(135deg,#2b6cb0,#4299e1);border-radius:10px;padding:10px;text-align:center;color:#fff;font-size:13px;font-weight:600" contenteditable="true" id="rpt_left_target">大区成本BP</div>
-</div>
-<div style="flex:1.2;background:#f7fafc;border:2px solid #e2e8f0;border-radius:12px;padding:16px">
-<div style="text-align:center;font-weight:700;font-size:13px;color:#38a169;margin-bottom:12px;border-bottom:2px solid #c6f6d5;padding-bottom:8px" contenteditable="true" id="rpt_right_title">路径二：大组内业务汇报</div>
-<div style="text-align:center;font-size:12px;color:#718096;margin-bottom:10px" contenteditable="true" id="rpt_right_desc">小组长汇总业务信息后向组长汇报，组长向大区成本BP汇报</div>
-<div style="display:flex;gap:8px;margin-bottom:8px;justify-content:center">
-<div style="background:#c6f6d5;border:1px solid #68d391;border-radius:8px;padding:8px;flex:1;text-align:center">
-<div style="font-weight:600;font-size:12px" contenteditable="true" id="rpt_r1">测算核价大组</div>
-<div style="font-size:11px;color:#718096;margin-top:4px" contenteditable="true" id="rpt_r1d">测算核价组+成本管控组</div>
-</div>
-<div style="background:#c6f6d5;border:1px solid #68d391;border-radius:8px;padding:8px;flex:1.3;text-align:center">
-<div style="font-weight:600;font-size:12px" contenteditable="true" id="rpt_r2">采购供方大组</div>
-<div style="font-size:11px;color:#718096;margin-top:4px" contenteditable="true" id="rpt_r2d">采购一二三组+合规检查组</div>
-</div>
-<div style="background:#c6f6d5;border:1px solid #68d391;border-radius:8px;padding:8px;flex:1;text-align:center">
-<div style="font-weight:600;font-size:12px" contenteditable="true" id="rpt_r3">验收结算大组</div>
-<div style="font-size:11px;color:#718096;margin-top:4px" contenteditable="true" id="rpt_r3d">验收结算组</div>
-</div>
-</div>
-<div style="text-align:center;color:#38a169;font-size:18px">&#9660;</div>
-<div style="text-align:center;font-size:11px;color:#a0aec0;margin:4px 0" contenteditable="true" id="rpt_right_arrow1">小组长 &#8594; 大组协调人（组长）</div>
-<div style="display:flex;gap:8px;margin-bottom:8px;justify-content:center">
-<div style="background:#fefcbf;border:1px solid #f6e05e;border-radius:8px;padding:8px;flex:1;text-align:center">
-<div style="font-weight:600;font-size:12px" contenteditable="true" id="rpt_crd1">协调人①（兼测算核价组长）</div>
-</div>
-<div style="background:#fefcbf;border:1px solid #f6e05e;border-radius:8px;padding:8px;flex:1;text-align:center">
-<div style="font-weight:600;font-size:12px" contenteditable="true" id="rpt_crd2">协调人②（兼合规检查组长）</div>
-</div>
-<div style="background:#fefcbf;border:1px solid #f6e05e;border-radius:8px;padding:8px;flex:1;text-align:center">
-<div style="font-weight:600;font-size:12px" contenteditable="true" id="rpt_crd3">协调人③（兼验收结算组长）</div>
-</div>
-</div>
-<div style="text-align:center;color:#38a169;font-size:18px">&#9660;</div>
-<div style="text-align:center;font-size:11px;color:#a0aec0;margin:4px 0" contenteditable="true" id="rpt_right_arrow2">组长向大区成本BP汇报</div>
-<div style="background:linear-gradient(135deg,#2b6cb0,#4299e1);border-radius:10px;padding:10px;text-align:center;color:#fff;font-size:13px;font-weight:600" contenteditable="true" id="rpt_right_target">大区成本BP</div>
-</div>
-</div>
-<div style="text-align:center;font-size:12px;color:#718096;margin-top:12px;border-top:1px dashed #cbd5e0;padding-top:10px" contenteditable="true" id="rpt_note">虚线汇报：7个组长/协调人 &#8594; 各自城市总（工作沟通，非考核）</div>
-</div>
-
-<h3 class="subsection-title" id="e657" contenteditable="true">
-9.2 考核指标</h3>
-<div class="table-wrap" id="tw_29"><table>
-<tr><th id="e658" contenteditable="true">考核对象</th><th id="e659" contenteditable="true">核心KPI</th><th id="e660" contenteditable="true">权重</th></tr>
-<tr><td id="e661" contenteditable="true">测算核价组</td><td id="e662" contenteditable="true">测算及时率、测算偏差率（≤5%）、核价模型覆盖率</td><td id="e663" contenteditable="true">40/30/30</td></tr>
-<tr><td id="e664" contenteditable="true">成本管控+数据分析组</td><td id="e665" contenteditable="true">降本机会识别数、数据看板更新频率、分析报告质量</td><td id="e666" contenteditable="true">30/30/40</td></tr>
-<tr><td id="e667" contenteditable="true">采购一组</td><td id="e668" contenteditable="true">工程/能源采购降本率、招标及时率、总部集采落地率</td><td id="e669" contenteditable="true">40/30/30</td></tr>
-<tr><td id="e670" contenteditable="true">采购二组</td><td id="e671" contenteditable="true">物业/企划采购降本率、4城采购及时率、制度指导覆盖率</td><td id="e672" contenteditable="true">30/30/40</td></tr>
-<tr><td id="e673" contenteditable="true">采购三组</td><td id="e674" contenteditable="true">物业/企划采购降本率+供方评价完成率、基准价更新及时率</td><td id="e675" contenteditable="true">40/30/30</td></tr>
-<tr><td id="e676" contenteditable="true">验收结算组</td><td id="e677" contenteditable="true">结算时效达标率、结算偏差率、验收覆盖率</td><td id="e678" contenteditable="true">40/30/30</td></tr>
-<tr><td id="e679" contenteditable="true">合规检查+标准化组</td><td id="e680" contenteditable="true">合规检查覆盖率、违规发现率、标准化文件完成度</td><td id="e681" contenteditable="true">30/30/40</td></tr>
-<tr><td id="e682" contenteditable="true"><strong>大组协调人</strong></td><td id="e683" contenteditable="true">大组整体KPI（40%）+ 兼任小组KPI（30%）+ 属地满意度（30%）</td><td id="e684" contenteditable="true">40/30/30</td></tr>
-<tr><td id="e685" contenteditable="true"><strong>小组长</strong></td><td id="e686" contenteditable="true">功能组KPI（60%）+ 属地满意度（20%）+ 城市总评价（20%）</td><td id="e687" contenteditable="true">60/20/20</td></tr>
-</table></div>
-<hr>
-</div>
-<div class="section-card color-block" id="sec_10"><div class="card-controls"><button class="card-del" title="删除色块">&times;</button><button class="card-dup" title="复制色块">+</button></div><div class="resize-handle"></div><h2 class="section-title" id="e700" contenteditable="true">十、风险与应对</h2>
-<div class="table-wrap" id="tw_30"><table>
-<tr><th id="e701" contenteditable="true">风险点</th><th id="e702" contenteditable="true">应对措施</th></tr>
-<tr><td id="e703" contenteditable="true">大组协调人兼任小组长，精力分散导致两头顾不上</td><td id="e704" contenteditable="true">明确优先级：大组协调人先保兼任小组的一线执行，再统筹大组全局；建立副手机制，高峰期由组内骨干代管</td></tr>
-<tr><td id="e705" contenteditable="true">复合用工边界模糊，常态业务与支援任务冲突</td><td id="e706" contenteditable="true">大组协调人统筹排程，每周明确各组人力分配比例；支援任务不超过总工时30%</td></tr>
-<tr><td id="e707" contenteditable="true">7城下沉后属地化管理深度不均，弱城市响应慢</td><td id="e708" contenteditable="true">设立7城成本组长，强城市（上海/杭州）帮扶弱城市；每月城市互评，落后城市纳入重点辅导</td></tr>
-<tr><td id="e709" contenteditable="true">合规检查组常态业务量不足，人员闲置</td><td id="e710" contenteditable="true">合规检查组无专项检查时回归人力池，与采购二组三组共同承担物业企划类招标核价</td></tr>
-<tr><td id="e711" contenteditable="true">过渡期新旧体系并行，一线人员无所适从</td><td id="e712" contenteditable="true">第1-2月双轨运行以旧为主，第3月切换新体系；每月复盘调整，确保平稳过渡</td></tr>
-<tr><td id="e713" contenteditable="true">成本管控+数据分析组能力不足，分析产出质量低</td><td id="e714" contenteditable="true">前3个月集中培训数据工具和分析方法；与测算核价组复合用工，实战中快速提升</td></tr>
-<tr><td id="e715" contenteditable="true">采购三组前期兼顾供方管理+基准价建设，物业企划承接量下降导致二组压力过大</td><td id="e716" contenteditable="true">三组物业企划量适当减少，空出的量由二组和合规检查组（无专项时）分担；大组协调人②动态调配</td></tr>
-</table></div>
-</div>
-</div>
-<div class="rte-toolbar" id="rteToolbar">
-    <div class="rte-toolbar-header" id="rteToolbarHeader">
-        <span class="rte-drag-hint">拖动移动工具栏</span>
-    </div>
-    <div class="rte-toolbar-body">
-        <button class="rte-btn" data-action="font-dec" title="缩小字号">A-</button>
-        <button class="rte-btn" data-action="font-inc" title="放大字号">A+</button>
-        <span class="rte-sep"></span>
-        <button class="rte-btn" data-action="bold" title="加粗" style="font-weight:bold">B</button>
-        <button class="rte-btn" data-action="italic" title="斜体" style="font-style:italic">I</button>
-        <button class="rte-btn" data-action="underline" title="下划线" style="text-decoration:underline">U</button>
-        <button class="rte-btn" data-action="strikethrough" title="删除线" style="text-decoration:line-through">S</button>
-        <span class="rte-sep"></span>
-        <label class="rte-color-label">字色<input type="color" data-action="text-color" value="#1a365d"></label>
-        <label class="rte-color-label">底色<input type="color" data-action="bg-color" value="#ebf4ff"></label>
-        <span class="rte-sep"></span>
-        <button class="rte-btn" data-action="align-left" title="左对齐">&#x2B05;</button>
-        <button class="rte-btn" data-action="align-center" title="居中">&#x2194;</button>
-        <button class="rte-btn" data-action="align-right" title="右对齐">&#x27A1;</button>
-        <span class="rte-sep"></span>
-        <button class="rte-btn" data-action="v-center" title="垂直居中切换">&#x2B0D;</button>
-        <button class="rte-btn rte-btn-danger" data-action="delete" title="清空内容">&#x1F5D1;</button>
-        <button class="rte-btn" data-action="copy" title="复制色块">&#x1F4CB;</button>
-    </div>
-</div>
-<div class="action-bar">
-    <button class="action-btn export-btn" id="exportBtn">导出完整版</button>
-    <button class="action-btn export-btn" id="exportEditableBtn" style="background:#38a169">导出可编辑版</button>
-    <button class="action-btn reset-btn" id="resetBtn">重置</button>
-</div>
-<div class="save-toast" id="saveToast">已自动保存</div>
-<script>
-
-(function() {
-    var navLinks = document.querySelectorAll('.nav-link');
-    var cards = document.querySelectorAll('.section-card');
-    var sidebar = document.getElementById('sidebar');
-    var navToggle = document.getElementById('navToggle');
-    var observer = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-            if (entry.isIntersecting) {
-                navLinks.forEach(function(link) {
-                    var isActive = link.getAttribute('href') === '#' + entry.target.id;
-                    link.classList.toggle('active', isActive);
-                });
-            }
-        });
-    }, { rootMargin: '-80px 0px -60% 0px', threshold: 0 });
-    cards.forEach(function(card) { observer.observe(card); });
-    navLinks.forEach(function(link) {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            var target = document.querySelector(link.getAttribute('href'));
-            if (target) { window.scrollTo({ top: target.offsetTop - 70, behavior: 'smooth' }); }
-            if (window.innerWidth <= 768) { sidebar.classList.remove('open'); }
-        });
-    });
-    if (navToggle) { navToggle.addEventListener('click', function() { sidebar.classList.toggle('open'); }); }
-})();
-
-</script>
-<script>
-
-var SAVE_PREFIX = 'v31_ce_';
-    var HTML_VERSION = 'v3.1-0620g';
-var saveTimer = null;
-var saveToast = document.getElementById('saveToast');
-var toastTimer = null;
-
-function triggerSave() {
-    clearTimeout(saveTimer);
-    saveTimer = setTimeout(function() { saveAll(); }, 500);
-}
-
-function saveAll() {
-    var editables = document.querySelectorAll('[contenteditable="true"]');
-    editables.forEach(function(el) {
-        if (el.id) { try { localStorage.setItem(SAVE_PREFIX + el.id, el.innerHTML); } catch(e) {} }
-    });
-    // Save version badge
-    var badge = document.getElementById('versionBadge');
-    if (badge) { try { localStorage.setItem(SAVE_PREFIX + 'version_badge', badge.textContent); } catch(e) {} }
-    // Save resized element dimensions
-    document.querySelectorAll('.color-block[id], .ctree-hq[id], .ctree-grp[id], .ctree-sn[id], .ctree-dc[id]').forEach(function(el) {
-        if (el.style.width || el.style.height || el.style.minWidth || el.style.minHeight || el.style.flex) {
-            try {
-                var sz = {w:el.style.width||'',h:el.style.height||'',mw:el.style.minWidth||'',mh:el.style.minHeight||'',fx:el.style.flex||''};
-                localStorage.setItem(SAVE_PREFIX+'sz_'+el.id, JSON.stringify(sz));
-            } catch(e) {}
-        }
-    });
-    // Save table structures (for add/delete row/column persistence)
-    saveAllTableStructures();
-    showSaveToast();
-}
-
-function saveTableStructure(tableWrap) {
-    if(!tableWrap || !tableWrap.id) return;
-    // Clone and strip dynamic buttons before saving
-    var clone = tableWrap.cloneNode(true);
-    clone.querySelectorAll('.row-del-btn, .col-del-btn, .add-col-btn, .add-row-btn, .add-row-bar, .th-resizer').forEach(function(b){ b.remove(); });
-    try { localStorage.setItem(SAVE_PREFIX + 'tbl_' + tableWrap.id, clone.innerHTML); } catch(e) {}
-}
-
-function saveAllTableStructures() {
-    document.querySelectorAll('.table-wrap').forEach(function(tw){ saveTableStructure(tw); });
-}
-
-function showSaveToast() {
-    if (saveToast) {
-        saveToast.classList.add('show');
-        clearTimeout(toastTimer);
-        toastTimer = setTimeout(function() { saveToast.classList.remove('show'); }, 2000);
-    }
-}
-
-function restoreAll() {
-    // Check if HTML version has changed - show notification but preserve user edits
-    var cachedVer = null;
-    try { cachedVer = localStorage.getItem(SAVE_PREFIX + 'html_version'); } catch(e) {}
-    if (cachedVer !== HTML_VERSION) {
-        // Update version marker without clearing any cache
-        try { localStorage.setItem(SAVE_PREFIX + 'html_version', HTML_VERSION); } catch(e) {}
-        // Show update notification instead of clearing cache
-        var updateNotice = document.createElement('div');
-        updateNotice.id = 'updateNotice';
-        updateNotice.style.cssText = 'position:fixed;top:60px;left:50%;transform:translateX(-50%);background:#ed8936;color:#fff;padding:8px 20px;border-radius:8px;font-size:13px;z-index:10000;box-shadow:0 2px 8px rgba(0,0,0,0.2);cursor:pointer;';
-        updateNotice.textContent = '页面结构已更新，您的编辑已保留。新增章节可直接查看。';
-        document.body.appendChild(updateNotice);
-        setTimeout(function(){ if(updateNotice.parentNode) updateNotice.remove(); }, 5000);
-        updateNotice.addEventListener('click', function(){ updateNotice.remove(); });
-    }
-    // Always restore user edits from cache - new elements (no cache) show fresh HTML
-    // Restore table structures first (handles add/delete row/column persistence)
-    document.querySelectorAll('.table-wrap').forEach(function(tw) {
-        if(tw.id) {
-            var savedTbl = null;
-            try { savedTbl = localStorage.getItem(SAVE_PREFIX + 'tbl_' + tw.id); } catch(e) {}
-            if(savedTbl !== null) { tw.innerHTML = savedTbl; }
-        }
-    });
-    var editables = document.querySelectorAll('[contenteditable="true"]');
-    editables.forEach(function(el) {
-        if (el.id) {
-            var saved = null;
-            try { saved = localStorage.getItem(SAVE_PREFIX + el.id); } catch(e) {}
-            if (saved !== null) { el.innerHTML = saved; }
-        }
-    });
-    var badge = document.getElementById('versionBadge');
-    if (badge) {
-        var savedBadge = null;
-        try { savedBadge = localStorage.getItem(SAVE_PREFIX + 'version_badge'); } catch(e) {}
-        if (savedBadge !== null) { badge.textContent = savedBadge; }
-    }
-    // Restore resized element dimensions
-    document.querySelectorAll('.color-block[id], .ctree-hq[id], .ctree-grp[id], .ctree-sn[id], .ctree-dc[id]').forEach(function(el) {
-        try {
-            var sz = localStorage.getItem(SAVE_PREFIX+'sz_'+el.id);
-            if (sz) {
-                sz = JSON.parse(sz);
-                if(sz.w) el.style.width = sz.w;
-                if(sz.h){ el.style.height = sz.h; if(el.classList.contains('section-card')) el.style.minHeight = sz.h; }
-                if(sz.mw) el.style.minWidth = sz.mw;
-                if(sz.mh) el.style.minHeight = sz.mh;
-                if(sz.fx) el.style.flex = sz.fx;
-            }
-        } catch(e) {}
-    });
-
-    // Re-add table buttons after innerHTML restoration
-    if(typeof addRowColDeleteBtns==='function') addRowColDeleteBtns();}
-    // For section-cards, convert explicit height to min-height to prevent content clipping
-    document.querySelectorAll('.section-card.color-block[id]').forEach(function(el){
-        if(el.style.height){
-            el.style.minHeight = el.style.height;
-            el.style.height = 'auto';
-        }
-    });
-
-// Migration 0620f→0620g: 角色编号校准
-(function(){
-  var sv=localStorage.getItem(SAVE_PREFIX+'html_version');
-  if(sv==='v3.1-0620f'){
-    var ch=['g2s1d','g2s2d','g2s3d','g2s4d','dc_sh_r','dc_xm_r','dc_hz_r','dc_nj_r','e45','e60','e65','e70','e87b','e87c','e88','e88a','e90','e120','e124','e128','e129d','e289','e298','e327','e345','e395e','e395g','rpt_crd2'];
-    ch.forEach(function(id){localStorage.removeItem(SAVE_PREFIX+id);});
-    localStorage.setItem(SAVE_PREFIX+'html_version',HTML_VERSION);
-  }
-})();
-restoreAll();
-document.addEventListener('input', function(e) {
-    if (e.target && e.target.getAttribute && e.target.getAttribute('contenteditable') === 'true') { triggerSave(); }
-});
-
-</script>
-<script>
-
-(function() {
-    var toolbar = document.getElementById('rteToolbar');
-    var toolbarHeader = document.getElementById('rteToolbarHeader');
-    var currentEditable = null;
-    var hideTimer = null;
-    var toolbarDragged = false;
-    var vCenterState = false;
-
-    function showToolbar(element) {
-        clearTimeout(hideTimer);
-        currentEditable = element;
-        if (!toolbarDragged) {
-            var rect = element.getBoundingClientRect();
-            var top = rect.top - 50;
-            if (top < 65) { top = rect.bottom + 8; }
-            var left = rect.left;
-            if (left + 440 > window.innerWidth) { left = window.innerWidth - 460; }
-            if (left < 10) { left = 10; }
-            toolbar.style.left = left + 'px';
-            toolbar.style.top = top + 'px';
-        }
-        toolbar.style.display = 'block';
-    }
-
-    function hideToolbar() {
-        hideTimer = setTimeout(function() {
-            var active = document.activeElement;
-            if (active && active.getAttribute && active.getAttribute('contenteditable') === 'true') { showToolbar(active); return; }
-            // Don't hide if color picker is open
-            if (active && active.type === 'color') { return; }
-            if (active && active.closest && active.closest('#rteToolbar')) { return; }
-            toolbar.style.display = 'none';
-            currentEditable = null;
-            toolbarDragged = false;
-        }, 200);
-    }
-
-    document.addEventListener('focus', function(e) {
-        if (e.target && e.target.getAttribute && e.target.getAttribute('contenteditable') === 'true') { showToolbar(e.target); }
-    }, true);
-    document.addEventListener('blur', function(e) {
-        if (e.target && e.target.getAttribute && e.target.getAttribute('contenteditable') === 'true') { hideToolbar(); }
-    }, true);
-    toolbar.addEventListener('mousedown', function(e) {
-        if (e.target.tagName === 'INPUT') return;
-        if (e.target.closest('.rte-toolbar-header')) return;
-        e.preventDefault();
-    });
-
-    // Toolbar drag
-    var isDragging = false, dragStartX = 0, dragStartY = 0, toolbarStartX = 0, toolbarStartY = 0;
-    toolbarHeader.addEventListener('mousedown', function(e) {
-        isDragging = true; dragStartX = e.clientX; dragStartY = e.clientY;
-        toolbarStartX = parseInt(toolbar.style.left || 0); toolbarStartY = parseInt(toolbar.style.top || 0);
-        e.preventDefault();
-    });
-    document.addEventListener('mousemove', function(e) {
-        if (!isDragging) return;
-        var newX = toolbarStartX + (e.clientX - dragStartX);
-        var newY = Math.max(56, toolbarStartY + (e.clientY - dragStartY));
-        newX = Math.max(0, Math.min(window.innerWidth - 440, newX));
-        toolbar.style.left = newX + 'px'; toolbar.style.top = newY + 'px';
-        toolbarDragged = true;
-    });
-    document.addEventListener('mouseup', function() { isDragging = false; });
-
-    // Toolbar buttons
-    toolbar.addEventListener('click', function(e) {
-        var btn = e.target.closest('.rte-btn');
-        if (!btn) return;
-        var action = btn.getAttribute('data-action');
-        if (!action || !currentEditable) return;
-        switch(action) {
-            case 'font-inc': changeFontSize(currentEditable, 2); break;
-            case 'font-dec': changeFontSize(currentEditable, -2); break;
-            case 'bold': document.execCommand('bold'); break;
-            case 'italic': document.execCommand('italic'); break;
-            case 'underline': document.execCommand('underline'); break;
-            case 'strikethrough': document.execCommand('strikeThrough'); break;
-            case 'align-left': document.execCommand('justifyLeft'); break;
-            case 'align-center': document.execCommand('justifyCenter'); break;
-            case 'align-right': document.execCommand('justifyRight'); break;
-            case 'v-center': toggleVCenter(); break;
-            case 'delete': currentEditable.innerHTML = ''; break;
-            case 'copy': duplicateCard(); break;
-        }
-        triggerSave();
-    });
-    var savedRange = null;
-    function saveSelection() {
-        var sel = window.getSelection();
-        if (sel.rangeCount > 0) { savedRange = sel.getRangeAt(0).cloneRange(); }
-    }
-    function restoreSelection() {
-        if (savedRange) {
-            var sel = window.getSelection();
-            sel.removeAllRanges();
-            sel.addRange(savedRange);
-        }
-    }
-    toolbar.querySelectorAll('input[type="color"]').forEach(function(input) {
-        input.addEventListener('focus', function(e) {
-            saveSelection();
-        });
-        input.addEventListener('input', function(e) {
-            if (currentEditable) { currentEditable.focus(); }
-            restoreSelection();
-            var action = e.target.getAttribute('data-action');
-            if (action === 'text-color') { document.execCommand('foreColor', false, e.target.value); }
-            else if (action === 'bg-color') { document.execCommand('hiliteColor', false, e.target.value); }
-            triggerSave();
-        });
-        input.addEventListener('change', function(e) {
-            if (currentEditable) { currentEditable.focus(); }
-            restoreSelection();
-            var action = e.target.getAttribute('data-action');
-            if (action === 'text-color') { document.execCommand('foreColor', false, e.target.value); }
-            else if (action === 'bg-color') { document.execCommand('hiliteColor', false, e.target.value); }
-            triggerSave();
-        });
-    });
-
-    function changeFontSize(el, delta) {
-        var style = window.getComputedStyle(el);
-        var current = parseInt(style.fontSize);
-        el.style.fontSize = Math.max(10, Math.min(48, current + delta)) + 'px';
-    }
-    function toggleVCenter() {
-        vCenterState = !vCenterState;
-        var align = vCenterState ? 'middle' : 'top';
-        document.querySelectorAll('table td, table th').forEach(function(cell) { cell.style.verticalAlign = align; });
-    }
-    function duplicateCard() {
-        if (!currentEditable) return;
-        var card = currentEditable.closest('.color-block');
-        if (!card) return;
-        var clone = card.cloneNode(true);
-        var counter = Date.now();
-        clone.querySelectorAll('[contenteditable]').forEach(function(el) {
-            if (el.id) { el.id = el.id + '_' + counter; }
-        });
-        clone.querySelectorAll('.card-controls').forEach(function(el) { el.remove(); });
-        clone.querySelectorAll('.resize-handle').forEach(function(el) { el.remove(); });
-        var controlsDiv = document.createElement('div');
-        controlsDiv.className = 'card-controls';
-        controlsDiv.innerHTML = '<button class="card-del" title="删除色块">&times;</button><button class="card-dup" title="复制色块">+</button>';
-        var resizeDiv = document.createElement('div');
-        resizeDiv.className = 'resize-handle';
-        clone.insertBefore(controlsDiv, clone.firstChild);
-        clone.insertBefore(resizeDiv, controlsDiv.nextSibling);
-        card.parentNode.insertBefore(clone, card.nextSibling);
-        attachCardListeners(clone);
-        triggerSave();
-    }
-
-    // Card controls
-    function attachCardListeners(card) {
-        var delBtn = card.querySelector('.card-del');
-        var dupBtn = card.querySelector('.card-dup');
-        if (delBtn) { delBtn.addEventListener('click', function() { card.remove(); triggerSave(); }); }
-        if (dupBtn) {
-            dupBtn.addEventListener('click', function() {
-                var clone = card.cloneNode(true);
-                var counter = Date.now();
-                clone.querySelectorAll('[contenteditable]').forEach(function(el) { if (el.id) { el.id = el.id + '_' + counter; } });
-                clone.querySelectorAll('.card-controls').forEach(function(el) { el.remove(); });
-                clone.querySelectorAll('.resize-handle').forEach(function(el) { el.remove(); });
-                var controlsDiv = document.createElement('div');
-                controlsDiv.className = 'card-controls';
-                controlsDiv.innerHTML = '<button class="card-del">&times;</button><button class="card-dup">+</button>';
-                var resizeDiv = document.createElement('div');
-                resizeDiv.className = 'resize-handle';
-                clone.insertBefore(controlsDiv, clone.firstChild);
-                clone.insertBefore(resizeDiv, controlsDiv.nextSibling);
-                card.parentNode.insertBefore(clone, card.nextSibling);
-                attachCardListeners(clone);
-                triggerSave();
-            });
-        }
-    }
-    document.querySelectorAll('.color-block').forEach(attachCardListeners);
-
-    // Card resize
-    var resizing = false, resizeTarget = null, resizeStartW = 0, resizeStartH = 0, resizeStartX = 0, resizeStartY = 0;
-    document.addEventListener('mousedown', function(e) {
-        if (e.target.classList && e.target.classList.contains('resize-handle')) {
-            resizing = true; resizeTarget = e.target.closest('.color-block');
-            resizeStartW = resizeTarget.offsetWidth; resizeStartH = resizeTarget.offsetHeight;
-            resizeStartX = e.clientX; resizeStartY = e.clientY; e.preventDefault();
-        }
-    });
-    document.addEventListener('mousemove', function(e) {
-        if (!resizing || !resizeTarget) return;
-        resizeTarget.style.width = Math.max(200, resizeStartW + (e.clientX - resizeStartX)) + 'px';
-        var newH = Math.max(100, resizeStartH + (e.clientY - resizeStartY));
-            resizeTarget.style.height = newH + 'px';
-            // For section-cards, also set min-height so content never gets clipped
-            if(resizeTarget.classList.contains('section-card')){ resizeTarget.style.minHeight = newH + 'px'; }
-    });
-    document.addEventListener('mouseup', function() { if (resizing) { resizing = false; resizeTarget = null; triggerSave(); } });
-
-    // Version badge edit
-    var badge = document.getElementById('versionBadge');
-    if (badge) {
-        badge.addEventListener('click', function() {
-            var name = prompt('请输入版本标注（如：v3.1-安安0620）', badge.textContent);
-            if (name !== null) { badge.textContent = name; triggerSave(); }
-        });
-    }
-
-    // Export
-        document.getElementById('exportBtn').addEventListener('click', function() {
-        var htmlStr = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
-        var blob = new Blob([htmlStr],{type:'text/html;charset=utf-8'});
-        var url = URL.createObjectURL(blob);
-        var a = document.createElement('a');
-        a.href = url; a.download = '东区成本管理组织架构v3.1_导出.html';
-        document.body.appendChild(a); a.click(); document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-    });
-
-    // Export Editable Version
-    document.getElementById('exportEditableBtn').addEventListener('click', function() {
-        var clone = document.documentElement.cloneNode(true);
-        // Keep all editing features: contenteditable, scripts, toolbar, action bar, etc.
-        // Only remove the export-editable button itself from the clone to avoid button proliferation
-        var expBtn = clone.getElementById('exportEditableBtn');
-        if (expBtn) expBtn.remove();
-        var htmlStr = '<!DOCTYPE html>\n' + clone.outerHTML;
-        var blob = new Blob([htmlStr], {type:'text/html;charset=utf-8'});
-        var url = URL.createObjectURL(blob);
-        var a = document.createElement('a');
-        a.href = url; a.download = '东区成本管理组织架构v3.1_可编辑版.html';
-        document.body.appendChild(a); a.click(); document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-    });
-
-    // Reset
-    document.getElementById('resetBtn').addEventListener('click', function() {
-        if (confirm('确认重置所有编辑内容？此操作不可撤销。')) {
-            Object.keys(localStorage).forEach(function(key) {
-                if (key.indexOf(SAVE_PREFIX) === 0) { localStorage.removeItem(key); }
-            });
-            location.reload();
-        }
-    });
-})();
-
-</script>
-
-<script>
-function addRowColDeleteBtns(){
-    // Remove existing dynamic buttons first (idempotent)
-    document.querySelectorAll('.row-del-btn, .col-del-btn, .add-col-btn').forEach(function(b){ b.remove(); });
-    document.querySelectorAll('.add-row-bar').forEach(function(b){ b.remove(); });
-    // Reset padding
-    document.querySelectorAll('.table-wrap table tr').forEach(function(row){
-      var firstCell = row.querySelector('td, th');
-      if(firstCell) firstCell.style.paddingLeft = '';
-    });
-    document.querySelectorAll('.table-wrap table tr:first-child th').forEach(function(th){
-      th.style.paddingRight = '';
-    });
-    // Re-add buttons (CSS :hover handles visibility, no JS event listeners needed)
-    document.querySelectorAll('.table-wrap table').forEach(function(table){
-      // Row delete buttons
-      table.querySelectorAll('tr').forEach(function(row){
-        var firstCell = row.querySelector('td, th');
-        if(!firstCell) return;
-        firstCell.style.position = 'relative';
-        firstCell.style.paddingLeft = '22px';
-        var btn = document.createElement('span');
-        btn.className = 'row-del-btn';
-        btn.innerHTML = '×';
-        btn.title = '删除此行';
-        btn.style.cssText = 'position:absolute;left:2px;top:50%;transform:translateY(-50%);width:16px;height:16px;line-height:16px;text-align:center;font-size:11px;background:#e53e3e;color:#fff;border-radius:50%;cursor:pointer;transition:opacity .2s;z-index:10;user-select:none;';
-        firstCell.insertBefore(btn, firstCell.firstChild);
-        btn.addEventListener('click', function(e){
-          e.preventDefault(); e.stopPropagation();
-          if(confirm('确定删除此行？')){ row.remove(); saveTableStructure(row.closest('.table-wrap')); if(typeof triggerSave==='function') triggerSave(); addRowColDeleteBtns(); }
-        });
-      });
-      // Column delete buttons
-      var headerRow = table.querySelector('tr');
-      if(!headerRow) return;
-      var ths = headerRow.querySelectorAll('th');
-      ths.forEach(function(th, colIdx){
-        th.style.position = 'relative';
-        th.style.paddingRight = '20px';
-        var delBtn = document.createElement('span');
-        delBtn.className = 'col-del-btn';
-        delBtn.innerHTML = '×';
-        delBtn.title = '删除此列';
-        delBtn.style.cssText = 'position:absolute;right:2px;top:1px;width:14px;height:14px;line-height:14px;text-align:center;font-size:10px;background:#e53e3e;color:#fff;border-radius:50%;cursor:pointer;transition:opacity .2s;z-index:10;user-select:none;';
-        th.appendChild(delBtn);
-        delBtn.addEventListener('click', function(e){
-          e.preventDefault(); e.stopPropagation();
-          if(confirm('确定删除此列？')){
-            table.querySelectorAll('tr').forEach(function(r){
-              var cells = r.querySelectorAll('th, td');
-              if(cells[colIdx]) cells[colIdx].remove();
-            });
-            saveTableStructure(table.closest('.table-wrap'));
-            if(typeof triggerSave==='function') triggerSave(); addRowColDeleteBtns();
-          }
-        });
-      });
-      // Add row button
-      var addRowBar = document.createElement('div');
-      addRowBar.className = 'add-row-bar';
-      addRowBar.style.cssText = 'text-align:center;padding:4px 0;';
-      var addRowBtn = document.createElement('button');
-      addRowBtn.className = 'add-row-btn';
-      addRowBtn.innerHTML = '+ 添加行';
-      addRowBtn.title = '在末尾添加一行';
-      addRowBtn.style.cssText = 'background:#edf2f7;border:1px dashed #a0aec0;color:#4a5568;padding:3px 14px;border-radius:4px;cursor:pointer;font-size:12px;margin-top:4px;';
-      addRowBtn.addEventListener('click', function(){
-        var colCount = table.querySelector('tr').querySelectorAll('th').length || 1;
-        var newRow = table.insertRow(-1);
-        for(var i=0;i<colCount;i++){
-          var cell = newRow.insertCell(-1);
-          cell.contentEditable = 'true';
-          cell.style.cssText = 'border:1px solid #e2e8f0;padding:8px 10px;';
-          cell.id = 'nr_'+Date.now()+'_'+i;
-        }
-        addRowColDeleteBtns();
-        saveTableStructure(table.closest('.table-wrap'));
-        if(typeof triggerSave==='function') triggerSave();
-      });
-      addRowBar.appendChild(addRowBtn);
-      table.parentNode.appendChild(addRowBar);
-      // Add column button
-      var lastTh = headerRow.querySelector('th:last-child');
-      if(lastTh){
-        lastTh.style.position = 'relative';
-        var addColBtn = document.createElement('span');
-        addColBtn.className = 'add-col-btn';
-        addColBtn.innerHTML = '+';
-        addColBtn.title = '添加一列';
-        addColBtn.style.cssText = 'position:absolute;right:-16px;top:50%;transform:translateY(-50%);width:16px;height:16px;line-height:16px;text-align:center;font-size:11px;background:#3182ce;color:#fff;border-radius:50%;cursor:pointer;transition:opacity .2s;z-index:10;user-select:none;';
-        lastTh.appendChild(addColBtn);
-        addColBtn.addEventListener('click', function(e){
-          e.preventDefault(); e.stopPropagation();
-          var newTh = document.createElement('th');
-          newTh.contentEditable = 'true';
-          newTh.id = 'nc_'+Date.now();
-          newTh.style.cssText = 'border:1px solid #e2e8f0;padding:8px 10px;background:#f7fafc;';
-          headerRow.appendChild(newTh);
-          table.querySelectorAll('tr').forEach(function(r){
-            if(r === headerRow) return;
-            var newTd = document.createElement('td');
-            newTd.contentEditable = 'true';
-            newTd.id = 'nc_'+Date.now()+'_'+Math.random().toString(36).substr(2,4);
-            newTd.style.cssText = 'border:1px solid #e2e8f0;padding:8px 10px;';
-            r.appendChild(newTd);
-          });
-          addRowColDeleteBtns();
-          saveTableStructure(table.closest('.table-wrap'));
-          if(typeof triggerSave==='function') triggerSave();
-        });
-      }
-    });
-}
-if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', addRowColDeleteBtns); }
-else { addRowColDeleteBtns(); }
-</script>
-
-<script>
-(function(){
-  function initResize(){
-    document.querySelectorAll('.table-wrap table').forEach(function(table){
-      var cols = [];
-      var ths = table.querySelectorAll('tr:first-child th');
-      if(!ths.length) return;
-      
-      // Set initial widths if not set
-      var totalW = table.offsetWidth || 600;
-      var colW = Math.floor(totalW / ths.length);
-      ths.forEach(function(th, i){
-        if(!th.style.width) th.style.width = colW + 'px';
-        th.style.minWidth = '40px';
-        
-        // Add resizer handle
-        var handle = document.createElement('div');
-        handle.className = 'th-resizer';
-        th.appendChild(handle);
-        
-        handle.addEventListener('mousedown', function(e){
-          e.preventDefault();
-          e.stopPropagation();
-          handle.classList.add('active');
-          
-          var startX = e.pageX;
-          var thEl = th;
-          var startW = thEl.offsetWidth;
-          
-          // Get column index
-          var allThs = Array.from(table.querySelectorAll('tr:first-child th'));
-          var colIdx = allThs.indexOf(thEl);
-          
-          function onMove(ev){
-            var diff = ev.pageX - startX;
-            var newW = Math.max(40, startW + diff);
-            thEl.style.width = newW + 'px';
-            thEl.style.minWidth = newW + 'px';
-            
-            // Also resize corresponding td cells
-            table.querySelectorAll('tr').forEach(function(row){
-              var cells = row.querySelectorAll('td');
-              if(cells[colIdx]){
-                cells[colIdx].style.width = newW + 'px';
-                cells[colIdx].style.minWidth = newW + 'px';
-              }
-            });
-          }
-          
-          function onUp(){
-            handle.classList.remove('active');
-            document.removeEventListener('mousemove', onMove);
-            document.removeEventListener('mouseup', onUp);
-          }
-          
-          document.addEventListener('mousemove', onMove);
-          document.addEventListener('mouseup', onUp);
-        });
-      });
-    });
-  }
-  
-  // Run after DOM ready
-  if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', initResize);
-  } else {
-    initResize();
-  }
-})();
-</script>
-
-
-
-<script>
-(function(){
-  // Table cell multi-select, copy, cut, paste
-  // v2: fixed first-click selection + editingCell tracking
-  var selectedCells = [];
-  var originCell = null;
-  var editingCell = null;
-
-  function clearSelection() {
-    selectedCells.forEach(function(c){ c.classList.remove('cell-selected','cell-range-origin'); });
-    selectedCells = [];
-    originCell = null;
-  }
-
-  function getCellIndex(cell) {
-    var row = cell.parentElement;
-    var table = row.parentElement;
-    if(table.tagName === 'TBODY') table = table.parentElement;
-    var rows = table.querySelectorAll('tr');
-    var r = -1, c = -1;
-    for(var i = 0; i < rows.length; i++){
-      if(rows[i] === row){ r = i; break; }
-    }
-    var cells = row.querySelectorAll('td, th');
-    for(var j = 0; j < cells.length; j++){
-      if(cells[j] === cell){ c = j; break; }
-    }
-    return {r: r, c: c, row: row, table: table};
-  }
-
-  function selectRange(start, end) {
-    clearSelection();
-    if(!start.table || start.table !== end.table) return;
-    var rMin = Math.min(start.r, end.r);
-    var rMax = Math.max(start.r, end.r);
-    var cMin = Math.min(start.c, end.c);
-    var cMax = Math.max(start.c, end.c);
-    var rows = start.table.querySelectorAll('tr');
-    for(var r = rMin; r <= rMax; r++){
-      var cells = rows[r].querySelectorAll('td, th');
-      for(var c = cMin; c <= cMax; c++){
-        if(cells[c]){
-          cells[c].classList.add('cell-selected');
-          selectedCells.push(cells[c]);
-        }
-      }
-    }
-    if(originCell) originCell.classList.add('cell-range-origin');
-  }
-
-  var clipboardData = null;
-  var clipboardRows = 0;
-  var clipboardCols = 0;
-  var clipboardAction = null;
-
-  function copySelection(action) {
-    if(selectedCells.length === 0) return;
-    clipboardAction = action || 'copy';
-    var minR = Infinity, maxR = -Infinity, minC = Infinity, maxC = -Infinity;
-    var table = null;
-    selectedCells.forEach(function(cell){
-      var idx = getCellIndex(cell);
-      if(!table) table = idx.table;
-      if(idx.r < minR) minR = idx.r;
-      if(idx.r > maxR) maxR = idx.r;
-      if(idx.c < minC) minC = idx.c;
-      if(idx.c > maxC) maxC = idx.c;
-    });
-    clipboardRows = maxR - minR + 1;
-    clipboardCols = maxC - minC + 1;
-    var rows = table.querySelectorAll('tr');
-    clipboardData = [];
-    for(var r = minR; r <= maxR; r++){
-      var rowData = [];
-      var cells = rows[r].querySelectorAll('td, th');
-      for(var c = minC; c <= maxC; c++){
-        var cell = cells[c];
-        if(cell && cell.classList.contains('cell-selected')){
-          rowData.push(cell.innerHTML);
-        } else {
-          rowData.push('');
-        }
-      }
-      clipboardData.push(rowData);
-    }
-    if(action === 'cut'){
-      selectedCells.forEach(function(cell){ cell.innerHTML = ''; });
-      if(typeof triggerSave === 'function') triggerSave();
-    }
-    var plainText = clipboardData.map(function(row){ return row.join('\t'); }).join('\n');
-    if(navigator.clipboard && navigator.clipboard.writeText){
-      navigator.clipboard.writeText(plainText).catch(function(){});
-    }
-  }
-
-  function pasteSelection() {
-    if(!clipboardData || clipboardData.length === 0) return;
-    var target = selectedCells.length > 0 ? selectedCells[0] : (document.activeElement && document.activeElement.closest('td, th') ? document.activeElement.closest('td, th') : null);
-    if(!target) return;
-    var idx = getCellIndex(target);
-    if(!idx.table) return;
-    var rows = idx.table.querySelectorAll('tr');
-    for(var dr = 0; dr < clipboardRows; dr++){
-      var rowIdx = idx.r + dr;
-      if(rowIdx >= rows.length) break;
-      var cells = rows[rowIdx].querySelectorAll('td, th');
-      for(var dc = 0; dc < clipboardCols; dc++){
-        var colIdx = idx.c + dc;
-        if(colIdx >= cells.length) break;
-        cells[colIdx].innerHTML = clipboardData[dr][dc] || '';
-      }
-    }
-    if(typeof triggerSave === 'function') triggerSave();
-  }
-
-  var dragStartCell = null;
-  var dragStartX = 0, dragStartY = 0;
-  var inCellSelectMode = false;
-
-  // === Capture phase: handle cell selection BEFORE contenteditable ===
-  document.addEventListener('mousedown', function(e){
-    var cell = e.target.closest('td, th');
-    if(!cell) {
-      // Clicked outside table - but don't clear if clicking RTE toolbar
-      if(e.target.closest('#rteToolbar')) return;
-      if(!e.shiftKey) { clearSelection(); editingCell = null; }
-      return;
-    }
-    // Don't interfere with table action buttons
-    if(e.target.closest('.row-del-btn, .col-del-btn, .add-col-btn, .add-row-btn, .th-resizer')) return;
-    var tableWrap = cell.closest('.table-wrap');
-    if(!tableWrap) return;
-
-    // Shift+click: extend selection
-    if(e.shiftKey && originCell){
-      e.preventDefault();
-      var startIdx = getCellIndex(originCell);
-      var endIdx = getCellIndex(cell);
-      selectRange(startIdx, endIdx);
-      inCellSelectMode = true;
-      editingCell = null;
-      return;
-    }
-
-    // Currently editing this cell - don't interfere (cursor reposition, text select)
-    if(editingCell === cell){
-      return;
-    }
-
-    // Cell is the only selected cell - clear selection, enter edit mode
-    if(cell.classList.contains('cell-selected') && selectedCells.length === 1){
-      clearSelection();
-      editingCell = cell;
-      dragStartCell = null;
-      // Don't preventDefault - let contenteditable activate
-      return;
-    }
-
-    // Otherwise: select this cell (first click or different cell)
-    e.preventDefault();
-    clearSelection();
-    originCell = cell;
-    cell.classList.add('cell-selected', 'cell-range-origin');
-    selectedCells.push(cell);
-    editingCell = null;
-    dragStartCell = cell;
-    dragStartX = e.clientX;
-    dragStartY = e.clientY;
-    inCellSelectMode = false;
-  }, true);
-
-  // Capture phase mousemove: drag to select range
-  document.addEventListener('mousemove', function(e){
-    if(!dragStartCell) return;
-    var dx = e.clientX - dragStartX;
-    var dy = e.clientY - dragStartY;
-    if(!inCellSelectMode && (Math.abs(dx) > 3 || Math.abs(dy) > 3)){
-      inCellSelectMode = true;
-      window.getSelection().removeAllRanges();
-      if(originCell !== dragStartCell){
-        clearSelection();
-        originCell = dragStartCell;
-        dragStartCell.classList.add('cell-selected', 'cell-range-origin');
-        selectedCells.push(dragStartCell);
-      }
-    }
-    if(!inCellSelectMode || !originCell) return;
-    var cell = e.target.closest('td, th');
-    if(!cell) return;
-    var tableWrap = cell.closest('.table-wrap');
-    if(!tableWrap) return;
-    e.preventDefault();
-    var startIdx = getCellIndex(originCell);
-    var endIdx = getCellIndex(cell);
-    if(startIdx.table === endIdx.table){
-      selectRange(startIdx, endIdx);
-    }
-  }, true);
-
-  // Capture phase mouseup: end drag
-  document.addEventListener('mouseup', function(e){
-    if(dragStartCell && inCellSelectMode){
-      e.preventDefault();
-    }
-    dragStartCell = null;
-    inCellSelectMode = false;
-  }, true);
-
-  // Keyboard shortcuts
-  document.addEventListener('keydown', function(e){
-    // Ctrl/Cmd + C: copy
-    if((e.ctrlKey || e.metaKey) && e.key === 'c' && selectedCells.length > 0){
-      var sel = window.getSelection();
-      if(sel && sel.toString().length > 0) return;
-      e.preventDefault();
-      copySelection('copy');
-    }
-    // Ctrl/Cmd + X: cut
-    if((e.ctrlKey || e.metaKey) && e.key === 'x' && selectedCells.length > 0){
-      var sel = window.getSelection();
-      if(sel && sel.toString().length > 0) return;
-      e.preventDefault();
-      copySelection('cut');
-    }
-    // Ctrl/Cmd + V: paste
-    if((e.ctrlKey || e.metaKey) && e.key === 'v' && clipboardData){
-      var sel = window.getSelection();
-      if(sel && sel.anchorNode && sel.anchorNode.closest && sel.anchorNode.closest('td, th') && selectedCells.length <= 1) return;
-      e.preventDefault();
-      pasteSelection();
-    }
-    // Ctrl/Cmd + A: select all cells in current table
-    if((e.ctrlKey || e.metaKey) && e.key === 'a'){
-      var activeEl = document.activeElement;
-      var cell = activeEl ? activeEl.closest('td, th') : null;
-      if(!cell) cell = selectedCells.length > 0 ? selectedCells[0] : null;
-      if(cell){
-        var tableWrap = cell.closest('.table-wrap');
-        if(tableWrap){
-          e.preventDefault();
-          var table = tableWrap.querySelector('table');
-          if(table){
-            var lastRow = table.querySelectorAll('tr');
-            var firstCell = lastRow[0] ? lastRow[0].querySelector('td, th') : null;
-            var lastRowEl = lastRow[lastRow.length - 1];
-            var lastCells = lastRowEl ? lastRowEl.querySelectorAll('td, th') : [];
-            var lastCell = lastCells[lastCells.length - 1];
-            if(firstCell && lastCell){
-              originCell = firstCell;
-              selectRange(getCellIndex(firstCell), getCellIndex(lastCell));
-            }
-          }
-        }
-      }
-    }
-    // Delete key: clear selected cells
-    if(e.key === 'Delete' && selectedCells.length > 1){
-      e.preventDefault();
-      selectedCells.forEach(function(cell){ cell.innerHTML = ''; });
-      if(typeof triggerSave === 'function') triggerSave();
-    }
-    // Escape: clear selection and edit state
-    if(e.key === 'Escape'){
-      clearSelection();
-      editingCell = null;
-    }
-  });
-
-  // Paste from system clipboard
-  document.addEventListener('paste', function(e){
-    if(!clipboardData || selectedCells.length <= 1) {
-      var target = selectedCells.length > 0 ? selectedCells[0] : (document.activeElement ? document.activeElement.closest('td, th') : null);
-      if(!target) return;
-      var clipText = e.clipboardData && e.clipboardData.getData('text/plain');
-      if(!clipText) return;
-      if(clipText.indexOf('\t') === -1 && clipText.indexOf('\n') === -1) return;
-      e.preventDefault();
-      var lines = clipText.split('\n').filter(function(l){ return l.length > 0; });
-      var idx = getCellIndex(target);
-      if(!idx.table) return;
-      var rows = idx.table.querySelectorAll('tr');
-      for(var dr = 0; dr < lines.length; dr++){
-        var rowIdx = idx.r + dr;
-        if(rowIdx >= rows.length) break;
-        var cols = lines[dr].split('\t');
-        var cells = rows[rowIdx].querySelectorAll('td, th');
-        for(var dc = 0; dc < cols.length; dc++){
-          var colIdx = idx.c + dc;
-          if(colIdx >= cells.length) break;
-          cells[colIdx].innerText = cols[dc];
-        }
-      }
-      if(typeof triggerSave === 'function') triggerSave();
-    }
-  });
-
-  // Clear editingCell when focus leaves a cell
-  document.addEventListener('focusout', function(e){
-    if(e.target === editingCell){
-      setTimeout(function(){
-        if(document.activeElement !== editingCell){
-          editingCell = null;
-        }
-      }, 200);
-    }
-  });
-})();
-</script>
-
-<script>
-(function(){
-  // Architecture diagram block resizing
-  document.querySelectorAll('.arch-rz').forEach(function(handle){
-    handle.addEventListener('mousedown', function(e){
-      e.preventDefault();
-      e.stopPropagation();
-      var target = handle.parentElement;
-      var startX = e.clientX;
-      var startY = e.clientY;
-      var startW = target.offsetWidth;
-      var startH = target.offsetHeight;
-      
-      function onMove(ev){
-        var newW = Math.max(60, startW + (ev.clientX - startX));
-        var newH = Math.max(40, startH + (ev.clientY - startY));
-        target.style.width = newW + 'px';
-        target.style.height = newH + 'px';
-        target.style.minWidth = newW + 'px';
-        target.style.minHeight = newH + 'px';
-        // For flex items, also set flex
-        if(target.classList.contains('ctree-sn') || target.classList.contains('ctree-dc')){
-          target.style.flex = '0 0 ' + newW + 'px';
-        }
-      }
-      function onUp(){
-        document.removeEventListener('mousemove', onMove);
-        document.removeEventListener('mouseup', onUp);
-        // Trigger save
-        if(typeof triggerSave === 'function') triggerSave();
-      }
-      document.addEventListener('mousemove', onMove);
-      document.addEventListener('mouseup', onUp);
-    });
-  });
-})();
-</script>
-
-</body>
-</html>
+---
+[File Info] lines 0-499 of 1856 total lines
