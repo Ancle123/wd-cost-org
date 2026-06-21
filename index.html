@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>东区成本管理平台组织架构方案 v3.1</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif; background: #ebf4ff; color: #2d3748; line-height: 1.6; font-size: 15px; }
+.header { position: fixed; top: 0; left: 0; right: 0; height: 56px; background: #1a365d; display: flex; align-items: center; padding: 0 20px; z-index: 1000; box-shadow: 0 2px 8px rgba(0,0,0,0.2); justify-content: space-between; }
+.header-title { color: white; font-size: 18px; font-weight: 600; }
+.version-badge { background: rgba(255,255,255,0.2); color: #fff; padding: 4px 12px; border-radius: 12px; font-size: 12px; cursor: pointer; }
+.version-badge:hover { background: rgba(255,255,255,0.3); }
+.nav-toggle { display: none; background: none; border: none; color: white; font-size: 24px; cursor: pointer; margin-right: 12px; }
+.sidebar { position: fixed; left: 0; top: 56px; bottom: 56px; width: 200px; background: white; border-right: 1px solid #e2e8f0; overflow-y: auto; padding: 12px 0; z-index: 999; transition: transform 0.3s; }
+.nav-link { display: block; padding: 10px 16px; color: #4a5568; text-decoration: none; font-size: 13px; border-left: 3px solid transparent; transition: all 0.2s; }
+.nav-link:hover { background: #ebf4ff; color: #1a365d; }
+.nav-link.active { background: #ebf4ff; color: #1a365d; border-left-color: #1a365d; font-weight: 600; }
+.main-content { margin-left: 200px; margin-top: 56px; padding: 24px; padding-bottom: 80px; }
+.section-card { background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin-bottom: 24px; padding: 32px; position: relative; overflow: visible; }
+.section-card:hover > .card-controls { opacity: 1; }
+.section-card:hover > .resize-handle { opacity: 1; }
+.card-controls { position: absolute; top: 12px; right: 12px; display: flex; gap: 6px; opacity: 0; transition: opacity 0.2s; z-index: 10; }
+.card-del, .card-dup { width: 28px; height: 28px; border: none; border-radius: 6px; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; color: white; }
+.card-del { background: #e53e3e; }
+.card-dup { background: #38a169; }
+.resize-handle { position: absolute; bottom: 0; right: 0; width: 16px; height: 16px; cursor: nwse-resize; opacity: 0; transition: opacity 0.2s; background: linear-gradient(135deg, transparent 50%, #1a365d 50%); border-bottom-right-radius: 12px; }
+.section-title { color: #1a365d; font-size: 22px; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #1a365d; outline: none; }
+.subsection-title { color: #2c5282; font-size: 18px; margin: 20px 0 12px; outline: none; }
+.sub-subsection-title { color: #2b6cb0; font-size: 16px; margin: 16px 0 8px; outline: none; }
+p { margin-bottom: 12px; outline: none; }
+p:focus { background: #f0fff4; }
+.blockquote { background: #ebf4ff; border-left: 4px solid #1a365d; padding: 10px 16px; border-radius: 0 8px 8px 0; margin-bottom: 12px; font-size: 14px; color: #4a5568; outline: none; }
+.list-item { padding-left: 8px; margin-bottom: 6px; outline: none; }
+.table-wrap { overflow-x: auto; margin-bottom: 16px; }
+table { width: 100%; border-collapse: separate; border-spacing: 0; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+th { background: #1a365d; color: white; padding: 12px 16px; text-align: left; font-weight: 600; font-size: 14px; outline: none; }
+td { padding: 10px 16px; border-bottom: 1px solid #e2e8f0; font-size: 14px; outline: none; }
+tbody tr:nth-child(even) td { background: #f7fafc; }
+tbody tr:hover td { background: #ebf4ff; }
+td:focus, th:focus { background: #fefcbf !important; }
+.ascii-art { background: #1a202c; color: #68d391; font-family: 'Courier New', Consolas, monospace; font-size: 13px; padding: 20px; border-radius: 8px; overflow-x: auto; white-space: pre; line-height: 1.4; margin-bottom: 16px; outline: none; }
+.ascii-art:focus { background: #2d3748; box-shadow: 0 0 0 2px #4299e1; }
+hr { border: none; border-top: 1px solid #e2e8f0; margin: 16px 0; }
+.rte-toolbar { position: fixed; display: none; width: 440px; background: white; border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.25); z-index: 10001; border: 1px solid #e2e8f0; }
+.rte-toolbar-header { background: #1a365d; color: white; padding: 6px 12px; border-radius: 10px 10px 0 0; cursor: move; font-size: 12px; display: flex; align-items: center; }
+.rte-drag-hint { opacity: 0.8; }
+.rte-toolbar-body { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; padding: 8px; }
+.rte-btn { width: 32px; height: 32px; border: 1px solid #e2e8f0; border-radius: 6px; background: white; cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
+.rte-btn:hover { background: #ebf4ff; border-color: #1a365d; }
+.rte-btn:active { background: #1a365d; color: white; }
+.rte-btn-danger { color: #e53e3e; }
+.rte-btn-danger:hover { background: #fed7d7; }
+.rte-sep { width: 1px; height: 24px; background: #e2e8f0; margin: 0 4px; }
+.rte-color-label { display: flex; align-items: center; gap: 4px; font-size: 12px; color: #4a5568; }
+.rte-color-label input[type="color"] { width: 28px; height: 28px; border: 1px solid #e2e8f0; border-radius: 6px; cursor: pointer; }
+.action-bar { position: fixed; bottom: 0; left: 200px; right: 0; height: 56px; background: white; border-top: 1px solid #e2e8f0; box-shadow: 0 -2px 8px rgba(0,0,0,0.08); display: flex; align-items: center; justify-content: center; gap: 16px; z-index: 1000; }
+.action-btn { padding: 8px 24px; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+.export-btn { background: #1a365d; color: white; }
+.export-btn:hover { background: #2c5282; }
+.reset-btn { background: #fff; color: #e53e3e; border: 1px solid #e53e3e; }
+.reset-btn:hover { background: #fff5f5; }
+.save-toast { position: fixed; bottom: 72px; right: 24px; background: #1a365d; color: white; padding: 8px 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); opacity: 0; transform: translateY(10px); transition: opacity 0.3s, transform 0.3s; z-index: 10000; pointer-events: none; font-size: 13px; }
+.save-toast.show { opacity: 1; transform: translateY(0); }
+.mod-log { background: #fff9e6; border: 2px dashed #d69e2e; border-radius: 12px; padding: 20px; margin-bottom: 24px; }
+.mod-log-title { color: #975a16; font-size: 16px; font-weight: 600; margin-bottom: 12px; }
+@media (max-width: 768px) {
+    .sidebar { transform: translateX(-100%); }
+    .sidebar.open { transform: translateX(0); }
+    .main-content { margin-left: 0; }
+    .action-bar { left: 0; }
+    .nav-toggle { display: block; }
+    .rte-toolbar { width: calc(100vw - 20px); left: 10px !important; }
+    .section-card { padding: 20px 16px; }
+    .header-title { font-size: 14px; }
+}
+[contenteditable="true"] { transition: background 0.2s; }
+[contenteditable="true"]:focus { background: #f0fff4; }
+
+.arch-diagram{padding:24px 20px;border-radius:12px;background:#f7fafc;margin-bottom:16px}
+.arch-layer{border-radius:12px;padding:18px;margin-bottom:10px;color:#fff}
+.arch-layer-hq{background:linear-gradient(135deg,#1a365d,#2a4a7f)}
+.arch-layer-hub{background:linear-gradient(135deg,#2b6cb0,#3182ce)}
+.arch-layer-local{background:linear-gradient(135deg,#38a169,#48bb78)}
+.arch-layer-accent{background:linear-gradient(135deg,#9b2c2c,#e53e3e)}
+.arch-layer-label{font-size:10px;text-transform:uppercase;letter-spacing:1px;opacity:.7;margin-bottom:10px;font-weight:700;display:flex;justify-content:space-between;align-items:center}
+.arch-layer-label .arch-count{font-size:14px;font-weight:800;opacity:1}
+.arch-nodes{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.arch-node{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);border-radius:9px;padding:10px 14px;text-align:center;min-width:120px}
+.arch-node-title{font-weight:700;font-size:12.5px;margin-bottom:2px}
+.arch-node-desc{font-size:10px;opacity:.85;line-height:1.5}
+.arch-arrow{text-align:center;padding:4px 0;font-size:16px;color:#a0aec0}
+.city-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:14px 0}
+.city-card{background:#fff;border-radius:10px;padding:14px;box-shadow:0 1px 4px rgba(0,0,0,.1);border-top:4px solid #38a169}
+.city-card.c-sh{border-top-color:#e53e3e}
+.city-card.c-su{border-top-color:#dd6b20}
+.city-card.c-hf{border-top-color:#3182ce}
+.city-card.c-xm{border-top-color:#4299e1}
+.city-card.c-hz{border-top-color:#805ad5}
+.city-card.c-nb{border-top-color:#38a169}
+.city-card.c-nj{border-top-color:#ed8936}
+.city-name{font-weight:800;font-size:14px;margin-bottom:4px}
+.city-leader{font-size:11.5px;color:#1a365d;font-weight:600;margin-bottom:6px}
+.city-roles{font-size:10.5px;color:#718096;line-height:1.7}
+.city-roles span{display:block}
+.flow-diagram{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin:16px 0;justify-content:center}
+.flow-step{background:#1a365d;color:#fff;padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;text-align:center}
+.flow-arrow{color:#a0aec0;font-size:18px;font-weight:700}
+.flow-step-highlight{background:#38a169}
+.flow-step-accent{background:#e53e3e}
+.balance-bar{display:flex;align-items:center;margin:4px 0;font-size:13px}
+.balance-label{width:140px;font-weight:600;color:#2d3748;font-size:13px}
+.balance-track{flex:1;height:24px;background:#e2e8f0;border-radius:12px;overflow:hidden;position:relative}
+.balance-fill{height:100%;border-radius:12px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;color:#fff;font-size:11px;font-weight:600}
+.balance-pct{width:50px;text-align:right;font-size:12px;color:#718096}
+</style>
+</head>
+<body>
+<div class="header">
+    <div style="display:flex;align-items:center">
+        <button class="nav-toggle" id="navToggle">&#9776;</button>
+        <span class="header-title">东区成本管理平台组织架构方案 v3.1</span>
+    </div>
+    <span class="version-badge" id="versionBadge">v3.1-安安0620</span>
+</div>
+<div class="sidebar" id="sidebar">
+    <a class="nav-link" href="#sec_1">一、设计原则</a>
+<a class="nav-link" href="#sec_2">二、组织架构总图</a>
+<a class="nav-link" href="#sec_3">三、7城市BP岗位分配</a>
+<a class="nav-link" href="#sec_4">四、人员总盘（30人，不...</a>
+<a class="nav-link" href="#sec_5">五、三大组详细设计</a>
+<a class="nav-link" href="#sec_6">六、需求流转与协作机制</a>
+<a class="nav-link" href="#sec_7">七、三大基础建设路线图</a>
+<a class="nav-link" href="#sec_8">八、过渡方案</a>
+<a class="nav-link" href="#sec_9">九、汇报与考核</a>
+<a class="nav-link" href="#sec_10">十、与v2方案的关键差异</a>
+<a class="nav-link" href="#sec_11">十一、风险与应对</a>
+
+</div>
+<div class="main-content">
+    
+<div class="mod-log color-block">
+    <div class="card-controls"><button class="card-del" title="删除色块">&times;</button><button class="card-dup" title="复制色块">+</button></div>
+    <div class="resize-handle"></div>
+    <div class="mod-log-title" id="modLogTitle" contenteditable="true">修改记录</div>
+    <div id="modLogContent" contenteditable="true">
+        <p id="modLogP1" contenteditable="true" style="color:#975a16;font-size:13px">请在此处记录每次修改的要点和版本，方便协作时快速了解变更内容。</p>
+        <p id="modLogP2" contenteditable="true" style="color:#975a16;font-size:13px">示例：v3.1-安安0620 — 初始版本，采购二三组按区域分，验收结算补至7人</p>
+    </div>
+</div>
+
+    <p id="e1" contenteditable="true"># 东区成本管理平台组织架构方案（v3.1）</p>
+<div class="blockquote" id="e2" contenteditable="true">基于6.18领导v2方案 + 会议讨论 + 领导最新语音定调<br>编制日期：2026年6月20日<br>定位：过程稿，方向校准用<br>v3.1更新：采购二三组同做物业企划按区域分+三组叠加供方把控，验收结算组补至7人，验收分级调整，三大基础建设路线图重构（标准清单→价格库、分标段→提效、供方库→合规+快速匹配），过渡期东区自建价格库和供方库、后期总部统一</div>
+<hr>
+<div class="section-card color-block" id="sec_1"><div class="card-controls"><button class="card-del" title="删除色块">&times;</button><button class="card-dup" title="复制色块">+</button></div><div class="resize-handle"></div><h2 class="section-title" id="e3" contenteditable="true">一、设计原则</h2>
+<div class="table-wrap"><table>
+<tr><th id="e4" contenteditable="true">原则</th><th id="e5" contenteditable="true">说明</th><th id="e6" contenteditable="true">来源</th></tr>
+<tr><td id="e7" contenteditable="true"><strong>人不动、编组干活</strong></td><td id="e8" contenteditable="true">所有人办公地点不变，按功能编组，组长统一派工</td><td id="e9" contenteditable="true">领导v2方案+语音确认</td></tr>
+<tr><td id="e10" contenteditable="true"><strong>三大组+七小组</strong></td><td id="e11" contenteditable="true">三个大组做归口管理，七个小组做专业执行</td><td id="e12" contenteditable="true">领导语音定调</td></tr>
+<tr><td id="e13" contenteditable="true"><strong>7城市BP全覆盖</strong></td><td id="e14" contenteditable="true">3大组协调人+4小组长，7个成本组长人人有岗</td><td id="e15" contenteditable="true">方案B</td></tr>
+<tr><td id="e16" contenteditable="true"><strong>双重身份</strong></td><td id="e17" contenteditable="true">城市成本组长既是属地接口人，又是专业线组长/协调人</td><td id="e18" contenteditable="true">领导语音</td></tr>
+<tr><td id="e19" contenteditable="true"><strong>审批最小改动</strong></td><td id="e20" contenteditable="true">过渡期审批流基本不变，价格库建成后逐步调整</td><td id="e21" contenteditable="true">领导语音</td></tr>
+<tr><td id="e22" contenteditable="true"><strong>逻辑集中、物理分散</strong></td><td id="e23" contenteditable="true">专业线统一调度，人员驻点不变</td><td id="e24" contenteditable="true">领导v2方案+语音</td></tr>
+<tr><td id="e25" contenteditable="true"><strong>供方管理从建转控</strong></td><td id="e26" contenteditable="true">供应商库由总部建设，东区负责使用+本地把关+基准价维护</td><td id="e27" contenteditable="true">会议讨论+本次确认</td></tr>
+</table></div>
+<hr>
+</div>
+<div class="section-card color-block" id="sec_2"><div class="card-controls"><button class="card-del" title="删除色块">&times;</button><button class="card-dup" title="复制色块">+</button></div><div class="resize-handle"></div><h2 class="section-title" id="e28" contenteditable="true">二、组织架构总图</h2>
+<div class="arch-diagram">
+<div class="arch-layer arch-layer-hq">
+<div class="arch-layer-label"><span contenteditable="true" id="arch_hq_lbl">总部成本部</span></div>
+<div class="arch-nodes">
+<div class="arch-node"><div class="arch-node-title" contenteditable="true" id="arch_hq_1">大区成本BP（平台负责人）</div><div class="arch-node-desc" contenteditable="true" id="arch_hq_1d">不占30人编制</div></div>
+</div>
+</div>
+<div class="arch-arrow">▼</div>
+<div class="arch-layer" style="background:linear-gradient(135deg,#4a5568,#718096)">
+<div class="arch-layer-label"><span contenteditable="true" id="arch_hub_lbl">大区本部</span><span class="arch-count" contenteditable="true" id="arch_hub_cnt">1人</span></div>
+<div class="arch-nodes">
+<div class="arch-node"><div class="arch-node-title" contenteditable="true" id="arch_hub_1">平台运营+数据分析</div><div class="arch-node-desc" contenteditable="true" id="arch_hub_1d">需求池管理、任务调度、数据汇总</div></div>
+</div>
+</div>
+<div class="arch-arrow">▼</div>
+<div class="arch-layer arch-layer-hub">
+<div class="arch-layer-label"><span contenteditable="true" id="arch_big_lbl">三大组</span><span class="arch-count" contenteditable="true" id="arch_big_cnt">28人+1机动</span></div>
+<div class="arch-nodes">
+<div class="arch-node"><div class="arch-node-title" contenteditable="true" id="arch_big_1">测算核价大组</div><div class="arch-node-desc" contenteditable="true" id="arch_big_1d">协调人① · 8人<br>测算合价4人 + 成本管控4人</div></div>
+<div class="arch-node"><div class="arch-node-title" contenteditable="true" id="arch_big_2">采购供方大组</div><div class="arch-node-desc" contenteditable="true" id="arch_big_2d">协调人② · 10人<br>采购一组4人 + 二组3人 + 三组3人</div></div>
+<div class="arch-node"><div class="arch-node-title" contenteditable="true" id="arch_big_3">验收结算大组</div><div class="arch-node-desc" contenteditable="true" id="arch_big_3d">协调人③ · 10人<br>验收结算7人 + 合规检查3人</div></div>
+</div>
+</div>
+<div class="arch-arrow">▼</div>
+<div class="arch-layer arch-layer-local">
+<div class="arch-layer-label"><span contenteditable="true" id="arch_city_lbl">7个城市公司属地（办公地点不变）</span><span class="arch-count" contenteditable="true" id="arch_city_cnt">兼任大组协调人或小组组长</span></div>
+<div class="city-grid">
+<div class="city-card c-hf"><div class="city-name" contenteditable="true" id="city_hf">合肥</div><div class="city-leader" contenteditable="true" id="city_hf_l">吴雪娜</div></div>
+<div class="city-card c-nj"><div class="city-name" contenteditable="true" id="city_nj">南京</div><div class="city-leader" contenteditable="true" id="city_nj_l">沙爽</div></div>
+<div class="city-card c-su"><div class="city-name" contenteditable="true" id="city_su">苏州</div><div class="city-leader" contenteditable="true" id="city_su_l">刘鹏</div></div>
+<div class="city-card c-sh"><div class="city-name" contenteditable="true" id="city_sh">上海</div><div class="city-leader" contenteditable="true" id="city_sh_l">刘丽</div></div>
+<div class="city-card c-hz"><div class="city-name" contenteditable="true" id="city_hz">杭州</div><div class="city-leader" contenteditable="true" id="city_hz_l">袁凯</div></div>
+<div class="city-card c-nb"><div class="city-name" contenteditable="true" id="city_nb">宁波</div><div class="city-leader" contenteditable="true" id="city_nb_l">郭健康</div></div>
+<div class="city-card c-xm"><div class="city-name" contenteditable="true" id="city_xm">厦门</div><div class="city-leader" contenteditable="true" id="city_xm_l">周仁林</div></div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div class="section-card color-block" id="sec_3"><div class="card-controls"><button class="card-del" title="删除色块">&times;</button><button class="card-dup" title="复制色块">+</button></div><div class="resize-handle"></div><h2 class="section-title" id="e30" contenteditable="true">三、7城市BP岗位分配</h2>
+<h3 class="subsection-title" id="e31" contenteditable="true">3.1 分配逻辑</h3>
+<div class="table-wrap"><table>
+<tr><th id="e32" contenteditable="true">岗位</th><th id="e33" contenteditable="true">人数</th><th id="e34" contenteditable="true">身份一</th><th id="e35" contenteditable="true">身份二</th><th id="e36" contenteditable="true">选拔标准</th></tr>
+<tr><td id="e37" contenteditable="true"><strong>大组协调人①</strong></td><td id="e38" contenteditable="true">1</td><td id="e39" contenteditable="true">测算核价大组协调人</td><td id="e40" contenteditable="true">兼测算合价组组长</td><td id="e41" contenteditable="true">测算经验最丰富，能带教</td></tr>
+<tr><td id="e42" contenteditable="true"><strong>大组协调人②</strong></td><td id="e43" contenteditable="true">1</td><td id="e44" contenteditable="true">采购供方大组协调人</td><td id="e45" contenteditable="true">兼采购一组组长</td><td id="e46" contenteditable="true">工程/能源采购领域最熟</td></tr>
+<tr><td id="e47" contenteditable="true"><strong>大组协调人③</strong></td><td id="e48" contenteditable="true">1</td><td id="e49" contenteditable="true">验收结算大组协调人</td><td id="e50" contenteditable="true">兼验收结算组组长</td><td id="e51" contenteditable="true">结算审核严谨，敢较真</td></tr>
+<tr><td id="e52" contenteditable="true"><strong>小组长④</strong></td><td id="e53" contenteditable="true">1</td><td id="e54" contenteditable="true">城市成本BP</td><td id="e55" contenteditable="true">成本管控+数据分析组组长</td><td id="e56" contenteditable="true">数据分析能力强，有全局观</td></tr>
+<tr><td id="e57" contenteditable="true"><strong>小组长⑤</strong></td><td id="e58" contenteditable="true">1</td><td id="e59" contenteditable="true">城市成本BP</td><td id="e60" contenteditable="true">采购二组组长（物业企划4城）</td><td id="e61" contenteditable="true">物业/企划采购经验丰富</td></tr>
+<tr><td id="e62" contenteditable="true"><strong>小组长⑥</strong></td><td id="e63" contenteditable="true">1</td><td id="e64" contenteditable="true">城市成本BP</td><td id="e65" contenteditable="true">采购三组组长（物业企划+供方管理3城）</td><td id="e66" contenteditable="true">供方体系把控能力，数据敏感</td></tr>
+<tr><td id="e67" contenteditable="true"><strong>小组长⑦</strong></td><td id="e68" contenteditable="true">1</td><td id="e69" contenteditable="true">城市成本BP</td><td id="e70" contenteditable="true">合规检查+标准化组组长</td><td id="e71" contenteditable="true">原则性强，熟悉制度</td></tr>
+</table></div>
+<p id="e72" contenteditable="true"><strong>关键设计</strong>：大组协调人兼任一个核心小组的组长，保证大组协调人"既管协调又接地气"，不会变成纯粹的行政角色。</p>
+<p id="e73" contenteditable="true"><strong>采购二组vs三组分工</strong>：</p>
+<div class="table-wrap"><table>
+<tr><th id="e74" contenteditable="true"></th><th id="e75" contenteditable="true">采购二组</th><th id="e76" contenteditable="true">采购三组</th></tr>
+<tr><td id="e77" contenteditable="true">业务</td><td id="e78" contenteditable="true">物业+企划类招标核价</td><td id="e79" contenteditable="true">物业+企划类招标核价 + 供方管理+基准价把控</td></tr>
+<tr><td id="e80" contenteditable="true">区域</td><td id="e81" contenteditable="true">4城（上海、苏州、杭州、南京）</td><td id="e82" contenteditable="true">3城（合肥、厦门、宁波）</td></tr>
+<tr><td id="e83" contenteditable="true">组长</td><td id="e84" contenteditable="true">城市BP⑤</td><td id="e85" contenteditable="true">城市BP⑥</td></tr>
+<tr><td id="e86" contenteditable="true">人数</td><td id="e87" contenteditable="true">3人</td><td id="e88" contenteditable="true">3人</td></tr>
+</table></div>
+<p id="e89" contenteditable="true">按区域切的原因：</p>
+<div class="list-item" id="e90" contenteditable="true">• 物业+企划在不同城市的组合和体量差异大，按区域切让每组对"自己的城市"端到端负责</div>
+<div class="list-item" id="e91" contenteditable="true">• 三组管3城（工作量相对轻的合肥、厦门、宁波），叠加供方管理+基准价把控后跟二组4城工作量基本对等</div>
+<div class="list-item" id="e92" contenteditable="true">• 三组供方管理职责因总部建库从"建"转"控"，工作量约砍一半，叠加在3组合理</div>
+<h3 class="subsection-title" id="e93" contenteditable="true">3.2 双重身份运转规则</h3>
+<div class="arch-diagram">
+<div class="arch-layer" style="background:linear-gradient(135deg,#6b46c1,#805ad5)">
+<div class="arch-layer-label"><span contenteditable="true" id="dual_lbl1">大组协调人 / 小组长（双重身份）</span></div>
+<div class="arch-nodes">
+<div class="arch-node"><div class="arch-node-title" contenteditable="true" id="dual_1">专业线</div><div class="arch-node-desc" contenteditable="true" id="dual_1d">考核、派工、标准</div></div>
+</div>
+</div>
+<div class="arch-arrow">▼</div>
+<div class="arch-layer arch-layer-hub">
+<div class="arch-layer-label"><span contenteditable="true" id="dual_lbl2">三条线并行</span></div>
+<div class="arch-nodes">
+<div class="arch-node"><div class="arch-node-title" contenteditable="true" id="dual_2">辖区广场需求受理</div><div class="arch-node-desc" contenteditable="true" id="dual_2d">属地第一接口人</div></div>
+<div class="arch-node"><div class="arch-node-title" contenteditable="true" id="dual_3">城市总工作沟通</div><div class="arch-node-desc" contenteditable="true" id="dual_3d">协调属地关系</div></div>
+<div class="arch-node"><div class="arch-node-title" contenteditable="true" id="dual_4">专业组员远程调度</div><div class="arch-node-desc" contenteditable="true" id="dual_4d">跨城派工审成果</div></div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div class="section-card color-block" id="sec_4"><div class="card-controls"><button class="card-del" title="删除色块">&times;</button><button class="card-dup" title="复制色块">+</button></div><div class="resize-handle"></div><h2 class="section-title" id="e95" contenteditable="true">四、人员总盘（30人，不含大区成本BP）</h2>
+<h3 class="subsection-title" id="e96" contenteditable="true">4.1 按三大组+七小组分配</h3>
+<div class="table-wrap"><table>
+<tr><th id="e97" contenteditable="true">大组</th><th id="e98" contenteditable="true">小组</th><th id="e99" contenteditable="true">人数</th><th id="e100" contenteditable="true">岗位拆分</th></tr>
+<tr><td id="e101" contenteditable="true"><strong>一、测算核价大组</strong></td><td id="e102" contenteditable="true"></td><td id="e103" contenteditable="true"><strong>8</strong></td><td id="e104" contenteditable="true"></td></tr>
+<tr><td id="e105" contenteditable="true"></td><td id="e106" contenteditable="true">测算合价组</td><td id="e107" contenteditable="true">4</td><td id="e108" contenteditable="true">组长1（大组协调人①兼）+ 高级测算师1 + 测算师2</td></tr>
+<tr><td id="e109" contenteditable="true"></td><td id="e110" contenteditable="true">成本管控+数据分析组</td><td id="e111" contenteditable="true">4</td><td id="e112" contenteditable="true">组长1（城市BP④）+ 数据分析专员1 + 成果汇总专员1 + 降本挖掘专员1</td></tr>
+<tr><td id="e113" contenteditable="true"><strong>二、采购供方大组</strong></td><td id="e114" contenteditable="true"></td><td id="e115" contenteditable="true"><strong>10</strong></td><td id="e116" contenteditable="true"></td></tr>
+<tr><td id="e117" contenteditable="true"></td><td id="e118" contenteditable="true">采购一组/工程能源</td><td id="e119" contenteditable="true">4</td><td id="e120" contenteditable="true">组长1（大组协调人②兼）+ 工程改造专员1 + 工程物资集采专员1 + 能源节费专员1</td></tr>
+<tr><td id="e121" contenteditable="true"></td><td id="e122" contenteditable="true">采购二组/物业企划（4城）</td><td id="e123" contenteditable="true">3</td><td id="e124" contenteditable="true">组长1（城市BP⑤）+ 物业采购专员1 + 企划采购专员1</td></tr>
+<tr><td id="e125" contenteditable="true"></td><td id="e126" contenteditable="true">采购三组/物业企划+供方管理（3城）</td><td id="e127" contenteditable="true">3</td><td id="e128" contenteditable="true">组长1（城市BP⑥）+ 物业企划采购专员1 + 供方管理+基准价把控专员1</td></tr>
+<tr><td id="e129" contenteditable="true"><strong>三、验收结算大组</strong></td><td id="e130" contenteditable="true"></td><td id="e131" contenteditable="true"><strong>10</strong></td><td id="e132" contenteditable="true"></td></tr>
+<tr><td id="e133" contenteditable="true"></td><td id="e134" contenteditable="true">验收结算组</td><td id="e135" contenteditable="true">7</td><td id="e136" contenteditable="true">组长1（大组协调人③兼）+ 结算审核专员2 + 验收专员2 + 结算支持专员1 + 数据录入归档专员1</td></tr>
+<tr><td id="e137" contenteditable="true"></td><td id="e138" contenteditable="true">合规检查+标准化组</td><td id="e139" contenteditable="true">3</td><td id="e140" contenteditable="true">组长1（城市BP⑦）+ 合规检查专员1 + 标准化专员1</td></tr>
+<tr><td id="e141" contenteditable="true"><strong>大区本部</strong></td><td id="e142" contenteditable="true"></td><td id="e143" contenteditable="true"><strong>1</strong></td><td id="e144" contenteditable="true"></td></tr>
+<tr><td id="e145" contenteditable="true"></td><td id="e146" contenteditable="true">平台运营+数据分析</td><td id="e147" contenteditable="true">1</td><td id="e148" contenteditable="true">需求池管理、任务调度、数据汇总</td></tr>
+<tr><td id="e149" contenteditable="true"><strong>机动</strong></td><td id="e150" contenteditable="true"></td><td id="e151" contenteditable="true"><strong>1</strong></td><td id="e152" contenteditable="true"></td></tr>
+<tr><td id="e153" contenteditable="true"></td><td id="e154" contenteditable="true">机动岗</td><td id="e155" contenteditable="true">1</td><td id="e156" contenteditable="true">按实际需要分配到最忙的组（首推验收结算组）</td></tr>
+<tr><td id="e157" contenteditable="true"><strong>合计</strong></td><td id="e158" contenteditable="true"></td><td id="e159" contenteditable="true"><strong>30</strong></td><td id="e160" contenteditable="true">7组长/协调人 + 1大区本部 + 21组员 + 1机动</td></tr>
+</table></div>
+<h3 class="subsection-title" id="e161" contenteditable="true">4.2 三大组人数平衡</h3>
+<div class="arch-diagram" style="background:#fff">
+<div class="balance-bar">
+<div class="balance-label" contenteditable="true" id="bal_1l">测算核价大组</div>
+<div class="balance-track"><div class="balance-fill" style="width:27%;background:#2b6cb0" contenteditable="true" id="bal_1f">8人</div></div>
+<div class="balance-pct" contenteditable="true" id="bal_1p">27%</div>
+</div>
+<div class="balance-bar">
+<div class="balance-label" contenteditable="true" id="bal_2l">采购供方大组</div>
+<div class="balance-track"><div class="balance-fill" style="width:33%;background:#3182ce" contenteditable="true" id="bal_2f">10人</div></div>
+<div class="balance-pct" contenteditable="true" id="bal_2p">33%</div>
+</div>
+<div class="balance-bar">
+<div class="balance-label" contenteditable="true" id="bal_3l">验收结算大组</div>
+<div class="balance-track"><div class="balance-fill" style="width:33%;background:#38a169" contenteditable="true" id="bal_3f">10人</div></div>
+<div class="balance-pct" contenteditable="true" id="bal_3p">33%</div>
+</div>
+<div class="balance-bar">
+<div class="balance-label" contenteditable="true" id="bal_4l">大区本部+机动</div>
+<div class="balance-track"><div class="balance-fill" style="width:7%;background:#718096" contenteditable="true" id="bal_4f">2人</div></div>
+<div class="balance-pct" contenteditable="true" id="bal_4p">7%</div>
+</div>
+</div>
+<p id="e163" contenteditable="true">三大组人数分布：采购和验收各10人（执行落地主力），测算8人（大脑型岗位，单兵产出高）。</p>
+<h3 class="subsection-title" id="e164" contenteditable="true">4.3 v3→v3.1核心变化</h3>
+<div class="table-wrap"><table>
+<tr><th id="e165" contenteditable="true">小组</th><th id="e166" contenteditable="true">v3方案</th><th id="e167" contenteditable="true">v3.1方案</th><th id="e168" contenteditable="true">变化</th><th id="e169" contenteditable="true">说明</th></tr>
+<tr><td id="e170" contenteditable="true">测算合价组</td><td id="e171" contenteditable="true">4人</td><td id="e172" contenteditable="true">4人</td><td id="e173" contenteditable="true">不变</td><td id="e174" contenteditable="true"></td></tr>
+<tr><td id="e175" contenteditable="true">成本管控+数据分析组</td><td id="e176" contenteditable="true">4人</td><td id="e177" contenteditable="true">4人</td><td id="e178" contenteditable="true">不变</td><td id="e179" contenteditable="true"></td></tr>
+<tr><td id="e180" contenteditable="true">采购一组/工程能源</td><td id="e181" contenteditable="true">4人</td><td id="e182" contenteditable="true">4人</td><td id="e183" contenteditable="true">不变</td><td id="e184" contenteditable="true"></td></tr>
+<tr><td id="e185" contenteditable="true">采购二组</td><td id="e186" contenteditable="true">3人/运营供方</td><td id="e187" contenteditable="true">3人/物业企划4城</td><td id="e188" contenteditable="true">职责调整</td><td id="e189" contenteditable="true">同做物业企划，按区域分</td></tr>
+<tr><td id="e190" contenteditable="true">供方管理+基准价组</td><td id="e191" contenteditable="true">3人独立组</td><td id="e192" contenteditable="true">—</td><td id="e193" contenteditable="true">合并</td><td id="e194" contenteditable="true">并入采购三组，从"建库"转"把控"</td></tr>
+<tr><td id="e195" contenteditable="true">采购三组</td><td id="e196" contenteditable="true">—</td><td id="e197" contenteditable="true">3人</td><td id="e198" contenteditable="true">新增</td><td id="e199" contenteditable="true">物业企划3城+供方管理基准价把控，前提是总部建库</td></tr>
+<tr><td id="e200" contenteditable="true">验收结算组</td><td id="e201" contenteditable="true">5人</td><td id="e202" contenteditable="true">7人</td><td id="e203" contenteditable="true">+2</td><td id="e204" contenteditable="true">补足大组人数，7城验收+结算量偏大</td></tr>
+<tr><td id="e205" contenteditable="true">合规检查+标准化组</td><td id="e206" contenteditable="true">3人</td><td id="e207" contenteditable="true">3人</td><td id="e208" contenteditable="true">不变</td><td id="e209" contenteditable="true"></td></tr>
+<tr><td id="e210" contenteditable="true">大区本部</td><td id="e211" contenteditable="true">1人</td><td id="e212" contenteditable="true">1人</td><td id="e213" contenteditable="true">不变</td><td id="e214" contenteditable="true"></td></tr>
+<tr><td id="e215" contenteditable="true">机动</td><td id="e216" contenteditable="true">1人</td><td id="e217" contenteditable="true">1人</td><td id="e218" contenteditable="true">不变</td><td id="e219" contenteditable="true"></td></tr>
+<tr><td id="e220" contenteditable="true"><strong>合计</strong></td><td id="e221" contenteditable="true"><strong>30人</strong></td><td id="e222" contenteditable="true"><strong>30人</strong></td><td id="e223" contenteditable="true"></td><td id="e224" contenteditable="true"></td></tr>
+</table></div>
+<hr>
+</div>
+<div class="section-card color-block" id="sec_5"><div class="card-controls"><button class="card-del" title="删除色块">&times;</button><button class="card-dup" title="复制色块">+</button></div><div class="resize-handle"></div><h2 class="section-title" id="e225" contenteditable="true">五、三大组详细设计</h2>
+<h3 class="subsection-title" id="e226" contenteditable="true">5.1 测算核价大组（8人）</h3>
+<p id="e227" contenteditable="true"><strong>定位</strong>：成本管控的"大脑"——出量、核价、定目标价、数据分析、降本挖掘</p>
+<p id="e228" contenteditable="true"><strong>大组协调人①</strong>：统筹本大组两个小组的协作，确保测算→核价→数据分析→降本挖掘的闭环运转。兼任测算合价组组长。</p>
+<h4 class="sub-subsection-title" id="e229" contenteditable="true">5.1.1 测算合价组（4人）</h4>
+<div class="table-wrap"><table>
+<tr><th id="e230" contenteditable="true">岗位</th><th id="e231" contenteditable="true">人数</th><th id="e232" contenteditable="true">核心职责</th></tr>
+<tr><td id="e233" contenteditable="true">组长（大组协调人①兼）</td><td id="e234" contenteditable="true">1</td><td id="e235" contenteditable="true">统筹全组+大组协调、质量把关、与采购组协作</td></tr>
+<tr><td id="e236" contenteditable="true">高级测算师</td><td id="e237" contenteditable="true">1</td><td id="e238" contenteditable="true">复杂改造项目深度测算、测算模型迭代</td></tr>
+<tr><td id="e239" contenteditable="true">测算师</td><td id="e240" contenteditable="true">2</td><td id="e241" contenteditable="true">常规项目测算、核价模型套用、招标清单编制+报价分析</td></tr>
+</table></div>
+<p id="e242" contenteditable="true"><strong>工作量参考</strong>：</p>
+<div class="table-wrap"><table>
+<tr><th id="e243" contenteditable="true">项目类型</th><th id="e244" contenteditable="true">核价周期</th></tr>
+<tr><td id="e245" contenteditable="true">轻改造（≤50万）</td><td id="e246" contenteditable="true">1-2个工作日</td></tr>
+<tr><td id="e247" contenteditable="true">常规改造（50-200万）</td><td id="e248" contenteditable="true">3-5个工作日</td></tr>
+<tr><td id="e249" contenteditable="true">大专项/大招调（&gt;200万）</td><td id="e250" contenteditable="true">5-10个工作日</td></tr>
+</table></div>
+<p id="e251" contenteditable="true"><strong>协作要点</strong>：</p>
+<div class="list-item" id="e252" contenteditable="true">• 测算组不只是核价——出量、核价、招标清单、报价分析是一条线</div>
+<div class="list-item" id="e253" contenteditable="true">• 招标的工程量清单和报价分析由测算组出，采购组负责流程推进和商务谈判</div>
+<div class="list-item" id="e254" contenteditable="true">• 同一个项目的量出一遍，核价用一遍，招标再用一遍，不用重复算</div>
+<h4 class="sub-subsection-title" id="e255" contenteditable="true">5.1.2 成本管控+数据分析组（4人）</h4>
+<div class="table-wrap"><table>
+<tr><th id="e256" contenteditable="true">岗位</th><th id="e257" contenteditable="true">人数</th><th id="e258" contenteditable="true">核心职责</th></tr>
+<tr><td id="e259" contenteditable="true">组长（城市BP④）</td><td id="e260" contenteditable="true">1</td><td id="e261" contenteditable="true">成本分析方向把控、降本机会识别、向大区总汇报</td></tr>
+<tr><td id="e262" contenteditable="true">数据分析专员</td><td id="e263" contenteditable="true">1</td><td id="e264" contenteditable="true">价格数据库维护更新、市场价对标、成本数据看板</td></tr>
+<tr><td id="e265" contenteditable="true">成果汇总专员</td><td id="e266" contenteditable="true">1</td><td id="e267" contenteditable="true">各组成果汇总归纳、标杆对比分析、月度/季度成本报表</td></tr>
+<tr><td id="e268" contenteditable="true">降本挖掘专员</td><td id="e269" contenteditable="true">1</td><td id="e270" contenteditable="true">降本机会识别、降本方案策划、降本成效跟踪</td></tr>
+</table></div>
+<p id="e271" contenteditable="true"><strong>核心产出</strong>：</p>
+<div class="table-wrap"><table>
+<tr><th id="e272" contenteditable="true">产出</th><th id="e273" contenteditable="true">频率</th><th id="e274" contenteditable="true">服务对象</th></tr>
+<tr><td id="e275" contenteditable="true">月度成本简报</td><td id="e276" contenteditable="true">月度</td><td id="e277" contenteditable="true">大区总+各城市总</td></tr>
+<tr><td id="e278" contenteditable="true">降本机会清单</td><td id="e279" contenteditable="true">月度</td><td id="e280" contenteditable="true">大区总+功能组</td></tr>
+<tr><td id="e281" contenteditable="true">标杆对比分析</td><td id="e282" contenteditable="true">季度</td><td id="e283" contenteditable="true">大区总</td></tr>
+<tr><td id="e284" contenteditable="true">价格趋势预警</td><td id="e285" contenteditable="true">实时</td><td id="e286" contenteditable="true">测算组+采购组</td></tr>
+</table></div>
+<hr>
+<h3 class="subsection-title" id="e287" contenteditable="true">5.2 采购供方大组（10人）</h3>
+<p id="e288" contenteditable="true"><strong>定位</strong>：花钱+管人——采购执行、供方把控、基准价维护</p>
+<p id="e289" contenteditable="true"><strong>大组协调人②</strong>：统筹本大组三个小组的协作，确保采购执行→供方把控→基准价维护的闭环。兼任采购一组组长。</p>
+<p id="e290" contenteditable="true"><strong>大组内三个小组的制衡逻辑</strong>：</p>
+<div class="list-item" id="e291" contenteditable="true">• 采购一组/二组/三组：执行端——找供方、谈价格、推流程</div>
+<div class="list-item" id="e292" contenteditable="true">• 采购三组叠加供方管理+基准价：把控端——评供方、定标准、控价格</div>
+<div class="list-item" id="e293" contenteditable="true">• 选商和使用评价不是同一拨人（二组找供方，三组评供方），避免利益绑定</div>
+<h4 class="sub-subsection-title" id="e294" contenteditable="true">5.2.1 采购一组/工程能源（4人）</h4>
+<div class="table-wrap"><table>
+<tr><th id="e295" contenteditable="true">岗位</th><th id="e296" contenteditable="true">人数</th><th id="e297" contenteditable="true">核心职责</th></tr>
+<tr><td id="e298" contenteditable="true">组长（大组协调人②兼）</td><td id="e299" contenteditable="true">1</td><td id="e300" contenteditable="true">统筹工程能源类采购+大组协调、大标亲自把关</td></tr>
+<tr><td id="e301" contenteditable="true">工程改造专员</td><td id="e302" contenteditable="true">1</td><td id="e303" contenteditable="true">专项改造/高品质施工/改造设计/专项维修/防水维修</td></tr>
+<tr><td id="e304" contenteditable="true">工程物资+集采落地专员</td><td id="e305" contenteditable="true">1</td><td id="e306" contenteditable="true">总部集采工程类品项落地协调（灯具、水泵、电缆等29项）</td></tr>
+<tr><td id="e307" contenteditable="true">能源节费专员</td><td id="e308" contenteditable="true">1</td><td id="e309" contenteditable="true">储能、EMC高效水泵/灯具、光伏、AI智控落地推动+效果跟踪</td></tr>
+</table></div>
+<p id="e310" contenteditable="true"><strong>招采覆盖</strong>：</p>
+<div class="table-wrap"><table>
+<tr><th id="e311" contenteditable="true">品类方向</th><th id="e312" contenteditable="true">对应招采项</th><th id="e313" contenteditable="true">角色</th></tr>
+<tr><td id="e314" contenteditable="true">工程改造</td><td id="e315" contenteditable="true">专项改造、改造设计、专项维修、防水维修（大区集采4项）</td><td id="e316" contenteditable="true">全流程主导</td></tr>
+<tr><td id="e317" contenteditable="true">工程物资</td><td id="e318" contenteditable="true">总部集采工程类品项（灯具、水泵、电缆、石材等）</td><td id="e319" contenteditable="true">落地协调</td></tr>
+<tr><td id="e320" contenteditable="true">能源节费</td><td id="e321" contenteditable="true">储能、EMC、光伏、AI智控（总部集采）</td><td id="e322" contenteditable="true">落地推动+效果跟踪</td></tr>
+</table></div>
+<h4 class="sub-subsection-title" id="e323" contenteditable="true">5.2.2 采购二组/物业企划·4城（3人）</h4>
+<div class="table-wrap"><table>
+<tr><th id="e324" contenteditable="true">岗位</th><th id="e325" contenteditable="true">人数</th><th id="e326" contenteditable="true">核心职责</th></tr>
+<tr><td id="e327" contenteditable="true">组长（城市BP⑤）</td><td id="e328" contenteditable="true">1</td><td id="e329" contenteditable="true">统筹4城物业+企划类采购、区域供需平衡</td></tr>
+<tr><td id="e330" contenteditable="true">物业采购专员</td><td id="e331" contenteditable="true">1</td><td id="e332" contenteditable="true">物业类集采和管控（消杀、保洁用品、绿化养护等）</td></tr>
+<tr><td id="e333" contenteditable="true">企划采购专员</td><td id="e334" contenteditable="true">1</td><td id="e335" contenteditable="true">企划类集采和管控（VI设计、自媒体、活动物料等）</td></tr>
+</table></div>
+<p id="e336" contenteditable="true"><strong>覆盖城市</strong>：上海、苏州、杭州、南京（4城，物业+企划体量较大）</p>
+<p id="e337" contenteditable="true"><strong>与采购三组的分工</strong>：</p>
+<div class="list-item" id="e338" contenteditable="true">• 二组和三组同做物业+企划类招标核价</div>
+<div class="list-item" id="e339" contenteditable="true">• 按区域切：二组管4城，三组管3城</div>
+<div class="list-item" id="e340" contenteditable="true">• 二组纯做采购执行，不管供方管理</div>
+<h4 class="sub-subsection-title" id="e341" contenteditable="true">5.2.3 采购三组/物业企划+供方管理·3城（3人）</h4>
+<div class="table-wrap"><table>
+<tr><th id="e342" contenteditable="true">岗位</th><th id="e343" contenteditable="true">人数</th><th id="e344" contenteditable="true">核心职责</th></tr>
+<tr><td id="e345" contenteditable="true">组长（城市BP⑥）</td><td id="e346" contenteditable="true">1</td><td id="e347" contenteditable="true">统筹3城物业+企划采购+供方管理+基准价把控</td></tr>
+<tr><td id="e348" contenteditable="true">物业企划采购专员</td><td id="e349" contenteditable="true">1</td><td id="e350" contenteditable="true">3城物业+企划类采购执行（与二组做同样的事，只是区域不同）</td></tr>
+<tr><td id="e351" contenteditable="true">供方管理+基准价把控专员</td><td id="e352" contenteditable="true">1</td><td id="e353" contenteditable="true">供应商库使用+本地准入把关+基准价维护+供方评价+分层管理</td></tr>
+</table></div>
+<p id="e354" contenteditable="true"><strong>覆盖城市</strong>：合肥、厦门、宁波（3城，工作量相对轻，叠加供方管理后与二组对等）</p>
+<p id="e355" contenteditable="true"><strong>供方管理职责说明</strong>：</p>
+<div class="table-wrap"><table>
+<tr><th id="e356" contenteditable="true">职责</th><th id="e357" contenteditable="true">内容</th><th id="e358" contenteditable="true">前提</th></tr>
+<tr><td id="e359" contenteditable="true">供应商库使用</td><td id="e360" contenteditable="true">基于总部建设的供应商库进行日常选商</td><td id="e361" contenteditable="true">总部建库并维护</td></tr>
+<tr><td id="e362" contenteditable="true">本地准入把关</td><td id="e363" contenteditable="true">新供方本地准入初审、现场考察</td><td id="e364" contenteditable="true">配合总部准入标准</td></tr>
+<tr><td id="e365" contenteditable="true">基准价维护</td><td id="e366" contenteditable="true">分品类基准价录入更新、市场价格对标</td><td id="e367" contenteditable="true">采购组提供成交价数据</td></tr>
+<tr><td id="e368" contenteditable="true">供方评价</td><td id="e369" contenteditable="true">S/A/B/C分层管理、绩效评价</td><td id="e370" contenteditable="true">按总部评价模型执行</td></tr>
+<tr><td id="e371" contenteditable="true">供方切换审核</td><td id="e372" contenteditable="true">退出/切换审核，确保合规</td><td id="e373" contenteditable="true">与合规检查组联动</td></tr>
+</table></div>
+<p id="e374" contenteditable="true"><strong>供方分层管理</strong>：</p>
+<div class="table-wrap"><table>
+<tr><th id="e375" contenteditable="true">供方等级</th><th id="e376" contenteditable="true">定义</th><th id="e377" contenteditable="true">管理方式</th><th id="e378" contenteditable="true">合作范围</th></tr>
+<tr><td id="e379" contenteditable="true">S级</td><td id="e380" contenteditable="true">战略合作伙伴</td><td id="e381" contenteditable="true">年度战略合作协议，优先派单</td><td id="e382" contenteditable="true">全东区</td></tr>
+<tr><td id="e383" contenteditable="true">A级</td><td id="e384" contenteditable="true">优质供方</td><td id="e385" contenteditable="true">区域框架协议，定期评价</td><td id="e386" contenteditable="true">跨城市</td></tr>
+<tr><td id="e387" contenteditable="true">B级</td><td id="e388" contenteditable="true">合格供方</td><td id="e389" contenteditable="true">单项目合同，年度复评</td><td id="e390" contenteditable="true">属地为主</td></tr>
+<tr><td id="e391" contenteditable="true">C级</td><td id="e392" contenteditable="true">观察期供方</td><td id="e393" contenteditable="true">限用+重点监督</td><td id="e394" contenteditable="true">限指定项目</td></tr>
+</table></div>
+<p id="e395" contenteditable="true"><strong>过渡安排</strong>：供方管理职责随总部供应商库上线节奏逐步移交。库未建成前，三组仍承担建库类工作，机动人员可临时增配。</p>
+<p id="e396" contenteditable="true"><strong>采购二组vs三组的协作与制衡</strong>：</p>
+<div class="arch-diagram">
+<div class="arch-nodes" style="margin-bottom:10px">
+<div class="arch-node" style="background:rgba(43,108,176,.15);border-color:rgba(43,108,176,.4);min-width:180px">
+<div class="arch-node-title" style="color:#2b6cb0" contenteditable="true" id="proc_b1">采购二组（4城执行）</div>
+<div class="arch-node-desc" style="color:#4a5568" contenteditable="true" id="proc_b1d">找供方、谈价格<br>覆盖：上海、苏州、杭州、南京</div>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 12px">
+<div style="color:#e53e3e;font-weight:700;font-size:13px" contenteditable="true" id="proc_div">制衡分界</div>
+<div style="font-size:11px;color:#718096" contenteditable="true" id="proc_div_d">二组找的供方→三组评<br>三组找的供方→二组评</div>
+</div>
+<div class="arch-node" style="background:rgba(56,161,105,.15);border-color:rgba(56,161,105,.4);min-width:180px">
+<div class="arch-node-title" style="color:#38a169" contenteditable="true" id="proc_b2">采购三组（3城执行+把控）</div>
+<div class="arch-node-desc" style="color:#4a5568" contenteditable="true" id="proc_b2d">找供方、谈价格 + 评供方、定标准<br>覆盖：合肥、厦门、宁波 + 供方管理</div>
+</div>
+</div>
+<div style="text-align:center;font-size:12px;color:#718096" contenteditable="true" id="proc_note">基准价由三组维护，二组采购结果对标基准价</div>
+</div>
+<hr>
+<h3 class="subsection-title" id="e398" contenteditable="true">5.3 验收结算大组（10人）</h3>
+<p id="e399" contenteditable="true"><strong>定位</strong>：成本管控的"闭环"——验品质、审结算、合规检查、标准化</p>
+<p id="e400" contenteditable="true"><strong>大组协调人③</strong>：统筹验收结算和合规检查两个小组的协作，确保验收→结算→合规审查的闭环。兼任验收结算组组长。</p>
+<p id="e401" contenteditable="true"><strong>合规检查组归入验收结算大组的逻辑</strong>：验收、结算、合规都是"检查/审核"性质——验收是现场检查，结算是数据审核，合规是流程审查。三个环节天然形成"三道防线"。</p>
+<h4 class="sub-subsection-title" id="e402" contenteditable="true">5.3.1 验收结算组（7人）</h4>
+<div class="table-wrap"><table>
+<tr><th id="e403" contenteditable="true">岗位</th><th id="e404" contenteditable="true">人数</th><th id="e405" contenteditable="true">核心职责</th></tr>
+<tr><td id="e406" contenteditable="true">组长（大组协调人③兼）</td><td id="e407" contenteditable="true">1</td><td id="e408" contenteditable="true">结算标准制定、质量把关、验收调度、争议仲裁</td></tr>
+<tr><td id="e409" contenteditable="true">结算审核专员</td><td id="e410" contenteditable="true">2</td><td id="e411" contenteditable="true">结算量价核对、变更合规审查、结算审批</td></tr>
+<tr><td id="e412" contenteditable="true">验收专员</td><td id="e413" contenteditable="true">2</td><td id="e414" contenteditable="true">到场验收、隐蔽工程抽查</td></tr>
+<tr><td id="e415" contenteditable="true">结算支持专员</td><td id="e416" contenteditable="true">1</td><td id="e417" contenteditable="true">对账归档、结算进度跟踪</td></tr>
+<tr><td id="e418" contenteditable="true">数据录入归档专员</td><td id="e419" contenteditable="true">1</td><td id="e420" contenteditable="true">结算数据录入、电子归档、价格库数据回填</td></tr>
+</table></div>
+<p id="e421" contenteditable="true"><strong>验收分级处理</strong>：</p>
+<div class="table-wrap"><table>
+<tr><th id="e422" contenteditable="true">项目类型</th><th id="e423" contenteditable="true">验收方式</th><th id="e424" contenteditable="true">结算审核</th></tr>
+<tr><td id="e425" contenteditable="true">大招调/大专项</td><td id="e426" contenteditable="true">必须到场验收</td><td id="e427" contenteditable="true">全量审</td></tr>
+<tr><td id="e428" contenteditable="true">轻改造</td><td id="e429" contenteditable="true">必须到场验收</td><td id="e430" contenteditable="true">全量审</td></tr>
+<tr><td id="e431" contenteditable="true">常规改造</td><td id="e432" contenteditable="true">抽查验收</td><td id="e433" contenteditable="true">全量审</td></tr>
+<tr><td id="e434" contenteditable="true">日常维保类</td><td id="e435" contenteditable="true">远程审核为主</td><td id="e436" contenteditable="true">抽审</td></tr>
+</table></div>
+<p id="e437" contenteditable="true"><strong>验收逻辑说明</strong>：</p>
+<div class="list-item" id="e438" contenteditable="true">• 大招调/大专项和轻改造都必须到场验收——金额大的自不必说，轻改造虽然金额小但项目分散、容易出漏洞，全量现场验收兜底</div>
+<div class="list-item" id="e439" contenteditable="true">• 常规改造项目相对标准化，抽查验收+全量结算审核即可控制风险</div>
+<div class="list-item" id="e440" contenteditable="true">• 结算审核除日常维保类抽审外，其余全量审</div>
+<p id="e441" contenteditable="true"><strong>7人的必要性</strong>：7城广场所有项目的验收+结算全归本组。验收需要到场（出差），结算需要全量审——2个验收专员覆盖7城（每人3-4城），2个结算审核专员保证结算时效，1个数据录入归档专员确保结算数据及时回填价格库。5人版本偏紧，7人才能保证验收不排期、结算不积压。</p>
+<p id="e442" contenteditable="true"><strong>日常节奏</strong>：大头在结算审核——各类结算单据、变更签证，不需要到场，远程集中审效率更高。验收出差的调度权归组长——哪个城市有验收需求就派谁去。</p>
+<h4 class="sub-subsection-title" id="e443" contenteditable="true">5.3.2 合规检查+标准化组（3人，机动组）</h4>
+<div class="table-wrap"><table>
+<tr><th id="e444" contenteditable="true">岗位</th><th id="e445" contenteditable="true">人数</th><th id="e446" contenteditable="true">核心职责</th></tr>
+<tr><td id="e447" contenteditable="true">组长（城市BP⑦）</td><td id="e448" contenteditable="true">1</td><td id="e449" contenteditable="true">合规检查计划统筹、标准化推进、新组员培训</td></tr>
+<tr><td id="e450" contenteditable="true">合规检查专员</td><td id="e451" contenteditable="true">1</td><td id="e452" contenteditable="true">招采流程合规抽查、价格异常核查、举报/投诉受理</td></tr>
+<tr><td id="e453" contenteditable="true">标准化专员</td><td id="e454" contenteditable="true">1</td><td id="e455" contenteditable="true">制度文件维护、操作手册编写、流程合规审查</td></tr>
+</table></div>
+<p id="e456" contenteditable="true"><strong>机动模式</strong>：不绑定城市，按需检查，类似内部审计角色。平时帮其他组干活，抽查时抽出来。重点工作：招采合规审查、结算抽查、供方切换审核。</p>
+<p id="e457" contenteditable="true"><strong>合规一票否决权</strong>：合规检查组对违规招采有一票否决权，这条底线不变。</p>
+<hr>
+</div>
+<div class="section-card color-block" id="sec_6"><div class="card-controls"><button class="card-del" title="删除色块">&times;</button><button class="card-dup" title="复制色块">+</button></div><div class="resize-handle"></div><h2 class="section-title" id="e458" contenteditable="true">六、需求流转与协作机制</h2>
+<h3 class="subsection-title" id="e459" contenteditable="true">6.1 需求怎么进来——统一需求池</h3>
+<p id="e460" contenteditable="true">广场/城市公司提需求，统一进需求池：</p>
+<div class="table-wrap"><table>
+<tr><th id="e461" contenteditable="true">需求字段</th><th id="e462" contenteditable="true">说明</th></tr>
+<tr><td id="e463" contenteditable="true">广场名</td><td id="e464" contenteditable="true">哪个广场发起</td></tr>
+<tr><td id="e465" contenteditable="true">需求类型</td><td id="e466" contenteditable="true">测算/采购/验收/结算/供方/合规/其他</td></tr>
+<tr><td id="e467" contenteditable="true">紧急程度</td><td id="e468" contenteditable="true">常规/加急/紧急</td></tr>
+<tr><td id="e469" contenteditable="true">项目简述</td><td id="e470" contenteditable="true">一句话说清楚要干啥</td></tr>
+<tr><td id="e471" contenteditable="true">期望时间</td><td id="e472" contenteditable="true">什么时候要成果</td></tr>
+</table></div>
+<p id="e473" contenteditable="true">工具选择：飞书多维表格或共享Excel</p>
+<h3 class="subsection-title" id="e474" contenteditable="true">6.2 活怎么派——组长派工制</h3>
+<div class="table-wrap"><table>
+<tr><th id="e475" contenteditable="true">需求类型</th><th id="e476" contenteditable="true">流转到</th><th id="e477" contenteditable="true">派工逻辑</th></tr>
+<tr><td id="e478" contenteditable="true">出量核价、目标价</td><td id="e479" contenteditable="true">测算合价组组长</td><td id="e480" contenteditable="true">看组内谁负荷轻就派给谁，不按城市分</td></tr>
+<tr><td id="e481" contenteditable="true">工程/能源招标</td><td id="e482" contenteditable="true">采购一组组长</td><td id="e483" contenteditable="true">按品类分给对应的人</td></tr>
+<tr><td id="e484" contenteditable="true">物业/企划采购（上海/苏州/杭州/南京）</td><td id="e485" contenteditable="true">采购二组组长</td><td id="e486" contenteditable="true">按工作量排</td></tr>
+<tr><td id="e487" contenteditable="true">物业/企划采购（合肥/厦门/宁波）</td><td id="e488" contenteditable="true">采购三组组长</td><td id="e489" contenteditable="true">按工作量排</td></tr>
+<tr><td id="e490" contenteditable="true">供应商准入/评价/基准价</td><td id="e491" contenteditable="true">采购三组组长</td><td id="e492" contenteditable="true">按品类和紧急度排</td></tr>
+<tr><td id="e493" contenteditable="true">验收、结算审核</td><td id="e494" contenteditable="true">验收结算组组长</td><td id="e495" contenteditable="true">验收就近派人，结算远程审</td></tr>
+<tr><td id="e496" contenteditable="true">数据分析、降本咨询</td><td id="e497" contenteditable="true">成本管控组组长</td><td id="e498" contenteditable="true">按分析深度需求分配</td></tr>
+<tr><td id="e499" contenteditable="true">合规疑问、流程咨询</td><td id="e500" contenteditable="true">合规检查组组长</td><td id="e501" contenteditable="true">快速响应</td></tr>
+</table></div>
+<p id="e502" contenteditable="true"><strong>跨组协调</strong>：涉及多个小组的需求，由对应大组协调人统一调度。如测算→采购→结算是跨大组流程，由大区BP协调。</p>
+<p id="e503" contenteditable="true">紧急需求：直联组长，10分钟内派工，不走表格排队。组长电话全区域公开。</p>
+<h3 class="subsection-title" id="e504" contenteditable="true">6.3 大组协调人的特殊职责</h3>
+<p id="e505" contenteditable="true">大组协调人不只是"管组长的人"，核心价值在于：</p>
+<div class="list-item" id="e506" contenteditable="true">1. <strong>资源弹性调配</strong>：本大组内哪个小组忙，协调人从闲的小组抽人支援</div>
+<div class="list-item" id="e507" contenteditable="true">2. <strong>争议仲裁</strong>：小组间有分歧（如测算组和采购组对目标价有争议），协调人拍板</div>
+<div class="list-item" id="e508" contenteditable="true">3. <strong>专业标准统一</strong>：确保本大组内各小组做事标准一致</div>
+<div class="list-item" id="e509" contenteditable="true">4. <strong>向上汇报</strong>：大区BP不需要同时对接7个组长，只需要对接3个协调人+4个独立小组长</div>
+<h3 class="subsection-title" id="e510" contenteditable="true">6.4 审批流程（过渡期方案）</h3>
+<p id="e511" contenteditable="true"><strong>过渡期核心原则：审批流基本不变，派工方式先变</strong></p>
+<div class="table-wrap"><table>
+<tr><th id="e512" contenteditable="true">业务</th><th id="e513" contenteditable="true">过渡期审批流</th><th id="e514" contenteditable="true">成熟期审批流（价格库建成后）</th></tr>
+<tr><td id="e515" contenteditable="true">测算核价</td><td id="e516" contenteditable="true">维持原审批人，测算执行改由组长派工</td><td id="e517" contenteditable="true">价格库内项目：自动核价通过；超预值：测算组长审批</td></tr>
+<tr><td id="e518" contenteditable="true">采购招标</td><td id="e519" contenteditable="true">维持原审批人，采购执行改由组长派工</td><td id="e520" contenteditable="true">价格库内项目：合规审查后直通；超预值：大组协调人审批</td></tr>
+<tr><td id="e521" contenteditable="true">验收结算</td><td id="e522" contenteditable="true">维持原审批人，验收/结算改由组长派工</td><td id="e523" contenteditable="true">标准清单内项目：按标准结算；超标准：验收组长审批</td></tr>
+</table></div>
+<p id="e524" contenteditable="true"><strong>过渡期时长</strong>：价格库+标准清单初步建成前（预计3-6个月）</p>
+<h3 class="subsection-title" id="e525" contenteditable="true">6.5 组间协作：以改造项目为例</h3>
+<div class="flow-diagram">
+<div class="flow-step" contenteditable="true" id="flow_1">广场提需求</div>
+<div class="flow-arrow">→</div>
+<div class="flow-step" contenteditable="true" id="flow_2">属地BP受理</div>
+<div class="flow-arrow">→</div>
+<div class="flow-step" contenteditable="true" id="flow_3">进需求池</div>
+</div>
+<div class="flow-diagram" style="margin-top:8px">
+<div class="flow-step" contenteditable="true" id="flow_4">测算合价组</div>
+<div class="flow-arrow">→</div>
+<div class="flow-step" contenteditable="true" id="flow_5">采购一组/二三组</div>
+<div class="flow-arrow">→</div>
+<div class="flow-step" contenteditable="true" id="flow_6">测算组回审</div>
+<div class="flow-arrow">→</div>
+<div class="flow-step" contenteditable="true" id="flow_7">定标审批</div>
+</div>
+<div class="flow-diagram" style="margin-top:8px">
+<div class="flow-step" contenteditable="true" id="flow_8">验收结算组</div>
+<div class="flow-arrow">→</div>
+<div class="flow-step flow-step-highlight" contenteditable="true" id="flow_9">采购三组（供方评价）</div>
+<div class="flow-arrow">+</div>
+<div class="flow-step flow-step-accent" contenteditable="true" id="flow_10">成本管控组（数据沉淀）</div>
+</div>
+<h3 class="subsection-title" id="e527" contenteditable="true">6.6 制衡规则</h3>
+<div class="table-wrap"><table>
+<tr><th id="e528" contenteditable="true">制衡点</th><th id="e529" contenteditable="true">规则</th></tr>
+<tr><td id="e530" contenteditable="true">核价与采购分离</td><td id="e531" contenteditable="true">测算合价组出目标价，采购组执行谈判，不得交叉</td></tr>
+<tr><td id="e532" contenteditable="true">谈判结果回审</td><td id="e533" contenteditable="true">采购谈判结果必须回测算合价组审核，超目标价10%须上报大区BP</td></tr>
+<tr><td id="e534" contenteditable="true">采购执行与供方评价分离</td><td id="e535" contenteditable="true">采购二组/三组找供方谈价格，供方评价由三组把控专员独立评（交叉评价）</td></tr>
+<tr><td id="e536" contenteditable="true">供方切换双审</td><td id="e537" contenteditable="true">采购组提切换需求 + 三组供方把控专员审核理由和价格合理性</td></tr>
+<tr><td id="e538" contenteditable="true">结算独立审核</td><td id="e539" contenteditable="true">结算审核由验收结算组独立完成，测算人员不得参与自己项目的结算</td></tr>
+<tr><td id="e540" contenteditable="true">合规一票否决</td><td id="e541" contenteditable="true">合规检查组对违规招采有一票否决权</td></tr>
+<tr><td id="e542" contenteditable="true">大组协调人不兼任其他大组协调人</td><td id="e543" contenteditable="true">3个协调人互不交叉，保证独立性</td></tr>
+</table></div>
+<hr>
+</div>
+<div class="section-card color-block" id="sec_7"><div class="card-controls"><button class="card-del" title="删除色块">&times;</button><button class="card-dup" title="复制色块">+</button></div><div class="resize-handle"></div><h2 class="section-title" id="e544" contenteditable="true">七、三大基础建设路线图</h2>
+<div class="blockquote" id="e545" contenteditable="true">架构调整要跑起来，依赖三项基础建设：标准清单+价格库、分标段、供方库。三者并行推进，各有侧重。</div>
+<h3 class="subsection-title" id="e546" contenteditable="true">7.1 标准清单与价格库（审批自动化的前提）</h3>
+<p id="e547" contenteditable="true"><strong>核心逻辑</strong>：标准清单是价格库的前提——先有标准化的品类清单和计量规则，才能把历史价格结构化入库。价格库是审批逻辑从"人治"到"规则治"的开关。</p>
+<p id="e548" contenteditable="true"><strong>建设策略</strong>：过渡期东区自行建设价格库，后期由总部统一建立价格库，东区过渡期的数据可直接迁移。</p>
+<div class="table-wrap"><table>
+<tr><th id="e549" contenteditable="true">阶段</th><th id="e550" contenteditable="true">时间</th><th id="e551" contenteditable="true">目标</th><th id="e552" contenteditable="true">关键动作</th></tr>
+<tr><td id="e553" contenteditable="true"><strong>第一阶段：标准清单+框架搭建</strong></td><td id="e554" contenteditable="true">第1-4周</td><td id="e555" contenteditable="true">标准品类清单+价格库框架+首批品类入库</td><td id="e556" contenteditable="true">1. 采购三组供方把控专员牵头，测算组合价组配合&lt;br&gt;2. 按62项招采分类表，逐项梳理并标准化品类清单和计量规则&lt;br&gt;3. 建立基准价录入模板和更新机制&lt;br&gt;4. 历史价格按标准清单结构化入库</td></tr>
+<tr><td id="e557" contenteditable="true"><strong>第二阶段：核心品类覆盖</strong></td><td id="e558" contenteditable="true">第5-12周</td><td id="e559" contenteditable="true">覆盖80%以上常规招采品类</td><td id="e560" contenteditable="true">1. 工程/能源类优先入库&lt;br&gt;2. 物业/企划类第二批入库&lt;br&gt;3. 每个品类至少3个历史项目价格对标</td></tr>
+<tr><td id="e561" contenteditable="true"><strong>第三阶段：自动化审批+总部接管</strong></td><td id="e562" contenteditable="true">第13-24周</td><td id="e563" contenteditable="true">价格库内项目自动核价/审批+总部统一建库</td><td id="e564" contenteditable="true">1. OA审批流接入价格库&lt;br&gt;2. 范围内项目自动通过，超预值走特殊审批&lt;br&gt;3. 东区过渡期数据迁移至总部统一价格库&lt;br&gt;4. 持续迭代价格库数据</td></tr>
+</table></div>
+<h3 class="subsection-title" id="e565" contenteditable="true">7.2 分标段（采购提效的前提——解决重复工作量）</h3>
+<p id="e566" contenteditable="true"><strong>核心问题</strong>：目前同一品类在不同城市、不同广场分别招标，大量重复编制招标文件、重复考察供方、重复审批，效率极低。</p>
+<p id="e567" contenteditable="true"><strong>分标段解决什么</strong>：</p>
+<div class="list-item" id="e568" contenteditable="true">1. <strong>合并同类项</strong>：62项招采任务中，大量可以合并为同一标段，同一标段一次招标覆盖多城多广场</div>
+<div class="list-item" id="e569" contenteditable="true">2. <strong>减少重复审批</strong>：同类项目合并采购，一份招标文件、一次审批、覆盖全部需求</div>
+<div class="list-item" id="e570" contenteditable="true">3. <strong>提升议价能力</strong>：合并后采购规模上来了，谈判筹码更重</div>
+<p id="e571" contenteditable="true"><strong>分标段标准</strong>：按品类+金额区间分标段</p>
+<div class="table-wrap"><table>
+<tr><th id="e572" contenteditable="true">标段类型</th><th id="e573" contenteditable="true">说明</th><th id="e574" contenteditable="true">典型品类</th></tr>
+<tr><td id="e575" contenteditable="true">大区集采标段</td><td id="e576" contenteditable="true">全东区统一招标，年度框架协议</td><td id="e577" contenteditable="true">工程物资（灯具、水泵、电缆等）、能源节费设备</td></tr>
+<tr><td id="e578" contenteditable="true">城市联合标段</td><td id="e579" contenteditable="true">2-3城联合招标</td><td id="e580" contenteditable="true">专项改造、防水维修</td></tr>
+<tr><td id="e581" contenteditable="true">单城标段</td><td id="e582" contenteditable="true">单城市独立招标</td><td id="e583" contenteditable="true">属地化强、体量小的品项</td></tr>
+</table></div>
+<p id="e584" contenteditable="true"><strong>启动时机</strong>：这是安安现在就可以动手的事，不需要等架构方案定稿。</p>
+<h3 class="subsection-title" id="e585" contenteditable="true">7.3 供方库（采购统筹的前提——解决合规+快速匹配）</h3>
+<p id="e586" contenteditable="true"><strong>核心问题</strong>：目前每个城市各自考察、各自准入，同一供方在不同城市重复考察，准入标准不统一，合规风险大。</p>
+<p id="e587" contenteditable="true"><strong>供方库解决什么</strong>：</p>
+<div class="list-item" id="e588" contenteditable="true">1. <strong>合规保障</strong>：统一准入标准、统一评价体系，堵住"各自准入、标准不一"的漏洞</div>
+<div class="list-item" id="e589" contenteditable="true">2. <strong>快速匹配供方</strong>：需求来了直接从库里匹配，不用每次重新找供方、谈准入</div>
+<div class="list-item" id="e590" contenteditable="true">3. <strong>减少考察工作量</strong>：同一供方只考察一次，全东区通用，不用7城重复跑</div>
+<p id="e591" contenteditable="true"><strong>建设策略</strong>：过渡期东区自行建设供方库，后期由总部统一建设供应商库，东区转"把控"模式。</p>
+<div class="table-wrap"><table>
+<tr><th id="e592" contenteditable="true">阶段</th><th id="e593" contenteditable="true">东区动作</th><th id="e594" contenteditable="true">总部衔接</th></tr>
+<tr><td id="e595" contenteditable="true">过渡期</td><td id="e596" contenteditable="true">采购三组牵头建供方库：准入标准统一+历史供方入库+评价体系搭建</td><td id="e597" contenteditable="true">总部规划供应商库架构</td></tr>
+<tr><td id="e598" contenteditable="true">衔接期</td><td id="e599" contenteditable="true">提供本地准入数据、历史供方清单、评价记录</td><td id="e600" contenteditable="true">总部建设+试运行</td></tr>
+<tr><td id="e601" contenteditable="true">成熟期</td><td id="e602" contenteditable="true">三组转"把控"模式：使用+本地准入把关+评价执行</td><td id="e603" contenteditable="true">总部统一维护+更新</td></tr>
+</table></div>
+<p id="e604" contenteditable="true"><strong>供方库与分标段的协同</strong>：</p>
+<div class="list-item" id="e605" contenteditable="true">• 供方库建好了，分标段招标才有足够的合格供方可选</div>
+<div class="list-item" id="e606" contenteditable="true">• 分标段招标做起来了，供方评价才有足够的数据量支撑分层</div>
+<div class="list-item" id="e607" contenteditable="true">• 两者互为前提，必须同步推进</div>
+<hr>
+</div>
+<div class="section-card color-block" id="sec_8"><div class="card-controls"><button class="card-del" title="删除色块">&times;</button><button class="card-dup" title="复制色块">+</button></div><div class="resize-handle"></div><h2 class="section-title" id="e608" contenteditable="true">八、过渡方案</h2>
+<h3 class="subsection-title" id="e609" contenteditable="true">8.1 第一阶段：编组建组（第1-2周）</h3>
+<div class="table-wrap"><table>
+<tr><th id="e610" contenteditable="true">事项</th><th id="e611" contenteditable="true">具体动作</th></tr>
+<tr><td id="e612" contenteditable="true">定7个组长/协调人</td><td id="e613" contenteditable="true">7个城市BP按专业能力分配到7个岗位</td></tr>
+<tr><td id="e614" contenteditable="true">定21个组员+1机动</td><td id="e615" contenteditable="true">按专业归属编入各组，不按城市分</td></tr>
+<tr><td id="e616" contenteditable="true">建需求池</td><td id="e617" contenteditable="true">搭建统一需求入口（飞书多维表格/共享Excel）</td></tr>
+<tr><td id="e618" contenteditable="true">建看板</td><td id="e619" contenteditable="true">每个组一个任务看板，进度透明</td></tr>
+<tr><td id="e620" contenteditable="true">建价格库</td><td id="e621" contenteditable="true">采购三组供方把控专员牵头，开始基础数据梳理</td></tr>
+</table></div>
+<h3 class="subsection-title" id="e622" contenteditable="true">8.2 第二阶段：试运行（第3-6周）</h3>
+<div class="table-wrap"><table>
+<tr><th id="e623" contenteditable="true">事项</th><th id="e624" contenteditable="true">具体动作</th></tr>
+<tr><td id="e625" contenteditable="true">组长派工</td><td id="e626" contenteditable="true">组长每天看需求池派活，组员从组长手里接单、交成果</td></tr>
+<tr><td id="e627" contenteditable="true">跨城协作</td><td id="e628" contenteditable="true">测算组远程做异地广场测算，采购组跨城市谈判</td></tr>
+<tr><td id="e629" contenteditable="true">审批不变</td><td id="e630" contenteditable="true">OA审批流保持原样，审批人不变，但执行改由专业组</td></tr>
+<tr><td id="e631" contenteditable="true">大组协调</td><td id="e632" contenteditable="true">3个协调人每周开一次大组内协调会，解决跨组问题</td></tr>
+<tr><td id="e633" contenteditable="true">采购二三组联动</td><td id="e634" contenteditable="true">二三组按区域分工但共享物业企划采购经验，定期对齐做法</td></tr>
+<tr><td id="e635" contenteditable="true">问题收集</td><td id="e636" contenteditable="true">每周收集运转问题，快速调整</td></tr>
+</table></div>
+<h3 class="subsection-title" id="e637" contenteditable="true">8.3 第三阶段：固化推广（第7-12周）</h3>
+<div class="table-wrap"><table>
+<tr><th id="e638" contenteditable="true">事项</th><th id="e639" contenteditable="true">具体动作</th></tr>
+<tr><td id="e640" contenteditable="true">价格库上线</td><td id="e641" contenteditable="true">核心品类价格库投入使用，超预值才走特殊审批</td></tr>
+<tr><td id="e642" contenteditable="true">供方库衔接</td><td id="e643" contenteditable="true">总部供应商库上线后，三组供方管理从"建"转"控"</td></tr>
+<tr><td id="e644" contenteditable="true">审批调整</td><td id="e645" contenteditable="true">OA审批节点从"指定人"改为"指定角色/组"</td></tr>
+<tr><td id="e646" contenteditable="true">优化分组</td><td id="e647" contenteditable="true">根据试运行情况微调组员分配</td></tr>
+<tr><td id="e648" contenteditable="true">制度固化</td><td id="e649" contenteditable="true">编制操作手册、考核办法、审批流程正式文件</td></tr>
+<tr><td id="e650" contenteditable="true">数据积累</td><td id="e651" contenteditable="true">价格库、案例库开始沉淀</td></tr>
+<tr><td id="e652" contenteditable="true">总结汇报</td><td id="e653" contenteditable="true">向总部汇报东区试点成果</td></tr>
+</table></div>
+<hr>
+</div>
+<div class="section-card color-block" id="sec_9"><div class="card-controls"><button class="card-del" title="删除色块">&times;</button><button class="card-dup" title="复制色块">+</button></div><div class="resize-handle"></div><h2 class="section-title" id="e654" contenteditable="true">九、汇报与考核</h2>
+<h3 class="subsection-title" id="e655" contenteditable="true">9.1 汇报关系</h3>
+<div class="arch-diagram">
+<div class="arch-layer arch-layer-hq">
+<div class="arch-layer-label"><span contenteditable="true" id="rpt_hq">总部成本部</span></div>
+</div>
+<div class="arch-arrow">▼</div>
+<div class="arch-layer" style="background:linear-gradient(135deg,#4a5568,#718096)">
+<div class="arch-layer-label"><span contenteditable="true" id="rpt_bp">大区成本BP（平台负责人）</span></div>
+</div>
+<div class="arch-arrow">▼</div>
+<div class="arch-layer arch-layer-hub">
+<div class="arch-layer-label"><span contenteditable="true" id="rpt_3grp">三大组协调人</span></div>
+<div class="arch-nodes">
+<div class="arch-node"><div class="arch-node-title" contenteditable="true" id="rpt_g1">测算核价</div><div class="arch-node-desc" contenteditable="true" id="rpt_g1d">协调人①<br>测算合价4人+成本管控4人</div></div>
+<div class="arch-node"><div class="arch-node-title" contenteditable="true" id="rpt_g2">采购供方</div><div class="arch-node-desc" contenteditable="true" id="rpt_g2d">协调人②<br>采购一组4人+二组3人+三组3人</div></div>
+<div class="arch-node"><div class="arch-node-title" contenteditable="true" id="rpt_g3">验收结算</div><div class="arch-node-desc" contenteditable="true" id="rpt_g3d">协调人③<br>验收结算7人+合规检查3人</div></div>
+</div>
+</div>
+<div style="text-align:center;font-size:12px;color:#718096;margin-top:8px" contenteditable="true" id="rpt_note">虚线汇报：7个组长/协调人 → 各自城市总（工作沟通，非考核）</div>
+</div>
+<h3 class="subsection-title" id="e657" contenteditable="true">9.2 考核指标</h3>
+<div class="table-wrap"><table>
+<tr><th id="e658" contenteditable="true">考核对象</th><th id="e659" contenteditable="true">核心KPI</th><th id="e660" contenteditable="true">权重</th></tr>
+<tr><td id="e661" contenteditable="true">测算合价组</td><td id="e662" contenteditable="true">测算及时率、测算偏差率（≤5%）、核价模型覆盖率</td><td id="e663" contenteditable="true">40/30/30</td></tr>
+<tr><td id="e664" contenteditable="true">成本管控+数据分析组</td><td id="e665" contenteditable="true">降本机会识别数、数据看板更新频率、分析报告质量</td><td id="e666" contenteditable="true">30/30/40</td></tr>
+<tr><td id="e667" contenteditable="true">采购一组</td><td id="e668" contenteditable="true">工程/能源采购降本率、招标及时率、总部集采落地率</td><td id="e669" contenteditable="true">40/30/30</td></tr>
+<tr><td id="e670" contenteditable="true">采购二组</td><td id="e671" contenteditable="true">物业/企划采购降本率、4城采购及时率、制度指导覆盖率</td><td id="e672" contenteditable="true">30/30/40</td></tr>
+<tr><td id="e673" contenteditable="true">采购三组</td><td id="e674" contenteditable="true">物业/企划采购降本率+供方评价完成率、基准价更新及时率</td><td id="e675" contenteditable="true">40/30/30</td></tr>
+<tr><td id="e676" contenteditable="true">验收结算组</td><td id="e677" contenteditable="true">结算时效达标率、结算偏差率、验收覆盖率</td><td id="e678" contenteditable="true">40/30/30</td></tr>
+<tr><td id="e679" contenteditable="true">合规检查+标准化组</td><td id="e680" contenteditable="true">合规检查覆盖率、违规发现率、标准化文件完成度</td><td id="e681" contenteditable="true">30/30/40</td></tr>
+<tr><td id="e682" contenteditable="true"><strong>大组协调人</strong></td><td id="e683" contenteditable="true">大组整体KPI（40%）+ 兼任小组KPI（30%）+ 属地满意度（30%）</td><td id="e684" contenteditable="true">40/30/30</td></tr>
+<tr><td id="e685" contenteditable="true"><strong>小组长</strong></td><td id="e686" contenteditable="true">功能组KPI（60%）+ 属地满意度（20%）+ 城市总评价（20%）</td><td id="e687" contenteditable="true">60/20/20</td></tr>
+</table></div>
+<hr>
+</div>
+<div class="section-card color-block" id="sec_10"><div class="card-controls"><button class="card-del" title="删除色块">&times;</button><button class="card-dup" title="复制色块">+</button></div><div class="resize-handle"></div><h2 class="section-title" id="e688" contenteditable="true">十、与v2方案的关键差异</h2>
+<div class="table-wrap"><table>
+<tr><th id="e689" contenteditable="true">维度</th><th id="e690" contenteditable="true">v2方案（7组平行）</th><th id="e691" contenteditable="true">v3.1方案（三大组+七小组）</th></tr>
+<tr><td id="e692" contenteditable="true">组织形态</td><td id="e693" contenteditable="true">7个平行功能组</td><td id="e694" contenteditable="true">3大组归口+7小组执行</td></tr>
+<tr><td id="e695" contenteditable="true">协调层级</td><td id="e696" contenteditable="true">7个组长直对大区BP</td><td id="e697" contenteditable="true">3个协调人+4个组长</td></tr>
+<tr><td id="e698" contenteditable="true">城市BP覆盖</td><td id="e699" contenteditable="true">7人全覆盖（7组长）</td><td id="e700" contenteditable="true">7人全覆盖（3协调人+4组长）</td></tr>
+<tr><td id="e701" contenteditable="true">采购力量</td><td id="e702" contenteditable="true">7人分散两组</td><td id="e703" contenteditable="true">10人集中一大组（3个采购小组）</td></tr>
+<tr><td id="e704" contenteditable="true">供方管理</td><td id="e705" contenteditable="true">4人独立建库组</td><td id="e706" contenteditable="true">3人把控组（合并到采购三组），总部建库为前提</td></tr>
+<tr><td id="e707" contenteditable="true">采购分工</td><td id="e708" contenteditable="true">二组运营+三组供方独立</td><td id="e709" contenteditable="true">二三组同做物业企划按区域分，三组叠加供方把控</td></tr>
+<tr><td id="e710" contenteditable="true">合规检查</td><td id="e711" contenteditable="true">独立3人组</td><td id="e712" contenteditable="true">机动组，编入验收结算大组</td></tr>
+<tr><td id="e713" contenteditable="true">数据分析</td><td id="e714" contenteditable="true">独立4人组</td><td id="e715" contenteditable="true">编入测算核价大组，与测算闭环</td></tr>
+<tr><td id="e716" contenteditable="true">验收结算</td><td id="e717" contenteditable="true">5人组</td><td id="e718" contenteditable="true">7人组（补足7城验收+结算量）</td></tr>
+<tr><td id="e719" contenteditable="true">验收分级</td><td id="e720" contenteditable="true">大专项到现场、轻改造抽查</td><td id="e721" contenteditable="true">大专项+轻改造必须到现场、常规改造抽查</td></tr>
+<tr><td id="e722" contenteditable="true">审批策略</td><td id="e723" contenteditable="true">角色/组审批</td><td id="e724" contenteditable="true">过渡期不变 + 价格库建成后自动化</td></tr>
+<tr><td id="e725" contenteditable="true">总人数</td><td id="e726" contenteditable="true">30人（含大区成本BP）</td><td id="e727" contenteditable="true">30人（不含大区成本BP）</td></tr>
+</table></div>
+<hr>
+</div>
+<div class="section-card color-block" id="sec_11"><div class="card-controls"><button class="card-del" title="删除色块">&times;</button><button class="card-dup" title="复制色块">+</button></div><div class="resize-handle"></div><h2 class="section-title" id="e728" contenteditable="true">十一、风险与应对</h2>
+<div class="table-wrap"><table>
+<tr><th id="e729" contenteditable="true">风险</th><th id="e730" contenteditable="true">应对</th></tr>
+<tr><td id="e731" contenteditable="true">组长双重身份忙不过来</td><td id="e732" contenteditable="true">组长聚焦专业派工和复核，日常属地事务交给副手或组员；大组协调人有权弹性调配</td></tr>
+<tr><td id="e733" contenteditable="true">组员跨城市协同效率低</td><td id="e734" contenteditable="true">通过任务看板+定期线上例会保持同步</td></tr>
+<tr><td id="e735" contenteditable="true">属地广场觉得"人不在身边"</td><td id="e736" contenteditable="true">城市BP办公地点不变，日常沟通不停</td></tr>
+<tr><td id="e737" contenteditable="true">7个组长/协调人能力不均</td><td id="e738" contenteditable="true">先按专业能力选人，给6个月过渡期考核达标后正式任命</td></tr>
+<tr><td id="e739" contenteditable="true">价格库建不起来</td><td id="e740" contenteditable="true">分标段+价格库是第一优先级，和架构调整同步推进；价格库不出来审批不变</td></tr>
+<tr><td id="e741" contenteditable="true">大组协调人变成"传话筒"</td><td id="e742" contenteditable="true">协调人必须兼任一个小组的组长，保证接地气</td></tr>
+<tr><td id="e743" contenteditable="true">合规组作为机动组存在感弱</td><td id="e744" contenteditable="true">合规一票否决权不变，合规专员可参与全流程抽查</td></tr>
+<tr><td id="e745" contenteditable="true">总部供应商库建设进度不及预期</td><td id="e746" contenteditable="true">过渡期三组仍承担建库职责，机动人员可临时增配；库上线后再转"把控"模式</td></tr>
+<tr><td id="e747" contenteditable="true">采购三组叠加供方管理后过载</td><td id="e748" contenteditable="true">三组管3城（工作量轻的），叠加后与二组4城对等；如仍过载机动人员补充</td></tr>
+<tr><td id="e749" contenteditable="true">采购二三组做法不统一</td><td id="e750" contenteditable="true">大组协调人②统一标准，两组定期对齐物业企划采购流程和做法</td></tr>
+</table></div>
+<hr>
+<p id="e751" contenteditable="true"><em>本方案为过程稿v3.1，基于6.18领导v2方案、会议讨论倾向、领导最新语音定调、安安6.20反馈综合整理。方向校准后可进一步细化。</em></p>
+</div>
+</div>
+<div class="rte-toolbar" id="rteToolbar">
+    <div class="rte-toolbar-header" id="rteToolbarHeader">
+        <span class="rte-drag-hint">拖动移动工具栏</span>
+    </div>
+    <div class="rte-toolbar-body">
+        <button class="rte-btn" data-action="font-dec" title="缩小字号">A-</button>
+        <button class="rte-btn" data-action="font-inc" title="放大字号">A+</button>
+        <span class="rte-sep"></span>
+        <button class="rte-btn" data-action="bold" title="加粗" style="font-weight:bold">B</button>
+        <button class="rte-btn" data-action="italic" title="斜体" style="font-style:italic">I</button>
+        <button class="rte-btn" data-action="underline" title="下划线" style="text-decoration:underline">U</button>
+        <button class="rte-btn" data-action="strikethrough" title="删除线" style="text-decoration:line-through">S</button>
+        <span class="rte-sep"></span>
+        <label class="rte-color-label">字色<input type="color" data-action="text-color" value="#1a365d"></label>
+        <label class="rte-color-label">底色<input type="color" data-action="bg-color" value="#ebf4ff"></label>
+        <span class="rte-sep"></span>
+        <button class="rte-btn" data-action="align-left" title="左对齐">&#x2B05;</button>
+        <button class="rte-btn" data-action="align-center" title="居中">&#x2194;</button>
+        <button class="rte-btn" data-action="align-right" title="右对齐">&#x27A1;</button>
+        <span class="rte-sep"></span>
+        <button class="rte-btn" data-action="v-center" title="垂直居中切换">&#x2B0D;</button>
+        <button class="rte-btn rte-btn-danger" data-action="delete" title="清空内容">&#x1F5D1;</button>
+        <button class="rte-btn" data-action="copy" title="复制色块">&#x1F4CB;</button>
+    </div>
+</div>
+<div class="action-bar">
+    <button class="action-btn export-btn" id="exportBtn">导出编辑结果</button>
+    <button class="action-btn reset-btn" id="resetBtn">重置</button>
+</div>
+<div class="save-toast" id="saveToast">已自动保存</div>
+<script>
+
+(function() {
+    var navLinks = document.querySelectorAll('.nav-link');
+    var cards = document.querySelectorAll('.section-card');
+    var sidebar = document.getElementById('sidebar');
+    var navToggle = document.getElementById('navToggle');
+    var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                navLinks.forEach(function(link) {
+                    var isActive = link.getAttribute('href') === '#' + entry.target.id;
+                    link.classList.toggle('active', isActive);
+                });
+            }
+        });
+    }, { rootMargin: '-80px 0px -60% 0px', threshold: 0 });
+    cards.forEach(function(card) { observer.observe(card); });
+    navLinks.forEach(function(link) {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            var target = document.querySelector(link.getAttribute('href'));
+            if (target) { window.scrollTo({ top: target.offsetTop - 70, behavior: 'smooth' }); }
+            if (window.innerWidth <= 768) { sidebar.classList.remove('open'); }
+        });
+    });
+    if (navToggle) { navToggle.addEventListener('click', function() { sidebar.classList.toggle('open'); }); }
+})();
+
+</script>
+<script>
+
+var SAVE_PREFIX = 'v31_ce_';
+var saveTimer = null;
+var saveToast = document.getElementById('saveToast');
+var toastTimer = null;
+
+function triggerSave() {
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(function() { saveAll(); }, 500);
+}
+
+function saveAll() {
+    var editables = document.querySelectorAll('[contenteditable="true"]');
+    editables.forEach(function(el) {
+        if (el.id) { try { localStorage.setItem(SAVE_PREFIX + el.id, el.innerHTML); } catch(e) {} }
+    });
+    // Save version badge
+    var badge = document.getElementById('versionBadge');
+    if (badge) { try { localStorage.setItem(SAVE_PREFIX + 'version_badge', badge.textContent); } catch(e) {} }
+    showSaveToast();
+}
+
+function showSaveToast() {
+    if (saveToast) {
+        saveToast.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(function() { saveToast.classList.remove('show'); }, 2000);
+    }
+}
+
+function restoreAll() {
+    var editables = document.querySelectorAll('[contenteditable="true"]');
+    editables.forEach(function(el) {
+        if (el.id) {
+            var saved = null;
+            try { saved = localStorage.getItem(SAVE_PREFIX + el.id); } catch(e) {}
+            if (saved !== null) { el.innerHTML = saved; }
+        }
+    });
+    var badge = document.getElementById('versionBadge');
+    if (badge) {
+        var savedBadge = null;
+        try { savedBadge = localStorage.getItem(SAVE_PREFIX + 'version_badge'); } catch(e) {}
+        if (savedBadge !== null) { badge.textContent = savedBadge; }
+    }
+}
+
+restoreAll();
+document.addEventListener('input', function(e) {
+    if (e.target && e.target.getAttribute && e.target.getAttribute('contenteditable') === 'true') { triggerSave(); }
+});
+
+</script>
+<script>
+
+(function() {
+    var toolbar = document.getElementById('rteToolbar');
+    var toolbarHeader = document.getElementById('rteToolbarHeader');
+    var currentEditable = null;
+    var hideTimer = null;
+    var toolbarDragged = false;
+    var vCenterState = false;
+
+    function showToolbar(element) {
+        clearTimeout(hideTimer);
+        currentEditable = element;
+        if (!toolbarDragged) {
+            var rect = element.getBoundingClientRect();
+            var top = rect.top - 50;
+            if (top < 65) { top = rect.bottom + 8; }
+            var left = rect.left;
+            if (left + 440 > window.innerWidth) { left = window.innerWidth - 460; }
+            if (left < 10) { left = 10; }
+            toolbar.style.left = left + 'px';
+            toolbar.style.top = top + 'px';
+        }
+        toolbar.style.display = 'block';
+    }
+
+    function hideToolbar() {
+        hideTimer = setTimeout(function() {
+            var active = document.activeElement;
+            if (active && active.getAttribute && active.getAttribute('contenteditable') === 'true') { showToolbar(active); return; }
+            toolbar.style.display = 'none';
+            currentEditable = null;
+            toolbarDragged = false;
+        }, 200);
+    }
+
+    document.addEventListener('focus', function(e) {
+        if (e.target && e.target.getAttribute && e.target.getAttribute('contenteditable') === 'true') { showToolbar(e.target); }
+    }, true);
+    document.addEventListener('blur', function(e) {
+        if (e.target && e.target.getAttribute && e.target.getAttribute('contenteditable') === 'true') { hideToolbar(); }
+    }, true);
+    toolbar.addEventListener('mousedown', function(e) {
+        if (e.target.tagName === 'INPUT') return;
+        if (e.target.closest('.rte-toolbar-header')) return;
+        e.preventDefault();
+    });
+
+    // Toolbar drag
+    var isDragging = false, dragStartX = 0, dragStartY = 0, toolbarStartX = 0, toolbarStartY = 0;
+    toolbarHeader.addEventListener('mousedown', function(e) {
+        isDragging = true; dragStartX = e.clientX; dragStartY = e.clientY;
+        toolbarStartX = parseInt(toolbar.style.left || 0); toolbarStartY = parseInt(toolbar.style.top || 0);
+        e.preventDefault();
+    });
+    document.addEventListener('mousemove', function(e) {
+        if (!isDragging) return;
+        var newX = toolbarStartX + (e.clientX - dragStartX);
+        var newY = Math.max(56, toolbarStartY + (e.clientY - dragStartY));
+        newX = Math.max(0, Math.min(window.innerWidth - 440, newX));
+        toolbar.style.left = newX + 'px'; toolbar.style.top = newY + 'px';
+        toolbarDragged = true;
+    });
+    document.addEventListener('mouseup', function() { isDragging = false; });
+
+    // Toolbar buttons
+    toolbar.addEventListener('click', function(e) {
+        var btn = e.target.closest('.rte-btn');
+        if (!btn) return;
+        var action = btn.getAttribute('data-action');
+        if (!action || !currentEditable) return;
+        switch(action) {
+            case 'font-inc': changeFontSize(currentEditable, 2); break;
+            case 'font-dec': changeFontSize(currentEditable, -2); break;
+            case 'bold': document.execCommand('bold'); break;
+            case 'italic': document.execCommand('italic'); break;
+            case 'underline': document.execCommand('underline'); break;
+            case 'strikethrough': document.execCommand('strikeThrough'); break;
+            case 'align-left': document.execCommand('justifyLeft'); break;
+            case 'align-center': document.execCommand('justifyCenter'); break;
+            case 'align-right': document.execCommand('justifyRight'); break;
+            case 'v-center': toggleVCenter(); break;
+            case 'delete': currentEditable.innerHTML = ''; break;
+            case 'copy': duplicateCard(); break;
+        }
+        triggerSave();
+    });
+    toolbar.querySelectorAll('input[type="color"]').forEach(function(input) {
+        input.addEventListener('input', function(e) {
+            var action = e.target.getAttribute('data-action');
+            if (action === 'text-color') { document.execCommand('foreColor', false, e.target.value); }
+            else if (action === 'bg-color') { document.execCommand('hiliteColor', false, e.target.value); }
+            triggerSave();
+        });
+    });
+
+    function changeFontSize(el, delta) {
+        var style = window.getComputedStyle(el);
+        var current = parseInt(style.fontSize);
+        el.style.fontSize = Math.max(10, Math.min(48, current + delta)) + 'px';
+    }
+    function toggleVCenter() {
+        vCenterState = !vCenterState;
+        var align = vCenterState ? 'middle' : 'top';
+        document.querySelectorAll('table td, table th').forEach(function(cell) { cell.style.verticalAlign = align; });
+    }
+    function duplicateCard() {
+        if (!currentEditable) return;
+        var card = currentEditable.closest('.color-block');
+        if (!card) return;
+        var clone = card.cloneNode(true);
+        var counter = Date.now();
+        clone.querySelectorAll('[contenteditable]').forEach(function(el) {
+            if (el.id) { el.id = el.id + '_' + counter; }
+        });
+        clone.querySelectorAll('.card-controls').forEach(function(el) { el.remove(); });
+        clone.querySelectorAll('.resize-handle').forEach(function(el) { el.remove(); });
+        var controlsDiv = document.createElement('div');
+        controlsDiv.className = 'card-controls';
+        controlsDiv.innerHTML = '<button class="card-del" title="删除色块">&times;</button><button class="card-dup" title="复制色块">+</button>';
+        var resizeDiv = document.createElement('div');
+        resizeDiv.className = 'resize-handle';
+        clone.insertBefore(controlsDiv, clone.firstChild);
+        clone.insertBefore(resizeDiv, controlsDiv.nextSibling);
+        card.parentNode.insertBefore(clone, card.nextSibling);
+        attachCardListeners(clone);
+        triggerSave();
+    }
+
+    // Card controls
+    function attachCardListeners(card) {
+        var delBtn = card.querySelector('.card-del');
+        var dupBtn = card.querySelector('.card-dup');
+        if (delBtn) { delBtn.addEventListener('click', function() { card.remove(); triggerSave(); }); }
+        if (dupBtn) {
+            dupBtn.addEventListener('click', function() {
+                var clone = card.cloneNode(true);
+                var counter = Date.now();
+                clone.querySelectorAll('[contenteditable]').forEach(function(el) { if (el.id) { el.id = el.id + '_' + counter; } });
+                clone.querySelectorAll('.card-controls').forEach(function(el) { el.remove(); });
+                clone.querySelectorAll('.resize-handle').forEach(function(el) { el.remove(); });
+                var controlsDiv = document.createElement('div');
+                controlsDiv.className = 'card-controls';
+                controlsDiv.innerHTML = '<button class="card-del">&times;</button><button class="card-dup">+</button>';
+                var resizeDiv = document.createElement('div');
+                resizeDiv.className = 'resize-handle';
+                clone.insertBefore(controlsDiv, clone.firstChild);
+                clone.insertBefore(resizeDiv, controlsDiv.nextSibling);
+                card.parentNode.insertBefore(clone, card.nextSibling);
+                attachCardListeners(clone);
+                triggerSave();
+            });
+        }
+    }
+    document.querySelectorAll('.color-block').forEach(attachCardListeners);
+
+    // Card resize
+    var resizing = false, resizeTarget = null, resizeStartW = 0, resizeStartH = 0, resizeStartX = 0, resizeStartY = 0;
+    document.addEventListener('mousedown', function(e) {
+        if (e.target.classList && e.target.classList.contains('resize-handle')) {
+            resizing = true; resizeTarget = e.target.closest('.color-block');
+            resizeStartW = resizeTarget.offsetWidth; resizeStartH = resizeTarget.offsetHeight;
+            resizeStartX = e.clientX; resizeStartY = e.clientY; e.preventDefault();
+        }
+    });
+    document.addEventListener('mousemove', function(e) {
+        if (!resizing || !resizeTarget) return;
+        resizeTarget.style.width = Math.max(300, resizeStartW + (e.clientX - resizeStartX)) + 'px';
+        resizeTarget.style.height = Math.max(200, resizeStartH + (e.clientY - resizeStartY)) + 'px';
+    });
+    document.addEventListener('mouseup', function() { if (resizing) { resizing = false; resizeTarget = null; triggerSave(); } });
+
+    // Version badge edit
+    var badge = document.getElementById('versionBadge');
+    if (badge) {
+        badge.addEventListener('click', function() {
+            var name = prompt('请输入版本标注（如：v3.1-安安0620）', badge.textContent);
+            if (name !== null) { badge.textContent = name; triggerSave(); }
+        });
+    }
+
+    // Export
+    document.getElementById('exportBtn').addEventListener('click', function() {
+        var clone = document.documentElement.cloneNode(true);
+        ['.rte-toolbar', '.action-bar', '.save-toast', '.card-controls', '.resize-handle', '.nav-toggle'].forEach(function(sel) {
+            clone.querySelectorAll(sel).forEach(function(el) { el.remove(); });
+        });
+        clone.querySelectorAll('[contenteditable]').forEach(function(el) { el.removeAttribute('contenteditable'); });
+        clone.querySelectorAll('script').forEach(function(el) { el.remove(); });
+        var script = document.createElement('script');
+        script.textContent = '(function(){var n=document.querySelectorAll(".nav-link");var c=document.querySelectorAll(".section-card");var o=new IntersectionObserver(function(e){e.forEach(function(t){if(t.isIntersecting){n.forEach(function(l){l.classList.toggle("active",l.getAttribute("href")==="#"+t.target.id)})}})},{rootMargin:"-80px 0px -60% 0px",threshold:0});c.forEach(function(t){o.observe(t)});n.forEach(function(l){l.addEventListener("click",function(e){e.preventDefault();var t=document.querySelector(l.getAttribute("href"));if(t){window.scrollTo({top:t.offsetTop-70,behavior:"smooth"})}})})})();';
+        clone.querySelector('body').appendChild(script);
+        var htmlStr = '<!DOCTYPE html>\n' + clone.outerHTML;
+        var blob = new Blob([htmlStr], {type:'text/html;charset=utf-8'});
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url; a.download = '东区成本管理组织架构v3.1_导出.html';
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    });
+
+    // Reset
+    document.getElementById('resetBtn').addEventListener('click', function() {
+        if (confirm('确认重置所有编辑内容？此操作不可撤销。')) {
+            Object.keys(localStorage).forEach(function(key) {
+                if (key.indexOf(SAVE_PREFIX) === 0) { localStorage.removeItem(key); }
+            });
+            location.reload();
+        }
+    });
+})();
+
+</script>
+</body>
+</html>
