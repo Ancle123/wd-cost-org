@@ -74,10 +74,11 @@ button#exportEditableBtn:hover { background: #2f855a; }
     .section-card { padding: 20px 16px; }
     .header-title { font-size: 14px; }
 }
-[contenteditable="true"] { transition: background 0.2s; }
+[contenteditable="true"] { transition: box-shadow 0.2s; }
 [contenteditable="true"]:focus { outline: 1px solid rgba(66,153,225,0.4); outline-offset: 1px; }
-.ctree-grp [contenteditable="true"], .ctree-hq [contenteditable="true"], .arch-layer [contenteditable="true"] { background: transparent !important; }
-.ctree-grp [contenteditable="true"]:focus, .ctree-hq [contenteditable="true"]:focus, .arch-layer [contenteditable="true"]:focus { background: rgba(255,255,255,0.15) !important; outline: 1px solid rgba(255,255,255,0.5); }
+.ctree-grp [contenteditable="true"], .ctree-hq [contenteditable="true"], .arch-layer [contenteditable="true"] { background: transparent !important; -webkit-text-fill-color: inherit !important; }
+.ctree-grp [contenteditable="true"]:focus, .ctree-hq [contenteditable="true"]:focus, .arch-layer [contenteditable="true"]:focus { background: transparent !important; -webkit-text-fill-color: inherit !important; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.5); outline: none; }
+.ctree-grp .cl, .ctree-grp .cn, .ctree-grp .cs, .ctree-hq .cl, .ctree-hq .cn, .ctree-hq .cs, .arch-layer [contenteditable="true"] { -webkit-text-fill-color: #fff !important; color: #fff !important; }
 
 .arch-diagram{padding:24px 20px;border-radius:12px;background:#f7fafc;margin-bottom:16px}
 .arch-layer{border-radius:12px;padding:18px;margin-bottom:10px;color:#fff}
