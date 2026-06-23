@@ -190,11 +190,8 @@ td.cell-range-origin, th.cell-range-origin { outline: 2px solid #2b6cb0 !importa
 .table-wrap table tr:hover th:last-child .add-col-btn { opacity: 0.8; pointer-events: auto; }
 .table-wrap table tr th:last-child .add-col-btn { opacity: 0; pointer-events: none; }
 
-/* 复合用工标识 */
-.comp-badge{position:absolute;top:-9px;right:6px;background:linear-gradient(135deg,#805ad5,#9f7aea);color:#fff;font-size:8px;padding:1px 6px;border-radius:6px;font-weight:700;letter-spacing:.5px;z-index:5;white-space:nowrap;box-shadow:0 1px 3px rgba(128,90,213,.3)}
-.comp-wrap{border:2px dashed rgba(128,90,213,.45);border-radius:10px;padding:10px 6px 6px;position:relative;display:flex;flex-direction:row;gap:6px;align-items:flex-start}
-.comp-wrap-label{position:absolute;top:-10px;left:12px;background:linear-gradient(135deg,#805ad5,#9f7aea);color:#fff;font-size:9px;padding:2px 8px;border-radius:6px;font-weight:700;white-space:nowrap;z-index:5;box-shadow:0 1px 3px rgba(128,90,213,.3)}
-.comp-note{margin-top:6px;padding:4px 10px;background:rgba(128,90,213,.08);border-left:3px solid #805ad5;border-radius:0 6px 6px 0;font-size:11px;color:#805ad5;font-weight:600}
+/* 复合用工小标签 */
+.comp-tag{display:inline-block;background:rgba(128,90,213,.15);color:#6b46c1;font-size:9px;padding:1px 5px;border-radius:4px;font-weight:700;margin-left:4px;vertical-align:middle;letter-spacing:.3px}
 </style>
 </head>
 <body>
@@ -265,14 +262,12 @@ td.cell-range-origin, th.cell-range-origin { outline: 2px solid #2b6cb0 !importa
         <div class="cs" contenteditable="true" id="tg1s">协调人① · 8人</div>
       </div>
       <div class="ctree-subs">
-        <div class="comp-wrap"><div class="comp-wrap-label" contenteditable="true" id="comp_lbl1">⟳ 复合用工</div>
         <div class="ctree-sn sn-b" id="arch_s1"><div class="arch-rz"></div><div class="st" contenteditable="true" id="g1s1">测算核价组</div>
-          <div class="sd" contenteditable="true" id="g1s1d">4人 · 组长=协调人①兼</div>
+          <div class="sd" contenteditable="true" id="g1s1d">4人 · 组长=协调人①兼<span class="comp-tag">复合用工</span></div>
         </div>
         <div class="ctree-sl"></div>
         <div class="ctree-sn sn-b" id="arch_s2"><div class="arch-rz"></div><div class="st" contenteditable="true" id="g1s2">成本管控+数据分析组</div>
-          <div class="sd" contenteditable="true" id="g1s2d">4人 · 组长=城市BP④</div>
-        </div>
+          <div class="sd" contenteditable="true" id="g1s2d">4人 · 组长=城市BP④<span class="comp-tag">复合用工</span></div>
         </div>
       </div>
     </div>
@@ -282,8 +277,8 @@ td.cell-range-origin, th.cell-range-origin { outline: 2px solid #2b6cb0 !importa
         <div class="cs" contenteditable="true" id="tg2s">协调人② · 13人</div>
       </div>
       <div class="ctree-subs">
-        <div class="ctree-sn sn-g" id="arch_s3"><div class="comp-badge" contenteditable="true" id="comp_b1">⟳ 复合用工</div><div class="arch-rz"></div><div class="st" contenteditable="true" id="g2s1">采购一组（工程能源）</div>
-          <div class="sd" contenteditable="true" id="g2s1d">4人 · 组长=小组长⑤</div>
+        <div class="ctree-sn sn-g" id="arch_s3"><div class="arch-rz"></div><div class="st" contenteditable="true" id="g2s1">采购一组（工程能源）</div>
+          <div class="sd" contenteditable="true" id="g2s1d">4人 · 组长=小组长⑤<span class="comp-tag">复合用工</span></div>
         </div>
         <div class="ctree-sl"></div>
         <div class="ctree-sn sn-g" id="arch_s4"><div class="arch-rz"></div><div class="st" contenteditable="true" id="g2s2">采购二组（物业企划4城）</div>
@@ -294,10 +289,9 @@ td.cell-range-origin, th.cell-range-origin { outline: 2px solid #2b6cb0 !importa
           <div class="sd" contenteditable="true" id="g2s3d">3人 · 组长=小组长⑦ · 合厦甬</div>
         </div>
         <div class="ctree-sl"></div>
-        <div class="ctree-sn sn-r" id="arch_s6"><div class="comp-badge" contenteditable="true" id="comp_b2">⟳ 复合用工</div><div class="arch-rz"></div><div class="st" contenteditable="true" id="g2s4">合规检查组</div>
-          <div class="sd" contenteditable="true" id="g2s4d">3人 · 组长=协调人②兼 · 标准化+合规</div>
+        <div class="ctree-sn sn-r" id="arch_s6"><div class="arch-rz"></div><div class="st" contenteditable="true" id="g2s4">合规检查组</div>
+          <div class="sd" contenteditable="true" id="g2s4d">3人 · 组长=协调人②兼 · 标准化+合规<span class="comp-tag">复合用工</span></div>
         </div>
-        <div class="comp-note" contenteditable="true" id="comp_n1">⟷ 采购一组（工程能源）↔ 合规检查组 复合用工：无合规专项时，合规人员回归人力池与采购一组协同</div>
       </div>
     </div>
     <div class="ctree-col ccol-narrow">
