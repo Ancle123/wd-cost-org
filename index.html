@@ -190,9 +190,9 @@ td.cell-range-origin, th.cell-range-origin { outline: 2px solid #2b6cb0 !importa
 .table-wrap table tr:hover th:last-child .add-col-btn { opacity: 0.8; pointer-events: auto; }
 .table-wrap table tr th:last-child .add-col-btn { opacity: 0; pointer-events: none; }
 
+
 /* 复合用工小标签 */
-.comp-tag{display:inline-block;background:rgba(128,90,213,.15);color:#6b46c1;font-size:9px;padding:1px 5px;border-radius:4px;font-weight:700;margin-left:4px;vertical-align:middle;letter-spacing:.3px}
-</style>
+.comp-tag{display:inline-block;background:rgba(128,90,213,.15);color:#6b46c1;font-size:9px;padding:1px 5px;border-radius:4px;font-weight:700;margin-left:4px;vertical-align:middle;letter-spacing:.3px}</style>
 </head>
 <body>
 <div class="header">
@@ -263,11 +263,11 @@ td.cell-range-origin, th.cell-range-origin { outline: 2px solid #2b6cb0 !importa
       </div>
       <div class="ctree-subs">
         <div class="ctree-sn sn-b" id="arch_s1"><div class="arch-rz"></div><div class="st" contenteditable="true" id="g1s1">测算核价组</div>
-          <div class="sd" contenteditable="true" id="g1s1d">4人 · 组长=协调人①兼<span class="comp-tag">复合用工</span></div>
+          <div class="sd" contenteditable="true" id="g1s1d">4人 · 组长=协调人①兼</div>
         </div>
         <div class="ctree-sl"></div>
         <div class="ctree-sn sn-b" id="arch_s2"><div class="arch-rz"></div><div class="st" contenteditable="true" id="g1s2">成本管控+数据分析组</div>
-          <div class="sd" contenteditable="true" id="g1s2d">4人 · 组长=城市BP④<span class="comp-tag">复合用工</span></div>
+          <div class="sd" contenteditable="true" id="g1s2d">4人 · 组长=城市BP④</div>
         </div>
       </div>
     </div>
@@ -278,7 +278,7 @@ td.cell-range-origin, th.cell-range-origin { outline: 2px solid #2b6cb0 !importa
       </div>
       <div class="ctree-subs">
         <div class="ctree-sn sn-g" id="arch_s3"><div class="arch-rz"></div><div class="st" contenteditable="true" id="g2s1">采购一组（工程能源）</div>
-          <div class="sd" contenteditable="true" id="g2s1d">4人 · 组长=小组长⑤<span class="comp-tag">复合用工</span></div>
+          <div class="sd" contenteditable="true" id="g2s1d">4人 · 组长=小组长⑤</div>
         </div>
         <div class="ctree-sl"></div>
         <div class="ctree-sn sn-g" id="arch_s4"><div class="arch-rz"></div><div class="st" contenteditable="true" id="g2s2">采购二组（物业企划4城）</div>
@@ -290,7 +290,7 @@ td.cell-range-origin, th.cell-range-origin { outline: 2px solid #2b6cb0 !importa
         </div>
         <div class="ctree-sl"></div>
         <div class="ctree-sn sn-r" id="arch_s6"><div class="arch-rz"></div><div class="st" contenteditable="true" id="g2s4">合规检查组</div>
-          <div class="sd" contenteditable="true" id="g2s4d">3人 · 组长=协调人②兼 · 标准化+合规<span class="comp-tag">复合用工</span></div>
+          <div class="sd" contenteditable="true" id="g2s4d">3人 · 组长=协调人②兼 · 标准化+合规</div>
         </div>
       </div>
     </div>
@@ -1042,6 +1042,34 @@ function restoreAll() {
   }
 })();
 restoreAll();
+
+// 复合用工标签 - restoreAll后动态注入，防止被localStorage覆盖
+(function(){
+  var compMap = {
+    'g1s1d': true, 'g1s2d': true,   // 测算核价大组: 测算核价组 + 成本管控+数据分析组
+    'g2s1d': true, 'g2s4d': true     // 采购供方大组: 采购一组 + 合规检查组
+  };
+  function injectCompTags(){
+    Object.keys(compMap).forEach(function(id){
+      var el = document.getElementById(id);
+      if(!el) return;
+      if(el.querySelector('.comp-tag')) return; // already has tag
+      var span = document.createElement('span');
+      span.className = 'comp-tag';
+      span.textContent = '复合用工';
+      span.contentEditable = 'false';
+      span.setAttribute('data-comp-tag','1');
+      el.appendChild(span);
+    });
+  }
+  // Run after restoreAll
+  setTimeout(injectCompTags, 50);
+  // Also run on DOMContentLoaded as backup
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',function(){setTimeout(injectCompTags,50);});}
+  // Prevent comp-tag from being saved into localStorage
+  var origSave = window.triggerSave;
+})();
+
 document.addEventListener('input', function(e) {
     if (e.target && e.target.getAttribute && e.target.getAttribute('contenteditable') === 'true') { triggerSave(); }
 });
