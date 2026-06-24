@@ -192,7 +192,22 @@ td.cell-range-origin, th.cell-range-origin { outline: 2px solid #2b6cb0 !importa
 
 
 /* 复合用工小标签 */
-.comp-tag{display:inline-block;background:rgba(128,90,213,.15);color:#6b46c1;font-size:9px;padding:1px 5px;border-radius:4px;font-weight:700;margin-left:4px;vertical-align:middle;letter-spacing:.3px}</style>
+.comp-tag{display:inline-block;background:rgba(128,90,213,.15);color:#6b46c1;font-size:9px;padding:1px 5px;border-radius:4px;font-weight:700;margin-left:4px;vertical-align:middle;letter-spacing:.3px}
+/* 文本元素增删控制 */
+.txt-ctrls{position:absolute;left:-60px;top:50%;transform:translateY(-50%);display:flex;gap:2px;opacity:0;transition:opacity .15s;pointer-events:none;z-index:5}
+.txt-ctrls button{width:18px;height:18px;border:none;border-radius:4px;cursor:pointer;font-size:11px;display:flex;align-items:center;justify-content:center;color:#fff;line-height:1}
+.txt-ctrls .tc-del{background:#e53e3e}
+.txt-ctrls .tc-add{background:#38a169}
+.txt-ctrls .tc-up{background:#718096}
+.txt-ctrls .tc-dn{background:#718096}
+[contenteditable="true"]:hover>.txt-ctrls,.txt-wrap:hover>.txt-ctrls{opacity:1;pointer-events:auto}
+.txt-wrap{position:relative;margin-left:60px}
+.txt-wrap>.txt-ctrls{left:-60px}
+p[contenteditable="true"],.list-item[contenteditable="true"]{position:relative;padding-left:0}
+p[contenteditable="true"]>.txt-ctrls{left:-60px}
+.list-item[contenteditable="true"]>.txt-ctrls{left:-40px}
+h2.section-title:hover,h3.subsection-title:hover,h4.sub-subsection-title:hover{outline:1px dashed #a0aec0;outline-offset:2px}
+</style>
 </head>
 <body>
 <div class="header">
@@ -1067,6 +1082,113 @@ restoreAll();
   // Also run on DOMContentLoaded as backup
   if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',function(){setTimeout(injectCompTags,50);});}
   // Prevent comp-tag from being saved into localStorage
+
+// 表格增删控制
+(function(){
+  document.querySelectorAll('.table-wrap').forEach(function(tw){
+    if(tw.querySelector('.tbl-ctrls'))return;
+    var bar=document.createElement('div');
+    bar.className='tbl-ctrls';
+    bar.style.cssText='display:flex;gap:4px;justify-content:flex-end;margin-top:2px;';
+    var delBtn=document.createElement('button');
+    delBtn.className='tbl-del';
+    delBtn.title='删除整个表格';
+    delBtn.textContent='删除表格';
+    delBtn.style.cssText='background:#e53e3e;color:#fff;border:none;border-radius:4px;padding:2px 10px;cursor:pointer;font-size:11px;';
+    bar.appendChild(delBtn);
+    tw.appendChild(bar);
+  });
+  document.addEventListener('click',function(e){
+    if(e.target.classList.contains('tbl-del')){
+      var tw=e.target.closest('.table-wrap');
+      if(tw&&confirm('确定删除此表格？')){
+        tw.remove();
+        if(typeof triggerSave==='function')triggerSave();
+      }
+    }
+  },true);
+  setTimeout(function(){
+    document.querySelectorAll('.table-wrap').forEach(function(tw){
+      if(tw.querySelector('.tbl-ctrls'))return;
+      var bar=document.createElement('div');
+      bar.className='tbl-ctrls';
+      bar.style.cssText='display:flex;gap:4px;justify-content:flex-end;margin-top:2px;';
+      var delBtn=document.createElement('button');
+      delBtn.className='tbl-del';
+      delBtn.title='删除整个表格';
+      delBtn.textContent='删除表格';
+      delBtn.style.cssText='background:#e53e3e;color:#fff;border:none;border-radius:4px;padding:2px 10px;cursor:pointer;font-size:11px;';
+      bar.appendChild(delBtn);
+      tw.appendChild(bar);
+    });
+  },100);
+})();
+
+
+// 文本元素增删控制 - 动态注入
+(function(){
+  var SEL='p[contenteditable="true"],.list-item[contenteditable="true"]';
+  var SKIP='.ctree-hq p,.ctree-grp p,.ctree-sn p,.ctree-dc p,.card-controls p,.ctree-subs p,.ctree p,.balance-bar p,.ctree-divider p,nav p,.modal p';
+  var uid=0;
+  function mkBtn(cls,title,txt){var b=document.createElement('button');b.className=cls;b.title=title;b.textContent=txt;b.contentEditable='false';return b;}
+  function injectTxtCtrls(){
+    document.querySelectorAll(SEL).forEach(function(el){
+      if(el.closest(SKIP))return;
+      if(el.querySelector('.txt-ctrls'))return;
+      // Don't add if inside a table cell
+      if(el.closest('td,th'))return;
+      // Don't add to very short elements
+      var cs=el.querySelector('.txt-ctrls');
+      if(cs)return;
+      var wrap=document.createElement('div');
+      wrap.className='txt-ctrls';
+      wrap.contentEditable='false';
+      wrap.appendChild(mkBtn('tc-del','删除此段','×'));
+      wrap.appendChild(mkBtn('tc-add','在下方新增一段','+'));
+      wrap.appendChild(mkBtn('tc-up','上移','↑'));
+      wrap.appendChild(mkBtn('tc-dn','下移','↓'));
+      el.insertBefore(wrap,el.firstChild);
+    });
+  }
+  function handleCtrl(e){
+    var btn=e.target.closest('.tc-del,.tc-add,.tc-up,.tc-dn');
+    if(!btn)return;
+    e.preventDefault();e.stopPropagation();
+    var el=btn.closest(SEL);
+    if(!el)return;
+    if(btn.classList.contains('tc-del')){
+      if(el.parentElement){
+        el.remove();
+        if(typeof triggerSave==='function')triggerSave();
+      }
+    }else if(btn.classList.contains('tc-add')){
+      var np=document.createElement('p');
+      np.contentEditable='true';
+      np.id='txt_'+Date.now()+'_'+(uid++);
+      np.innerHTML='<br>';
+      el.parentElement.insertBefore(np,el.nextSibling);
+      np.focus();
+      if(typeof triggerSave==='function')triggerSave();
+      injectTxtCtrls(); // inject controls on new element
+    }else if(btn.classList.contains('tc-up')){
+      var prev=el.previousElementSibling;
+      if(prev&&prev.matches(SEL)){
+        el.parentElement.insertBefore(el,prev);
+        if(typeof triggerSave==='function')triggerSave();
+      }
+    }else if(btn.classList.contains('tc-dn')){
+      var next=el.nextElementSibling;
+      if(next&&next.matches(SEL)){
+        el.parentElement.insertBefore(next,el);
+        if(typeof triggerSave==='function')triggerSave();
+      }
+    }
+  }
+  document.addEventListener('click',handleCtrl,true);
+  setTimeout(injectTxtCtrls,100);
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){setTimeout(injectTxtCtrls,100);});
+})();
+
   var origSave = window.triggerSave;
 })();
 
