@@ -203,9 +203,13 @@ td.cell-range-origin, th.cell-range-origin { outline: 2px solid #2b6cb0 !importa
 [contenteditable="true"]:hover>.txt-ctrls,.txt-wrap:hover>.txt-ctrls{opacity:1;pointer-events:auto}
 .txt-wrap{position:relative;margin-left:60px}
 .txt-wrap>.txt-ctrls{left:-60px}
-p[contenteditable="true"],.list-item[contenteditable="true"]{position:relative;padding-left:0}
+p[contenteditable="true"],.list-item[contenteditable="true"],h2[contenteditable="true"],h3[contenteditable="true"],h4[contenteditable="true"],h5[contenteditable="true"]{position:relative;padding-left:0}
 p[contenteditable="true"]>.txt-ctrls{left:-60px}
 .list-item[contenteditable="true"]>.txt-ctrls{left:-40px}
+h2[contenteditable="true"]>.txt-ctrls{left:-50px}
+h3[contenteditable="true"]>.txt-ctrls{left:-50px}
+h4[contenteditable="true"]>.txt-ctrls{left:-50px}
+h5[contenteditable="true"]>.txt-ctrls{left:-50px}
 h2.section-title:hover,h3.subsection-title:hover,h4.sub-subsection-title:hover{outline:1px dashed #a0aec0;outline-offset:2px}
 </style>
 </head>
@@ -1127,8 +1131,8 @@ restoreAll();
 
 // 文本元素增删控制 - 动态注入
 (function(){
-  var SEL='p[contenteditable="true"],.list-item[contenteditable="true"]';
-  var SKIP='.ctree-hq p,.ctree-grp p,.ctree-sn p,.ctree-dc p,.card-controls p,.ctree-subs p,.ctree p,.balance-bar p,.ctree-divider p,nav p,.modal p';
+  var SEL='p[contenteditable="true"],.list-item[contenteditable="true"],h2[contenteditable="true"],h3[contenteditable="true"],h4[contenteditable="true"],h5[contenteditable="true"]';
+  var SKIP='.ctree-hq p,.ctree-grp p,.ctree-sn p,.ctree-dc p,.card-controls p,.ctree-subs p,.ctree p,.balance-bar p,.ctree-divider p,nav p,.modal p,.ctree-hq h2,.ctree-grp h2,.ctree-sn h2,.ctree-dc h2,.ctree-subs h2,.ctree h2,.ctree-divider h2,.ctree-hq h3,.ctree-grp h3,.ctree-sn h3,.ctree-dc h3,.ctree-subs h3,.ctree h3,.ctree-divider h3,.ctree-hq h4,.ctree-grp h4,.ctree-sn h4,.ctree-dc h4,.ctree-subs h4,.ctree h4,.ctree-divider h4';
   var uid=0;
   function mkBtn(cls,title,txt){var b=document.createElement('button');b.className=cls;b.title=title;b.textContent=txt;b.contentEditable='false';return b;}
   function injectTxtCtrls(){
@@ -1162,9 +1166,11 @@ restoreAll();
         if(typeof triggerSave==='function')triggerSave();
       }
     }else if(btn.classList.contains('tc-add')){
-      var np=document.createElement('p');
+      var tag=el.tagName.toLowerCase();
+      var np=document.createElement(tag==='h2'||tag==='h3'||tag==='h4'||tag==='h5'?tag:'p');
       np.contentEditable='true';
       np.id='txt_'+Date.now()+'_'+(uid++);
+      if(el.className)np.className=el.className;
       np.innerHTML='<br>';
       el.parentElement.insertBefore(np,el.nextSibling);
       np.focus();
